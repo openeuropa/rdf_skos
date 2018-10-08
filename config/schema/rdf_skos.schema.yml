@@ -1,0 +1,31 @@
+rdf_skos.graphs:
+  type: config_entity
+  label: 'RDF SKOS graphs configuration'
+  mapping:
+    entity_types:
+      type: sequence
+      label: 'Entity type graphs'
+      sequence:
+        type: sequence
+        label: 'Graphs per entity type'
+        sequence:
+          type: mapping
+          label: 'Graph info'
+          mapping:
+            name:
+              type: string
+              label: "The graph name"
+            uri:
+              type: string
+              label: "The graph URI"
+
+entity_reference_selection.default:skos_concept:
+  type: entity_reference_selection.default
+  label: 'SKOS Concept handler settings'
+  mapping:
+    concept_schemes:
+      type: sequence
+      label: 'The concept schemes to filter by'
+      sequence:
+        type: string
+        label: 'The Concept Scheme URI'

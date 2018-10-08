@@ -1,0 +1,8 @@
+name: RDF SKOS
+description: Entity type for SKOS modeling
+core: 8.x
+package: RDF Entity
+type: module
+
+dependencies:
+  - rdf_entity
