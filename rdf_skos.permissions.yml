@@ -1,33 +1,15 @@
-add skos concept scheme entities:
-  title: 'Create new SKOS Concept Scheme entities'
-
 administer skos concept scheme entities:
   title: 'Administer SKOS Concept Scheme entities'
   description: 'Allow to access the administration form to configure SKOS Concept Scheme entities.'
   restrict access: true
 
-delete skos concept scheme entities:
-  title: 'Delete SKOS Concept Scheme entities'
-
-edit skos concept scheme entities:
-  title: 'Edit SKOS Concept Scheme entities'
-
 view published skos concept scheme entities:
   title: 'View published SKOS Concept Scheme entities'
-
-add skos concept entities:
-  title: 'Create new SKOS Concept entities'
 
 administer skos concept entities:
   title: 'Administer SKOS Concept entities'
   description: 'Allow to access the administration form to configure SKOS Concept entities.'
   restrict access: true
-
-delete skos concept entities:
-  title: 'Delete SKOS Concept entities'
-
-edit skos concept entities:
-  title: 'Edit SKOS Concept entities'
 
 view published skos concept entities:
   title: 'View published SKOS Concept entities'

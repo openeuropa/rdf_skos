@@ -44,11 +44,12 @@ class SkosEntityStorage extends RdfEntitySparqlStorage {
    */
   protected function processGraphResults($results, array $graph_ids): ?array {
     $return = parent::processGraphResults($results, $graph_ids);
-    if ($this->bundleKey === "" && $return) {
+    if ($this->bundleKey === '' && $return) {
       foreach ($return as &$values) {
-        unset($values[""]);
+        unset($values['']);
       }
     }
+
     return $return;
   }
 

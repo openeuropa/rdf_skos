@@ -61,14 +61,7 @@ class SkosConceptSelection extends DefaultSelection {
       $options[$concept_scheme->id()] = $concept_scheme->getTitle();
     }
 
-    $form['concept_schemes'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Concept Schemes'),
-      '#description' => $this->t('Concept Schemes to filter by. Leave empty to allow all.'),
-      '#options' => $options,
-      '#default_value' => array_values($configuration['concept_schemes']),
-      '#multiple' => TRUE,
-    ];
+    $form['concept_schemes']['#options'] = $options;
 
     return $form;
   }
@@ -98,7 +91,7 @@ class SkosConceptSelection extends DefaultSelection {
     if (empty($concept_schemes)) {
       return $query;
     }
-    $query->condition('inScheme', $concept_schemes, 'IN');
+    $query->condition('in_scheme', $concept_schemes, 'IN');
 
     return $query;
   }

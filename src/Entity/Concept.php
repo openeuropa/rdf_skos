@@ -18,15 +18,7 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
  *   handlers = {
  *     "storage" = "Drupal\rdf_skos\SkosEntityStorage",
  *     "list_builder" = "Drupal\rdf_skos\ConceptListBuilder",
- *     "views_data" = "Drupal\views\EntityViewsData",
  *     "translation" = "Drupal\content_translation\ContentTranslationHandler",
- *
- *     "form" = {
- *       "default" = "Drupal\rdf_skos\Form\ConceptForm",
- *       "add" = "Drupal\rdf_skos\Form\ConceptForm",
- *       "edit" = "Drupal\rdf_skos\Form\ConceptForm",
- *       "delete" = "Drupal\rdf_skos\Form\ConceptDeleteForm",
- *     },
  *     "access" = "Drupal\rdf_skos\ConceptAccessControlHandler",
  *     "route_provider" = {
  *       "html" = "Drupal\rdf_skos\ConceptHtmlRouteProvider",
@@ -37,15 +29,12 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
  *   admin_permission = "administer skos concept entities",
  *   entity_keys = {
  *     "id" = "id",
- *     "label" = "prefLabel",
+ *     "label" = "pref_label",
  *     "uuid" = "uuid",
  *     "langcode" = "langcode",
  *   },
  *   links = {
  *     "canonical" = "/admin/structure/skos_concept/{skos_concept}",
- *     "add-form" = "/admin/structure/skos_concept/add",
- *     "edit-form" = "/admin/structure/skos_concept/{skos_concept}/edit",
- *     "delete-form" = "/admin/structure/skos_concept/{skos_concept}/delete",
  *     "collection" = "/admin/structure/skos_concept",
  *   },
  *   field_ui_base_route = "skos_concept"
@@ -57,14 +46,14 @@ class Concept extends ContentEntityBase implements ConceptInterface {
    * {@inheritdoc}
    */
   public function getPreferredLabel(): ?string {
-    return $this->get('prefLabel')->value;
+    return $this->get('pref_label')->value;
   }
 
   /**
    * {@inheritdoc}
    */
   public function setPreferredLabel(string $label): ConceptInterface {
-    $this->set('prefLabel', $label);
+    $this->set('pref_label', $label);
     return $this;
   }
 
@@ -72,14 +61,14 @@ class Concept extends ContentEntityBase implements ConceptInterface {
    * {@inheritdoc}
    */
   public function getAlternateLabel(): ?string {
-    return $this->get('altLabel')->value;
+    return $this->get('alt_label')->value;
   }
 
   /**
    * {@inheritdoc}
    */
   public function setAlternateLabel(string $label): ConceptInterface {
-    $this->set('altLabel', $label);
+    $this->set('alt_label', $label);
     return $this;
   }
 
@@ -87,14 +76,14 @@ class Concept extends ContentEntityBase implements ConceptInterface {
    * {@inheritdoc}
    */
   public function getHiddenLabel(): ?string {
-    return $this->get('hiddenLabel')->value;
+    return $this->get('hidden_label')->value;
   }
 
   /**
    * {@inheritdoc}
    */
   public function setHiddenLabel(string $label): ConceptInterface {
-    $this->set('hiddenLabel', $label);
+    $this->set('hidden_label', $label);
     return $this;
   }
 
@@ -109,28 +98,28 @@ class Concept extends ContentEntityBase implements ConceptInterface {
    * {@inheritdoc}
    */
   public function getScopeNote(): ?string {
-    return $this->get('scopeNote')->value;
+    return $this->get('scope_note')->value;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getHistoryNote(): ?string {
-    return $this->get('historyNote')->value;
+    return $this->get('history_note')->value;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getEditorialNote(): ?string {
-    return $this->get('editorialNote')->value;
+    return $this->get('editorial_note')->value;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getChangeNote(): ?string {
-    return $this->get('changeNote')->value;
+    return $this->get('change_note')->value;
   }
 
   /**
@@ -144,14 +133,14 @@ class Concept extends ContentEntityBase implements ConceptInterface {
    * {@inheritdoc}
    */
   public function getConceptSchemes(): array {
-    return $this->get('inScheme')->referencedEntities();
+    return $this->get('in_scheme')->referencedEntities();
   }
 
   /**
    * {@inheritdoc}
    */
   public function setConceptSchemes(array $concept_schemes): ConceptInterface {
-    $this->set('inScheme', $concept_schemes);
+    $this->set('in_scheme', $concept_schemes);
     return $this;
   }
 
@@ -159,7 +148,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
    * {@inheritdoc}
    */
   public function topConceptOf(): array {
-    return $this->get('topConceptOf')->referencedEntities();
+    return $this->get('top_concept_of')->referencedEntities();
   }
 
   /**
@@ -187,35 +176,35 @@ class Concept extends ContentEntityBase implements ConceptInterface {
    * {@inheritdoc}
    */
   public function getExactMatch(): array {
-    return $this->get('exactMatch')->referencedEntities();
+    return $this->get('exact_match')->referencedEntities();
   }
 
   /**
    * {@inheritdoc}
    */
   public function getCloseMatch(): array {
-    return $this->get('closeMatch')->referencedEntities();
+    return $this->get('close_match')->referencedEntities();
   }
 
   /**
    * {@inheritdoc}
    */
   public function getBroadMatch(): array {
-    return $this->get('broadMatch')->referencedEntities();
+    return $this->get('broad_match')->referencedEntities();
   }
 
   /**
    * {@inheritdoc}
    */
   public function getNarrowMatch(): array {
-    return $this->get('narrowMatch')->referencedEntities();
+    return $this->get('narrow_match')->referencedEntities();
   }
 
   /**
    * {@inheritdoc}
    */
   public function getRelatedMatch(): array {
-    return $this->get('relatedMatch')->referencedEntities();
+    return $this->get('related_match')->referencedEntities();
   }
 
   /**
@@ -230,7 +219,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
       ->setDescription(t('The SKOS Concept ID.'))
       ->setReadOnly(TRUE);
 
-    $fields['prefLabel'] = BaseFieldDefinition::create('string')
+    $fields['pref_label'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Preferred Label'))
       ->setDescription(t('The preferred label of the Concept.'))
       ->setDisplayOptions('view', [
@@ -238,7 +227,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
         'type' => 'sting',
       ]);
 
-    $fields['altLabel'] = BaseFieldDefinition::create('string')
+    $fields['alt_label'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Alternate Label'))
       ->setDescription(t('The alternate label of the Concept.'))
       ->setDisplayOptions('view', [
@@ -246,7 +235,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
         'type' => 'sting',
       ]);
 
-    $fields['hiddenLabel'] = BaseFieldDefinition::create('string')
+    $fields['hidden_label'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Hidden Label'))
       ->setDescription(t('The hidden label of the Concept.'))
       ->setDisplayOptions('view', [
@@ -270,7 +259,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
         'type' => 'sting',
       ]);
 
-    $fields['scopeNote'] = BaseFieldDefinition::create('string')
+    $fields['scope_note'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Scope Note'))
       ->setDescription(t('The scope note of the Concept.'))
       ->setDisplayOptions('view', [
@@ -278,7 +267,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
         'type' => 'sting',
       ]);
 
-    $fields['editorialNote'] = BaseFieldDefinition::create('string')
+    $fields['editorial_note'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Editorial Note'))
       ->setDescription(t('The editorial note of the Concept.'))
       ->setDisplayOptions('view', [
@@ -286,7 +275,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
         'type' => 'sting',
       ]);
 
-    $fields['changeNote'] = BaseFieldDefinition::create('string')
+    $fields['change_note'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Change Note'))
       ->setDescription(t('The change note of the Concept.'))
       ->setDisplayOptions('view', [
@@ -294,7 +283,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
         'type' => 'sting',
       ]);
 
-    $fields['historyNote'] = BaseFieldDefinition::create('string')
+    $fields['history_note'] = BaseFieldDefinition::create('string')
       ->setLabel(t('History Note'))
       ->setDescription(t('The history note of the Concept.'))
       ->setDisplayOptions('view', [
@@ -302,7 +291,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
         'type' => 'sting',
       ]);
 
-    $fields['inScheme'] = BaseFieldDefinition::create('entity_reference')
+    $fields['in_scheme'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('In Scheme'))
       ->setDescription(t('The Concept Schemes this Concept belongs to.'))
       ->setSetting('target_type', 'skos_concept_scheme')
@@ -313,7 +302,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
         'type' => 'entity_reference_label',
       ]);
 
-    $fields['topConceptOf'] = BaseFieldDefinition::create('entity_reference')
+    $fields['top_concept_of'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Top Concept Of'))
       ->setDescription(t('The Concept Schemes this Concept is the top concept of.'))
       ->setSetting('target_type', 'skos_concept_scheme')
@@ -357,7 +346,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
         'type' => 'entity_reference_label',
       ]);
 
-    $fields['exactMatch'] = BaseFieldDefinition::create('entity_reference')
+    $fields['exact_match'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Exact Match Concepts'))
       ->setDescription(t('The exact match Concepts from other Concept Schemes.'))
       ->setSetting('target_type', 'skos_concept')
@@ -368,7 +357,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
         'type' => 'entity_reference_label',
       ]);
 
-    $fields['closeMatch'] = BaseFieldDefinition::create('entity_reference')
+    $fields['close_match'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Close Match Concepts'))
       ->setDescription(t('The close match Concepts from other Concept Schemes.'))
       ->setSetting('target_type', 'skos_concept')
@@ -379,7 +368,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
         'type' => 'entity_reference_label',
       ]);
 
-    $fields['broadMatch'] = BaseFieldDefinition::create('entity_reference')
+    $fields['broad_match'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Broad Match Concepts'))
       ->setDescription(t('The broader Concepts from other Concept Schemes.'))
       ->setSetting('target_type', 'skos_concept')
@@ -390,7 +379,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
         'type' => 'entity_reference_label',
       ]);
 
-    $fields['narrowMatch'] = BaseFieldDefinition::create('entity_reference')
+    $fields['narrow_match'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Narrow Match Concepts'))
       ->setDescription(t('The narrower Concepts from other Concept Schemes.'))
       ->setSetting('target_type', 'skos_concept')
@@ -401,7 +390,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
         'type' => 'entity_reference_label',
       ]);
 
-    $fields['relatedMatch'] = BaseFieldDefinition::create('entity_reference')
+    $fields['related_match'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Related Match Concepts'))
       ->setDescription(t('The related Concepts from other Concept Schemes.'))
       ->setSetting('target_type', 'skos_concept')

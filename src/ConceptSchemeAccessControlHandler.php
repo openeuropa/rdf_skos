@@ -21,21 +21,8 @@ class ConceptSchemeAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account): AccessResultInterface {
-    /** @var \Drupal\rdf_skos\Entity\ConceptSchemeInterface $entity */
-    switch ($operation) {
-      case 'view':
-        return AccessResult::allowedIfHasPermission($account, 'view published skos concept scheme entities');
-
-      // For the moment, we only allow read.
-      case 'update':
-        return AccessResult::forbidden();
-
-      case 'delete':
-        return AccessResult::forbidden();
-    }
-
-    // Unknown operation, no opinion.
-    return AccessResult::neutral();
+    // For the moment, we only allow read.
+    return $operation === 'view' ? AccessResult::allowedIfHasPermissions($account, ['view published skos concept scheme entities', 'administer skos concept scheme entities'], 'OR') : AccessResult::forbidden();
   }
 
   /**

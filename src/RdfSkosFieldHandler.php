@@ -99,6 +99,9 @@ class RdfSkosFieldHandler extends RdfFieldHandler {
         'fields' => [
           'title' => [
             'column' => 'value',
+            // We use more predicates because SKOS is quite flexible and there
+            // are vocabularies which use other predicates for mapping the
+            // ConceptScheme titles.
             'predicate' => [
               'http://purl.org/dc/terms/title',
               'http://www.w3.org/2004/02/skos/core#prefLabel',
@@ -106,7 +109,7 @@ class RdfSkosFieldHandler extends RdfFieldHandler {
             ],
             'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
-          'hasTopConcept' => [
+          'has_top_concept' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#hasTopConcept'],
             'format' => RdfFieldHandlerInterface::RESOURCE,
@@ -116,22 +119,22 @@ class RdfSkosFieldHandler extends RdfFieldHandler {
       'skos_concept' => [
         'rdf_type' => 'http://www.w3.org/2004/02/skos/core#Concept',
         'fields' => [
-          'prefLabel' => [
+          'pref_label' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#prefLabel'],
             'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
-          'altLabel' => [
+          'alt_label' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#altLabel'],
             'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
-          'hiddenLabel' => [
+          'hidden_label' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#hiddenLabel'],
             'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
-          'inScheme' => [
+          'in_scheme' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#inScheme'],
             'format' => RdfFieldHandlerInterface::RESOURCE,
@@ -146,27 +149,27 @@ class RdfSkosFieldHandler extends RdfFieldHandler {
             'predicate' => ['http://www.w3.org/2004/02/skos/core#example'],
             'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
-          'scopeNote' => [
+          'scope_note' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#scopeNote'],
             'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
-          'editorialNote' => [
+          'editorial_note' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#editorialNote'],
             'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
-          'changeNote' => [
+          'change_note' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#changeNote'],
             'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
-          'historyNote' => [
+          'history_note' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#historyNote'],
             'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
-          'topConceptOf' => [
+          'top_concept_of' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#topConceptOf'],
             'format' => RdfFieldHandlerInterface::RESOURCE,
@@ -186,27 +189,27 @@ class RdfSkosFieldHandler extends RdfFieldHandler {
             'predicate' => ['http://www.w3.org/2004/02/skos/core#related'],
             'format' => RdfFieldHandlerInterface::RESOURCE,
           ],
-          'exactMatch' => [
+          'exact_match' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#exactMatch'],
             'format' => RdfFieldHandlerInterface::RESOURCE,
           ],
-          'closeMatch' => [
+          'close_match' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#closeMatch'],
             'format' => RdfFieldHandlerInterface::RESOURCE,
           ],
-          'broadMatch' => [
+          'broad_match' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#broadMatch'],
             'format' => RdfFieldHandlerInterface::RESOURCE,
           ],
-          'narrowMatch' => [
+          'narrow_match' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#narrowMatch'],
             'format' => RdfFieldHandlerInterface::RESOURCE,
           ],
-          'relatedMatch' => [
+          'related_match' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#relatedMatch'],
             'format' => RdfFieldHandlerInterface::RESOURCE,

@@ -19,15 +19,7 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
  *     "storage" = "Drupal\rdf_skos\SkosEntityStorage",
  *     "view_builder" = "Drupal\rdf_skos\ConceptSchemeViewBuilder",
  *     "list_builder" = "Drupal\rdf_skos\ConceptSchemeListBuilder",
- *     "views_data" = "Drupal\views\EntityViewsData",
  *     "translation" = "Drupal\content_translation\ContentTranslationHandler",
- *
- *     "form" = {
- *       "default" = "Drupal\rdf_skos\Form\ConceptSchemeForm",
- *       "add" = "Drupal\rdf_skos\Form\ConceptSchemeForm",
- *       "edit" = "Drupal\rdf_skos\Form\ConceptSchemeForm",
- *       "delete" = "Drupal\rdf_skos\Form\ConceptSchemeDeleteForm",
- *     },
  *     "access" = "Drupal\rdf_skos\ConceptSchemeAccessControlHandler",
  *     "route_provider" = {
  *       "html" = "Drupal\rdf_skos\ConceptSchemeHtmlRouteProvider",
@@ -44,9 +36,6 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
  *   },
  *   links = {
  *     "canonical" = "/admin/structure/skos_concept_scheme/{skos_concept_scheme}",
- *     "add-form" = "/admin/structure/skos_concept_scheme/add",
- *     "edit-form" = "/admin/structure/skos_concept_scheme/{skos_concept_scheme}/edit",
- *     "delete-form" = "/admin/structure/skos_concept_scheme/{skos_concept_scheme}/delete",
  *     "collection" = "/admin/structure/skos_concept_scheme",
  *   },
  *   field_ui_base_route = "skos_concept_scheme"
@@ -73,7 +62,7 @@ class ConceptScheme extends ContentEntityBase implements ConceptSchemeInterface 
    * {@inheritdoc}
    */
   public function getTopConcepts(): array {
-    return $this->get('hasTopConcept')->referencedEntities();
+    return $this->get('has_top_concept')->referencedEntities();
   }
 
   /**
@@ -92,7 +81,7 @@ class ConceptScheme extends ContentEntityBase implements ConceptSchemeInterface 
       ->setLabel(t('Title'))
       ->setDescription(t('The title of the Concept Scheme.'));
 
-    $fields['hasTopConcept'] = BaseFieldDefinition::create('entity_reference')
+    $fields['has_top_concept'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Has Top Concept'))
       ->setDescription(t('The Concepts that are top level in this scheme.'))
       ->setSetting('target_type', 'skos_concept')

@@ -63,7 +63,7 @@ class ConceptSchemeViewBuilder extends EntityViewBuilder {
   protected function getTopConcepts(ConceptSchemeInterface $concept_scheme): array {
     $concepts = $concept_scheme->getTopConcepts();
     $ids = $this->entityManager->getStorage('skos_concept')->getQuery()
-      ->condition('topConceptOf', $concept_scheme->id())
+      ->condition('top_concept_of', $concept_scheme->id())
       ->pager(30)
       ->execute();
 

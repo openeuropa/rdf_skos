@@ -57,6 +57,7 @@ class RdfSkosGraphHandler extends RdfGraphHandler {
 
     foreach ($config->get('entity_types.' . $entity_type_id) as $graph) {
       $this->cache['definition'][$entity_type_id][$graph['name']] = [
+        // Empty because we don't have any meta info about those graphs.
         'title' => '',
         'description' => '',
       ];

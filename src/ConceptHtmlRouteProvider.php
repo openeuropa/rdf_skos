@@ -19,16 +19,9 @@ class ConceptHtmlRouteProvider extends AdminHtmlRouteProvider {
    */
   public function getRoutes(EntityTypeInterface $entity_type): RouteCollection {
     $collection = parent::getRoutes($entity_type);
-
-    $routes = [
-      'entity.skos_concept.edit_form',
-      'entity.skos_concept.delete_form',
-      'entity.skos_concept.canonical',
-    ];
-    foreach ($routes as $name) {
-      if ($route = $collection->get($name)) {
-        $route->setRequirement('skos_concept', '.+');
-      }
+    $route = $collection->get('entity.skos_concept.canonical');
+    if ($route instanceof Route) {
+      $route->setRequirement('skos_concept', '.+');
     }
 
     $entity_type_id = $entity_type->id();

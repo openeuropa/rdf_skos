@@ -58,9 +58,10 @@ WHERE {
   }
 }
 EndOfQuery;
+
+      $this->sparql->query($query);
     }
 
-    $this->sparql->query($query);
     parent::tearDown();
   }
 

@@ -1,17 +1,12 @@
 services:
   rdf_skos.entity.query.sparql:
-    class: \Drupal\rdf_skos\Entity\Query\Sparql\QueryFactory
+    class: Drupal\rdf_skos\Entity\Query\Sparql\QueryFactory
     arguments: ['@sparql_endpoint', '@entity_type.manager', '@rdf_skos.sparql.graph_handler', '@rdf_skos.sparql.field_handler']
     tags:
       - { name: backend_overridable }
   rdf_skos.sparql.graph_handler:
-    class: \Drupal\rdf_skos\RdfSkosGraphHandler
+    class: Drupal\rdf_skos\RdfSkosGraphHandler
     arguments: ['@entity_type.manager', '@event_dispatcher', '@config.factory']
   rdf_skos.sparql.field_handler:
-    class: \Drupal\rdf_skos\RdfSkosFieldHandler
-    arguments: ['@entity_type.manager', '@entity_field.manager', '@event_dispatcher']
-  rdf_skos.active_graph_subscriber:
-    class: Drupal\rdf_skos\EventSubscriber\SkosActiveGraphSubscriber
-    arguments: ['@entity_type.manager', '@rdf_skos.sparql.graph_handler']
-    tags:
-      - { name: event_subscriber }
+    class: Drupal\rdf_skos\RdfSkosFieldHandler
+    parent: sparql.field_handler

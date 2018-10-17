@@ -77,12 +77,12 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
     $entity->set('field_fruit', 'http://example.com/vegetables/potato');
     $violations = $entity->field_fruit->validate();
     $this->assertCount(1, $violations);
-    $this->assertEquals($violations[0]->getMessage(), t('This entity (%type: %id) cannot be referenced.', ['%type' => 'skos_concept', '%id' => 'http://example.com/vegetables/potato']));
+    $this->assertEquals(t('This entity (%type: %id) cannot be referenced.', ['%type' => 'skos_concept', '%id' => 'http://example.com/vegetables/potato']), $violations[0]->getMessage());
 
     // The fruits_veggies field should be able to reference both.
     $entity->set('field_fruits_veggies', 'http://example.com/fruit/apple');
     $violations = $entity->field_fruits_veggies->validate();
-    $this->assertEquals($violations->count(), 0);
+    $this->assertEquals(0, $violations->count());
     $entity->set('field_fruits_veggies', 'http://example.com/vegetables/potato');
     $violations = $entity->field_fruits_veggies->validate();
     $this->assertCount(0, $violations);

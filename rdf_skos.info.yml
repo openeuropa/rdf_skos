@@ -5,4 +5,4 @@ package: RDF Entity
 type: module
 
 dependencies:
-  - rdf_entity
+  - rdf_entity:rdf_entity

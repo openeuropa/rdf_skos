@@ -38,7 +38,7 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
       ->execute();
     $this->assertCount(1, $ids);
     $id = reset($ids);
-    $this->assertEquals($id, 'http://example.com/fruit');
+    $this->assertEquals('http://example.com/fruit', $id);
 
     $ids = $entity_type_manager->getStorage('skos_concept')->getQuery()
       ->execute();
@@ -56,6 +56,7 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
     $ids = $entity_type_manager->getStorage('skos_concept_scheme')->getQuery()
       ->execute();
     $concept_schemes = $entity_type_manager->getStorage('skos_concept_scheme')->loadMultiple($ids);
+    $this->assertCount(1, $concept_schemes);
     /** @var \Drupal\rdf_skos\Entity\ConceptSchemeInterface $concept_scheme */
     $concept_scheme = reset($concept_schemes);
     $this->assertEquals('Fruit', $concept_scheme->getTitle());
@@ -63,7 +64,7 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
     // Assert top concepts.
     $top_concepts = $concept_scheme->getTopConcepts();
     $top_concept = reset($top_concepts);
-    $this->assertEquals('Citrus fruit', $top_concept->label());
+    $this->assertEquals('Citrus fruit', $top_concept->getPreferredLabel());
 
     // Test concepts.
     $ids = $entity_type_manager->getStorage('skos_concept')->getQuery()
@@ -86,7 +87,7 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
     $pear = $concepts['http://example.com/fruit/pear'];
     $this->assertEquals('Apple', $pear->getRelated()[0]->getPreferredLabel());
 
-    $concepts = $entity_type_manager->getStorage('skos_concept')->loadByProperties(['prefLabel' => 'Exotic fruit']);
+    $concepts = $entity_type_manager->getStorage('skos_concept')->loadByProperties(['pref_label' => 'Exotic fruit']);
     /** @var \Drupal\rdf_skos\Entity\ConceptInterface $concept */
     $concept = reset($concepts);
     $this->assertEquals('Fruit', $concept->topConceptOf()[0]->getTitle());
