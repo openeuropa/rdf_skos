@@ -23,9 +23,6 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
     $this->enableGraph('fruit');
     $this->enableGraph('vegetables');
 
-    $graphs = $this->getTestGraphInfo();
-    $fruit = $graphs['fruit'];
-
     // Create a reference field to Fruit.
     $this->createEntityReferenceField(
       'entity_test',
@@ -36,13 +33,12 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
       'default',
       [
         'concept_schemes' => [
-          $fruit['uri'],
+          'http://example.com/fruit',
         ],
       ]
     );
 
     // Create a reference field to Fruit and Vegetables.
-    $vegetables = $graphs['vegetables'];
     $this->createEntityReferenceField(
       'entity_test',
       'entity_test',
@@ -52,8 +48,8 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
       'default',
       [
         'concept_schemes' => [
-          $fruit['uri'],
-          $vegetables['uri'],
+          'http://example.com/fruit',
+          'http://example.com/vegetables',
         ],
       ]
     );
