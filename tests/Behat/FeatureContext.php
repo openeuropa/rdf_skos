@@ -26,6 +26,9 @@ class FeatureContext extends ConfigContext {
   /**
    * Imports the SKOS test graphs and configures it to be used.
    *
+   * @param \Behat\Behat\Hook\Scope\BeforeScenarioScope $beforeScenarioScope
+   *   The scope.
+   *
    * @BeforeScenario @skos
    */
   public function importSkosContent(BeforeScenarioScope $beforeScenarioScope): void {
@@ -51,6 +54,9 @@ class FeatureContext extends ConfigContext {
 
   /**
    * Deletes the SKOS test graphs.
+   *
+   * @param \Behat\Behat\Hook\Scope\AfterScenarioScope $afterScenarioScope
+   *   The scope.
    *
    * @AfterScenario @skos
    */
