@@ -21,7 +21,8 @@
         "drush/drush": "^9",
         "openeuropa/code-review": "^1.0.0-alpha4",
         "openeuropa/task-runner": "^0.7",
-        "openeuropa/drupal-core-require-dev": "~8.6"
+        "openeuropa/drupal-core-require-dev": "~8.6",
+        "phpunit/phpunit": "~6.0"
     },
     "suggest": {
         "drupal/console": "^1"
