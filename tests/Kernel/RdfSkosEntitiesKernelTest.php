@@ -4,6 +4,9 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\rdf_skos\Kernel;
 
+use Drupal\rdf_skos\Entity\ConceptInterface;
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * Tests the RDF SKOS entities.
  */
@@ -110,6 +113,22 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
     $ids = $entity_type_manager->getStorage('skos_concept')->getQuery()
       ->execute();
     $this->assertCount(7, $ids);
+  }
+
+  /**
+   * Tests that for SKOS entities we get the correct active graphs.
+   */
+  public function testActiveGraphs(): void {
+    $this->enableGraph('fruit');
+    $url = $this->container->get('entity_type.manager')->getStorage('skos_concept')->load('http://example.com/fruit/apple')->toUrl()->toString();
+    $request = Request::create($url);
+    /** @var \Drupal\Core\Routing\Router $router */
+    $router = \Drupal::service('router.no_access_checks');
+    $matched = $router->matchRequest($request);
+    // If this matched correctly using the RDF entity param converter, we should
+    // have the Concept entity in the result. Otherwise an exception is thrown
+    // and the test should fail.
+    $this->assertInstanceOf(ConceptInterface::class, $matched['skos_concept']);
   }
 
 }

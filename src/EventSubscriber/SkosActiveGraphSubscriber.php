@@ -56,17 +56,7 @@ class SkosActiveGraphSubscriber implements EventSubscriberInterface {
    * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
    *   Thrown when the access is denied and redirects to user login page.
    */
-  public function graphForEntityConvert(ActiveGraphEvent $event): void {
-    $entity_type_id = $event->getEntityTypeId();
-    if (!in_array($entity_type_id, ['skos_concept_scheme', 'skos_concept'])) {
-      return;
-    }
-
-    // By default, we look in all graphs.
-    $graphs = $this->rdfGraphHandler->getEntityTypeGraphIds($entity_type_id);
-    $event->setGraphs($graphs);
-    $event->stopPropagation();
-  }
+  public function graphForEntityConvert(ActiveGraphEvent $event): void {}
 
   /**
    * {@inheritdoc}
