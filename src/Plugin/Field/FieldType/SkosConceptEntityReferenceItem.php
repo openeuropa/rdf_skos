@@ -18,8 +18,8 @@ use Drupal\Core\Form\FormStateInterface;
  *   label = @Translation("SKOS Concept Reference"),
  *   description = @Translation("References SKOS Concepts."),
  *   category = @Translation("SKOS"),
- *   default_widget = "entity_reference_autocomplete",
- *   default_formatter = "entity_reference_label",
+ *   default_widget = "skos_concept_entity_reference_autocomplete",
+ *   default_formatter = "skos_concept_entity_reference_label",
  *   list_class = "\Drupal\Core\Field\EntityReferenceFieldItemList",
  * )
  */
