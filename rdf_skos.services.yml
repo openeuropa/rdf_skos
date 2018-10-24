@@ -10,3 +10,8 @@ services:
   rdf_skos.sparql.field_handler:
     class: Drupal\rdf_skos\RdfSkosFieldHandler
     parent: sparql.field_handler
+  rdf_skos.active_graph_subscriber:
+    class: Drupal\rdf_skos\EventSubscriber\SkosActiveGraphSubscriber
+    arguments: ['@entity_type.manager', '@rdf_skos.sparql.graph_handler']
+    tags:
+      - { name: event_subscriber }
