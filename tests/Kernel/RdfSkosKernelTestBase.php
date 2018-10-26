@@ -19,6 +19,7 @@ class RdfSkosKernelTestBase extends RdfKernelTestBase {
    */
   public static $modules = [
     'rdf_skos',
+    'rdf_skos_test',
   ];
 
   /**
