@@ -1,5 +1,5 @@
 {
-    "name": "rdf_skos/rdf_skos",
+    "name": "openeuropa/rdf_skos",
     "description": "Drupal module that contains the RDF SKOS entity types.",
     "type": "drupal-module",
     "license": "EUPL-1.2",
