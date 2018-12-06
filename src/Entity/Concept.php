@@ -36,8 +36,7 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
  *   links = {
  *     "canonical" = "/admin/structure/skos_concept/{skos_concept}",
  *     "collection" = "/admin/structure/skos_concept",
- *   },
- *   field_ui_base_route = "skos_concept"
+ *   }
  * )
  */
 class Concept extends ContentEntityBase implements ConceptInterface {
