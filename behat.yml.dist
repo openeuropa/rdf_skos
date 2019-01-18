@@ -9,8 +9,8 @@ default:
         - Drupal\Tests\rdf_skos\Behat\FeatureContext
         - OpenEuropa\Behat\TransformationContext:
             pages:
-              SKOS concept scheme: 'admin/structure/skos_concept_scheme'
-              SKOS concept: 'admin/structure/skos_concept'
+              SKOS concept scheme administration: 'admin/structure/skos_concept_scheme'
+              SKOS concept administration: 'admin/structure/skos_concept'
   extensions:
     Behat\MinkExtension:
       goutte: ~
