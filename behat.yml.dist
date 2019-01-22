@@ -7,6 +7,10 @@ default:
         - Drupal\DrupalExtension\Context\MinkContext
         - Drupal\DrupalExtension\Context\DrupalContext
         - Drupal\Tests\rdf_skos\Behat\FeatureContext
+        - OpenEuropa\Behat\TransformationContext:
+            pages:
+              SKOS concept scheme administration: 'admin/structure/skos_concept_scheme'
+              SKOS concept administration: 'admin/structure/skos_concept'
   extensions:
     Behat\MinkExtension:
       goutte: ~

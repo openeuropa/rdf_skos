@@ -9,7 +9,7 @@ Feature: SKOS feature
 
   @skos
   Scenario: SKOS Concept Scheme listing
-    Given I go to "admin/structure/skos_concept_scheme"
+    Given I go to "the SKOS concept scheme administration page"
     Then I should see "Fruit" in the "http://example.com/fruit" row
     And I should see "Vegetables" in the "http://example.com/vegetables" row
     Then I click "Fruit"
@@ -18,7 +18,7 @@ Feature: SKOS feature
 
   @skos
   Scenario: SKOS Concept listing
-    Given I go to "admin/structure/skos_concept"
+    Given I go to "the SKOS concept administration page"
     Then I should see "Apple" in the "http://example.com/fruit/apple" row
     And I should see "Potato" in the "http://example.com/vegetables/potato" row
     Then I click "Citrus fruit"
