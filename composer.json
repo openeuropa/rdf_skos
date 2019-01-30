@@ -9,7 +9,7 @@
         "php": "^7.1",
         "drupal/core": "~8.6@alpha",
         "drupal/field_group": "^1.0",
-        "drupal/rdf_entity": "dev-1.x",
+        "drupal/rdf_entity": "1.0-alpha12",
         "easyrdf/easyrdf": "0.10.0-alpha1 as 0.9.2"
     },
     "require-dev": {
