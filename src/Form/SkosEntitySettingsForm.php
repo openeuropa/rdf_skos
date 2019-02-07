@@ -42,7 +42,7 @@ abstract class SkosEntitySettingsForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
-    $config = $this->configFactory->get('rdf_skos.graphs')->get('entity_types.' . $this->getEntityTypeId());
+    $config = $this->configFactory->getEditable('rdf_skos.graphs')->get('entity_types.' . $this->getEntityTypeId());
     $default = '';
     if ($config) {
       foreach ($config as &$graph) {
