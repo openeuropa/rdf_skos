@@ -85,6 +85,9 @@ class SkosConceptEntityReferenceItem extends EntityReferenceItem {
     ];
 
     $handler = $selection_manager->getSelectionHandler($field);
+    // Set the current field config in the form state to make it available in
+    // selection plugin.
+    $form_state->set('field', $field);
     $form['handler']['handler_settings'] += $handler->buildConfigurationForm([], $form_state);
 
     return $form;
