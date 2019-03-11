@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Drupal\rdf_skos;
 
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Language\LanguageInterface;
 use Drupal\rdf_entity\Entity\RdfEntitySparqlStorage;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -51,6 +52,37 @@ class SkosEntityStorage extends RdfEntitySparqlStorage {
     }
 
     return $return;
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * Ensure that if there are duplicate fields for the field that is mapped to
+   * the bundle predicate, we use the correct one.
+   */
+  protected function getActiveBundle(array $entity_values): ?string {
+    $bundle_predicates = $this->bundlePredicate;
+    $bundles = [];
+    foreach ($bundle_predicates as $bundle_predicate) {
+      if (isset($entity_values[$bundle_predicate])) {
+        $bundle_data = $entity_values[$bundle_predicate];
+        foreach ($bundle_data[LanguageInterface::LANGCODE_DEFAULT] as $key => $uri) {
+          try {
+            $bundles += $this->fieldHandler->getInboundBundleValue($this->entityTypeId, $uri);
+          }
+          catch (\Exception $exception) {
+            // We do nothing in this case.
+            continue;
+          }
+        }
+      }
+    }
+
+    if (empty($bundles)) {
+      return NULL;
+    }
+
+    return reset($bundles);
   }
 
 }
