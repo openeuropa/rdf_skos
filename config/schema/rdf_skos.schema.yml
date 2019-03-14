@@ -27,17 +27,17 @@ entity_reference_selection.default:skos_concept:
       type: entity_reference_selection.skos_concept.concept_schemes
     field:
       type: mapping
-      label: Field information
+      label: 'Field information'
       mapping:
         field_name:
           type: string
-          label: The name of the field
+          label: 'The name of the field'
         entity_type:
           type: string
-          label: The entity type the field is on
+          label: 'The entity type the field is on'
         bundle:
           type: string
-          label: The entity type bundle the field is on
+          label: 'The entity type bundle the field is on'
         concept_schemes:
           type: entity_reference_selection.skos_concept.concept_schemes
 
