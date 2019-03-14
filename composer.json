@@ -10,7 +10,8 @@
         "drupal/core": "~8.6@alpha",
         "drupal/field_group": "^1.0",
         "drupal/rdf_entity": "1.0-alpha12",
-        "easyrdf/easyrdf": "0.10.0-alpha.1 as 0.9.1"
+        "easyrdf/easyrdf": "0.10.0-alpha.1 as 0.9.1",
+        "twig/twig": "~1.37.1"
     },
     "require-dev": {
         "composer/installers": "^1.2",
