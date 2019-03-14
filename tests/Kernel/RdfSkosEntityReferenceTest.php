@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\rdf_skos\Kernel;
 
-use Drupal\field\Tests\EntityReference\EntityReferenceTestTrait;
+use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
 
 /**
  * Tests the SKOS entity reference field.
