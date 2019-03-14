@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * The RDF Skos test module.
+ */
+
+declare(strict_types = 1);
+
+use Drupal\Core\Database\Query\AlterableInterface;
+
+/**
+ * Implements hook_query_QUERY_TAG_alter().
+ *
+ * Alters the entity_test field_fruit field.
+ */
+function rdf_skos_test_query_skos_concept_field_selection_plugin_alter(AlterableInterface $query) {
+  $field_info = $query->getMetaData('field');
+  if (!$field_info) {
+    return;
+  }
+
+  if ($field_info['field_name'] === 'field_fruit' && count($field_info['concept_schemes']) === 1 && $field_info['concept_schemes'][0] === 'http://example.com/fruit') {
+    // Only apple related fruit.
+    $query->condition('related', 'http://example.com/fruit/apple');
+  }
+}

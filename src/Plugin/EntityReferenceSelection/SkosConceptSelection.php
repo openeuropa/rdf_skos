@@ -83,7 +83,9 @@ class SkosConceptSelection extends DefaultSelection {
       $settings['handler_settings']['concept_schemes'] = $concept_schemes;
     }
 
-    // Add field information that can be used in the selection handler.
+    // Add field information that can be used in the selection handler. This
+    // comes from the actual SkosConceptEntityReferenceItem and we need it so
+    // that the selection plugin query builder can receive this information.
     $field = $form_state->get('field');
     if ($field instanceof FieldConfigInterface) {
       $settings['handler_settings']['field'] = [
