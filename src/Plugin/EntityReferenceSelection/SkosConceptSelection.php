@@ -6,6 +6,7 @@ namespace Drupal\rdf_skos\Plugin\EntityReferenceSelection;
 
 use Drupal\Core\Entity\Plugin\EntityReferenceSelection\DefaultSelection;
 use Drupal\Core\Entity\Query\QueryInterface;
+use Drupal\Core\Field\FieldConfigInterface;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -28,6 +29,9 @@ class SkosConceptSelection extends DefaultSelection {
     return [
       // Empty array means allow all.
       'concept_schemes' => [],
+        // In case the plugin is used in a reference field, we can store some
+        // info about it.
+      'field' => [],
     ] + parent::defaultConfiguration();
   }
 
@@ -77,8 +81,22 @@ class SkosConceptSelection extends DefaultSelection {
     if ($concept_schemes) {
       $concept_schemes = array_values($concept_schemes);
       $settings['handler_settings']['concept_schemes'] = $concept_schemes;
-      $form_state->setValue('settings', $settings);
     }
+
+    // Add field information that can be used in the selection handler. This
+    // comes from the actual SkosConceptEntityReferenceItem and we need it so
+    // that the selection plugin query builder can receive this information.
+    $field = $form_state->get('field');
+    if ($field instanceof FieldConfigInterface) {
+      $settings['handler_settings']['field'] = [
+        'field_name' => $field->getName(),
+        'entity_type' => $field->getTargetEntityTypeId(),
+        'bundle' => $field->getTargetBundle(),
+        'concept_schemes' => $concept_schemes,
+      ];
+    }
+
+    $form_state->setValue('settings', $settings);
   }
 
   /**
@@ -87,6 +105,12 @@ class SkosConceptSelection extends DefaultSelection {
   protected function buildEntityQuery($match = NULL, $match_operator = 'CONTAINS'): QueryInterface {
     $query = parent::buildEntityQuery($match, $match_operator);
     $configuration = $this->getConfiguration();
+    if (!empty($configuration['field'])) {
+      // Allow query alterations when used for a reference field.
+      $query->addTag('skos_concept_field_selection_plugin');
+      $query->addMetaData('field', $configuration['field']);
+    }
+
     $concept_schemes = $configuration['concept_schemes'];
     if (empty($concept_schemes)) {
       return $query;

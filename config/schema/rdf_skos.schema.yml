@@ -24,8 +24,26 @@ entity_reference_selection.default:skos_concept:
   label: 'SKOS Concept handler settings'
   mapping:
     concept_schemes:
-      type: sequence
-      label: 'The concept schemes to filter by'
-      sequence:
-        type: string
-        label: 'The Concept Scheme URI'
+      type: entity_reference_selection.skos_concept.concept_schemes
+    field:
+      type: mapping
+      label: 'Field information'
+      mapping:
+        field_name:
+          type: string
+          label: 'The name of the field'
+        entity_type:
+          type: string
+          label: 'The entity type the field is on'
+        bundle:
+          type: string
+          label: 'The entity type bundle the field is on'
+        concept_schemes:
+          type: entity_reference_selection.skos_concept.concept_schemes
+
+entity_reference_selection.skos_concept.concept_schemes:
+  type: sequence
+  label: 'The concept schemes to filter by'
+  sequence:
+    type: string
+    label: 'The Concept Scheme URI'

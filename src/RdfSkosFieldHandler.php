@@ -7,11 +7,17 @@ namespace Drupal\rdf_skos;
 use Drupal\rdf_entity\Exception\NonExistingFieldPropertyException;
 use Drupal\rdf_entity\RdfFieldHandler;
 use Drupal\rdf_entity\RdfFieldHandlerInterface;
+use Drupal\rdf_skos\Event\SkosPredicateMappingEvent;
 
 /**
  * RDF field handler for SKOS entities.
  */
 class RdfSkosFieldHandler extends RdfFieldHandler {
+
+  /**
+   * Event name dispatched to gather predicate mappings for SKOS entities.
+   */
+  const PREDICATE_MAPPING_EVENT = 'rdf_skos_field_handler.predicate_mapping';
 
   /**
    * {@inheritdoc}
@@ -218,7 +224,11 @@ class RdfSkosFieldHandler extends RdfFieldHandler {
       ],
     ];
 
-    return $mapping[$entity_type_id];
+    $event = new SkosPredicateMappingEvent($entity_type_id);
+    $event->setMapping($mapping[$entity_type_id]);
+    $this->eventDispatcher->dispatch(self::PREDICATE_MAPPING_EVENT, $event);
+
+    return $event->getMapping();
   }
 
 }
