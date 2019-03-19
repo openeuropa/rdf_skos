@@ -15,11 +15,6 @@ use Drupal\rdf_skos\Event\SkosPredicateMappingEvent;
 class RdfSkosFieldHandler extends RdfFieldHandler {
 
   /**
-   * Event name dispatched to gather predicate mappings for SKOS entities.
-   */
-  const PREDICATE_MAPPING_EVENT = 'rdf_skos_field_handler.predicate_mapping';
-
-  /**
    * {@inheritdoc}
    */
   protected function buildEntityTypeProperties($entity_type_id): void {
@@ -226,7 +221,7 @@ class RdfSkosFieldHandler extends RdfFieldHandler {
 
     $event = new SkosPredicateMappingEvent($entity_type_id);
     $event->setMapping($mapping[$entity_type_id]);
-    $this->eventDispatcher->dispatch(self::PREDICATE_MAPPING_EVENT, $event);
+    $this->eventDispatcher->dispatch(SkosPredicateMappingEvent::EVENT, $event);
 
     return $event->getMapping();
   }
