@@ -12,6 +12,11 @@ use Symfony\Component\EventDispatcher\Event;
 class SkosPredicateMappingEvent extends Event {
 
   /**
+   * Event name dispatched to gather predicate mappings for SKOS entities.
+   */
+  const EVENT = 'rdf_skos_field_handler.predicate_mapping';
+
+  /**
    * The predicate mapping.
    *
    * @var array
