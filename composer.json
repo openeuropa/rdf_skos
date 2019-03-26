@@ -14,6 +14,7 @@
     },
     "require-dev": {
         "composer/installers": "^1.5",
+        "consolidation/robo" : "^1.2.2",
         "cweagans/composer-patches": "~1.0",
         "drupal-composer/drupal-scaffold": "^2.5.2",
         "drupal/config_devel": "~1.2",
@@ -24,7 +25,7 @@
         "openeuropa/behat-transformation-context" : "~0.1",
         "openeuropa/code-review": "~1.0@beta",
         "openeuropa/drupal-core-require-dev": "^8.6",
-        "openeuropa/task-runner": "~1.0beta",
+        "openeuropa/task-runner": "~1.0@beta",
         "phpunit/phpunit": "~6.0",
         "symfony/dom-crawler": "~3.0"
     },
