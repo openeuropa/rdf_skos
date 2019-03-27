@@ -26,6 +26,17 @@ pipeline:
     commands:
       - composer install --ansi --no-suggest --no-progress
 
+  composer-update-lowest:
+    group: post-prepare
+    image: fpfis/httpd-php-dev:7.1
+    volumes:
+      - /cache:/cache
+    commands:
+      - composer update --prefer-lowest --prefer-stable --ansi --no-suggest --no-progress
+    when:
+      matrix:
+        COMPOSER_BOUNDARY: lowest
+
   site-install:
     image: fpfis/httpd-php-dev:7.1
     commands:
@@ -48,3 +59,8 @@ pipeline:
     image: fpfis/php71-build
     commands:
       - ./vendor/bin/behat --strict
+
+matrix:
+  COMPOSER_BOUNDARY:
+    - lowest
+    - highest
