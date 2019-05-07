@@ -1,8 +1,16 @@
 # Change Log
 
+## [0.2.0](https://github.com/openeuropa/rdf_skos/tree/0.2.0) (2019-05-06)
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.1.0...0.2.0)
+
+**Merged pull requests:**
+
+- OPENEUROPA-1813: Upgrade to 8.7 [\#15](https://github.com/openeuropa/rdf_skos/pull/15) ([upchuk](https://github.com/upchuk))
+
 ## [0.1.0](https://github.com/openeuropa/rdf_skos/tree/0.1.0) (2019-04-25)
 **Merged pull requests:**
 
+- Update CHANGELOG.md for release 0.1.0. [\#14](https://github.com/openeuropa/rdf_skos/pull/14) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-1659 [\#13](https://github.com/openeuropa/rdf_skos/pull/13) ([voidtek](https://github.com/voidtek))
 - OPENEUROPA-1690: Moving the even name constant. [\#12](https://github.com/openeuropa/rdf_skos/pull/12) ([upchuk](https://github.com/upchuk))
 - OPENEUROPA-1690: Minor fix that allows Skos data with multiple type fields. [\#11](https://github.com/openeuropa/rdf_skos/pull/11) ([upchuk](https://github.com/upchuk))
