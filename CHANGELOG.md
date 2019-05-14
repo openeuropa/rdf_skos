@@ -1,10 +1,18 @@
 # Change Log
 
-## [0.2.0](https://github.com/openeuropa/rdf_skos/tree/0.2.0) (2019-05-06)
+## [0.2.1](https://github.com/openeuropa/rdf_skos/tree/0.2.1) (2019-05-14)
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.2.0...0.2.1)
+
+**Merged pull requests:**
+
+- OPENEUROPA-1890: Fixing RDF Skos config schema. [\#18](https://github.com/openeuropa/rdf_skos/pull/18) ([upchuk](https://github.com/upchuk))
+
+## [0.2.0](https://github.com/openeuropa/rdf_skos/tree/0.2.0) (2019-05-07)
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.1.0...0.2.0)
 
 **Merged pull requests:**
 
+- OPENEUROPA-1813: Create release 0.2.0. [\#16](https://github.com/openeuropa/rdf_skos/pull/16) ([voidtek](https://github.com/voidtek))
 - OPENEUROPA-1813: Upgrade to 8.7 [\#15](https://github.com/openeuropa/rdf_skos/pull/15) ([upchuk](https://github.com/upchuk))
 
 ## [0.1.0](https://github.com/openeuropa/rdf_skos/tree/0.1.0) (2019-04-25)
