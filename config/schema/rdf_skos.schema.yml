@@ -47,3 +47,12 @@ entity_reference_selection.skos_concept.concept_schemes:
   sequence:
     type: string
     label: 'The Concept Scheme URI'
+
+field.storage_settings.skos_concept_entity_reference:
+  type: field.storage_settings.entity_reference
+
+field.field_settings.skos_concept_entity_reference:
+  type: field.field_settings.entity_reference
+
+field.widget.settings.skos_concept_entity_reference_autocomplete:
+  type: field.widget.settings.entity_reference_autocomplete
