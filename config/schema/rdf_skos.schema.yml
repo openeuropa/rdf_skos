@@ -41,13 +41,6 @@ entity_reference_selection.default:skos_concept:
         concept_schemes:
           type: entity_reference_selection.skos_concept.concept_schemes
 
-entity_reference_selection.skos_concept.concept_schemes:
-  type: sequence
-  label: 'The concept schemes to filter by'
-  sequence:
-    type: string
-    label: 'The Concept Scheme URI'
-
 field.storage_settings.skos_concept_entity_reference:
   type: field.storage_settings.entity_reference
 
@@ -56,3 +49,33 @@ field.field_settings.skos_concept_entity_reference:
 
 field.widget.settings.skos_concept_entity_reference_autocomplete:
   type: field.widget.settings.entity_reference_autocomplete
+
+entity_reference_selection.skos_concept.concept_schemes:
+  type: sequence
+  label: 'The concept schemes to filter by'
+  sequence:
+    type: string
+    label: 'The Concept Scheme URI'
+
+views.filter.skos_concept_reference_id:
+  type: views.filter.many_to_one
+  label: 'Skos concept reference ID'
+  mapping:
+    type:
+      type: string
+      label: 'Selection type'
+    limit:
+      type: boolean
+      label: 'Limit to concept scheme'
+    concept_scheme:
+      type: string
+      label: 'The concept scheme to limit by'
+    value:
+      type: sequence
+      label: 'Values'
+      sequence:
+        type: string
+        label: 'Value'
+
+views.filter_value.skos_concept_reference_id:
+  type: views.filter_value.in_operator

@@ -1,14 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\rdf_skos\Plugin\views\filter;
 
 use Drupal\Core\Entity\Element\EntityAutocomplete;
 use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\taxonomy\Entity\Term;
-use Drupal\taxonomy\TermStorageInterface;
-use Drupal\taxonomy\VocabularyStorageInterface;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\Plugin\views\filter\ManyToOne;
@@ -28,14 +27,19 @@ class SkosConceptReferenceId extends ManyToOne {
    *
    * @var null
    */
+  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public $validated_exposed_input = NULL;
 
   /**
+   * The entity type manager.
+   *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
   /**
+   * The entity repository.
+   *
    * @var \Drupal\Core\Entity\EntityRepositoryInterface
    */
   protected $entityRepository;
@@ -50,7 +54,9 @@ class SkosConceptReferenceId extends ManyToOne {
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager.
    * @param \Drupal\Core\Entity\EntityRepositoryInterface $entityRepository
+   *   The entity repository.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entityTypeManager, EntityRepositoryInterface $entityRepository) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -134,7 +140,7 @@ class SkosConceptReferenceId extends ManyToOne {
           '#title' => $this->t('Concept scheme'),
           '#options' => $options,
           '#description' => $this->t('Select which concept scheme to filter by.'),
-          '#default_value' => $this->options['vid'],
+          '#default_value' => $this->options['concept_scheme'],
         ];
       }
     }
@@ -157,7 +163,7 @@ class SkosConceptReferenceId extends ManyToOne {
       '#title' => $this->options['limit'] ? $this->t('Select concepts from concept scheme @scheme', ['@scheme' => $scheme->label()]) : $this->t('Select concepts'),
       '#type' => 'textfield',
       '#default_value' => EntityAutocomplete::getEntityLabels($concepts),
-      // Account for the large size of concept references
+      // Account for the large size of concept references.
       '#maxlength' => 10000,
     ];
 
@@ -170,7 +176,7 @@ class SkosConceptReferenceId extends ManyToOne {
     }
 
     if (!$form_state->get('exposed')) {
-      // Retain the helper option
+      // Retain the helper option.
       $this->helper->buildOptionsForm($form, $form_state);
 
       // Show help text if not exposed to end users.
@@ -211,7 +217,11 @@ class SkosConceptReferenceId extends ManyToOne {
   /**
    * {@inheritdoc}
    *
-   * This is entirely copied from Drupal\taxonomy\Plugin\views\filter\TaxonomyIndexTid
+   * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+   * @SuppressWarnings(PHPMD.NPathComplexity)
+   *
+   * This is entirely copied from
+   * Drupal\taxonomy\Plugin\views\filter\TaxonomyIndexTid.
    */
   public function acceptExposedInput($input) {
     if (empty($this->options['exposed'])) {
@@ -225,7 +235,7 @@ class SkosConceptReferenceId extends ManyToOne {
     }
 
     // If view is an attachment and is inheriting exposed filters, then assume
-    // exposed input has already been validated
+    // exposed input has already been validated.
     if (!empty($this->view->is_attachment) && $this->view->display_handler->usesExposed()) {
       $this->validated_exposed_input = (array) $this->view->exposed_raw_input[$this->options['expose']['identifier']];
     }
@@ -276,10 +286,11 @@ class SkosConceptReferenceId extends ManyToOne {
   /**
    * {@inheritdoc}
    *
-   * This is entirely copied from Drupal\taxonomy\Plugin\views\filter\TaxonomyIndexTid
+   * This is entirely copied from
+   * Drupal\taxonomy\Plugin\views\filter\TaxonomyIndexTid.
    */
   protected function valueSubmit($form, FormStateInterface $form_state) {
-    // prevent array_filter from messing up our arrays in parent submit.
+    // Prevent array_filter from messing up our arrays in parent submit.
   }
 
   /**
@@ -298,7 +309,8 @@ class SkosConceptReferenceId extends ManyToOne {
   /**
    * {@inheritdoc}
    *
-   * This is entirely copied from Drupal\taxonomy\Plugin\views\filter\TaxonomyIndexTid
+   * This is entirely copied from
+   * Drupal\taxonomy\Plugin\views\filter\TaxonomyIndexTid.
    */
   public function getCacheContexts() {
     $contexts = parent::getCacheContexts();
