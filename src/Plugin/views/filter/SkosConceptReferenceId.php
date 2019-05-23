@@ -8,6 +8,7 @@ use Drupal\Core\Entity\Element\EntityAutocomplete;
 use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\rdf_skos\Entity\ConceptSchemeInterface;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\Plugin\views\filter\ManyToOne;
@@ -19,6 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @ingroup views_filter_handlers
  *
  * @ViewsFilter("skos_concept_reference_id")
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class SkosConceptReferenceId extends ManyToOne {
 
@@ -329,7 +331,13 @@ class SkosConceptReferenceId extends ManyToOne {
     $dependencies = parent::calculateDependencies();
 
     $scheme = $this->entityTypeManager->getStorage('skos_concept_scheme')->load($this->options['concept_scheme']);
-    $dependencies[$scheme->getConfigDependencyKey()][] = $scheme->getConfigDependencyName();
+    if ($scheme instanceof ConceptSchemeInterface) {
+      $dependencies[$scheme->getConfigDependencyKey()][] = $scheme->getConfigDependencyName();
+    }
+
+    if (!$this->options['value']) {
+      return $dependencies;
+    }
 
     foreach ($this->entityTypeManager->getStorage('skos_concept')->loadMultiple($this->options['value']) as $concept) {
       $dependencies[$concept->getConfigDependencyKey()][] = $concept->getConfigDependencyName();
