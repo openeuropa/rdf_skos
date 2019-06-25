@@ -1,10 +1,20 @@
 # Change Log
 
+## [0.3.0](https://github.com/openeuropa/rdf_skos/tree/0.3.0) (2019-06-25)
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.2.1...0.3.0)
+
+**Merged pull requests:**
+
+- OPENEUROPA-1897: Use ci image. [\#21](https://github.com/openeuropa/rdf_skos/pull/21) ([imanoleguskiza](https://github.com/imanoleguskiza))
+- OPENEUROPA-1782: Minor bug fix on the Skos concept filter plugin. [\#20](https://github.com/openeuropa/rdf_skos/pull/20) ([upchuk](https://github.com/upchuk))
+- OPENEUROPA-1782: Ensure that the RDF SKOS entity reference target ID can be used in Views in a many-to-one filter [\#17](https://github.com/openeuropa/rdf_skos/pull/17) ([upchuk](https://github.com/upchuk))
+
 ## [0.2.1](https://github.com/openeuropa/rdf_skos/tree/0.2.1) (2019-05-14)
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.2.0...0.2.1)
 
 **Merged pull requests:**
 
+- Release-0.2.1: Create release 0.2.1. [\#19](https://github.com/openeuropa/rdf_skos/pull/19) ([sergepavle](https://github.com/sergepavle))
 - OPENEUROPA-1890: Fixing RDF Skos config schema. [\#18](https://github.com/openeuropa/rdf_skos/pull/18) ([upchuk](https://github.com/upchuk))
 
 ## [0.2.0](https://github.com/openeuropa/rdf_skos/tree/0.2.0) (2019-05-07)
