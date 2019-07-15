@@ -27,15 +27,18 @@ class SkosConceptReferenceId extends ManyToOne {
   /**
    * Stores the exposed input for this filter.
    *
-   * @var null
+   * @var array
+   *
+   * phpcs:disable Drupal.NamingConventions.ValidVariableName.LowerCamelName
    */
-  // phpcs:ignore Drupal.NamingConventions.ValidVariableName.LowerCamelName
   public $validated_exposed_input = NULL;
 
   /**
    * The entity type manager.
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   *
+   * phpcs:enable Drupal.NamingConventions.ValidVariableName.LowerCamelName
    */
   protected $entityTypeManager;
 
