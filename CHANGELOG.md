@@ -1,10 +1,18 @@
 # Change Log
 
+## [0.3.1](https://github.com/openeuropa/rdf_skos/tree/0.3.1) (2019-08-26)
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.3.0...0.3.1)
+
+**Merged pull requests:**
+
+- OPENEUROPA-0000: Remove unneeded field\_group dependency. [\#24](https://github.com/openeuropa/rdf_skos/pull/24) ([brummbar](https://github.com/brummbar))
+
 ## [0.3.0](https://github.com/openeuropa/rdf_skos/tree/0.3.0) (2019-06-25)
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.2.1...0.3.0)
 
 **Merged pull requests:**
 
+- Update CHANGELOG.md for release 0.3.0. [\#22](https://github.com/openeuropa/rdf_skos/pull/22) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-1897: Use ci image. [\#21](https://github.com/openeuropa/rdf_skos/pull/21) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - OPENEUROPA-1782: Minor bug fix on the Skos concept filter plugin. [\#20](https://github.com/openeuropa/rdf_skos/pull/20) ([upchuk](https://github.com/upchuk))
 - OPENEUROPA-1782: Ensure that the RDF SKOS entity reference target ID can be used in Views in a many-to-one filter [\#17](https://github.com/openeuropa/rdf_skos/pull/17) ([upchuk](https://github.com/upchuk))
