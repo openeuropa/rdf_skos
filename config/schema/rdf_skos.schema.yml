@@ -50,6 +50,13 @@ field.field_settings.skos_concept_entity_reference:
 field.widget.settings.skos_concept_entity_reference_autocomplete:
   type: field.widget.settings.entity_reference_autocomplete
 
+field.formatter.settings.skos_concept_entity_reference_label:
+  type: mapping
+  mapping:
+    link:
+      type: boolean
+      label: 'Link to the entity'
+
 entity_reference_selection.skos_concept.concept_schemes:
   type: sequence
   label: 'The concept schemes to filter by'
