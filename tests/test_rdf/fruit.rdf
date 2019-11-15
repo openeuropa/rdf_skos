@@ -6,12 +6,15 @@
     <skos:ConceptScheme rdf:about="http://example.com/fruit">
         <skos:hasTopConcept rdf:resource="http://example.com/fruit/citrus-fruit"/>
         <skos:prefLabel xml:lang="en">Fruit</skos:prefLabel>
+        <skos:prefLabel xml:lang="it">Frutta</skos:prefLabel>
         <dc:title xml:lang="en">Fruit</dc:title>
     </skos:ConceptScheme>
     <skos:Concept rdf:about="http://example.com/fruit/citrus-fruit">
         <skos:inScheme rdf:resource="http://example.com/fruit"/>
         <skos:prefLabel xml:lang="en">Citrus fruit</skos:prefLabel>
+        <skos:prefLabel xml:lang="it">Agrumi</skos:prefLabel>
         <skos:altLabel xml:lang="en">Citrus fruit ALT</skos:altLabel>
+        <skos:altLabel xml:lang="fr">Agrumes ALT</skos:altLabel>
         <skos:hiddenLabel xml:lang="en">Citrus fruit HIDDEN</skos:hiddenLabel>
         <skos:example xml:lang="en">lemons, oranges, limes, mandarines, grapefruit, satsumas</skos:example>
         <skos:definition xml:lang="en">Fruit that make you salivate sometimes</skos:definition>
@@ -30,11 +33,13 @@
     <skos:Concept rdf:about="http://example.com/fruit/pear">
         <skos:inScheme rdf:resource="http://example.com/fruit"/>
         <skos:prefLabel xml:lang="en">Pear</skos:prefLabel>
+        <skos:prefLabel xml:lang="fr">Poire</skos:prefLabel>
         <skos:related rdf:resource="http://example.com/fruit/apple"/>
     </skos:Concept>
     <skos:Concept rdf:about="http://example.com/fruit/apple">
         <skos:inScheme rdf:resource="http://example.com/fruit"/>
         <skos:prefLabel xml:lang="en">Apple</skos:prefLabel>
+        <skos:prefLabel xml:lang="it">Mela</skos:prefLabel>
     </skos:Concept>
     <skos:Concept rdf:about="http://example.com/fruit/banana">
         <skos:inScheme rdf:resource="http://example.com/fruit"/>

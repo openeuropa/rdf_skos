@@ -7,6 +7,7 @@ namespace Drupal\rdf_skos;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\rdf_entity\Entity\RdfEntitySparqlStorage;
+use Drupal\rdf_entity\RdfFieldHandlerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -51,6 +52,7 @@ class SkosEntityStorage extends RdfEntitySparqlStorage {
       }
     }
 
+    $this->processGraphResultTranslations($return);
     return $return;
   }
 
@@ -83,6 +85,117 @@ class SkosEntityStorage extends RdfEntitySparqlStorage {
     }
 
     return reset($bundles);
+  }
+
+  /**
+   * Processes the translations for the graph results.
+   *
+   * Since SKOS data does not have langcode information per "entity", we need
+   * to construct the data the parent class expects to create translations
+   * when hydrating the entities. We do this by checking all the translatable
+   * literal fields and compile a list of translation languages across all
+   * these fields. And we indicate that we want our generated entity to have
+   * a translation of all these languages.
+   *
+   * Moreover, we populate for each field that have no translation value in a
+   * certain language with defaults so that the resulting entity can have
+   * fallback values when requested in certain language.
+   *
+   * @param array $results
+   *   The results to process.
+   *
+   * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+   */
+  protected function processGraphResultTranslations(array &$results): void {
+    $langcode_key = $this->getEntityType()->getKey('langcode');
+    foreach ($results as $id => $entity_values) {
+      $translations = [];
+
+      if (isset($entity_values[$langcode_key])) {
+        // If the values already contain langcode information, do nothing.
+        continue;
+      }
+
+      foreach ($entity_values as $field_name => $field_values) {
+        if (!$this->isFieldTranslatable($field_name)) {
+          continue;
+        }
+
+        $translations = array_merge($translations, array_keys($field_values));
+      }
+
+      $translations = array_filter($translations, function ($langcode) {
+        return $langcode !== LanguageInterface::LANGCODE_DEFAULT;
+      });
+
+      if (!$translations) {
+        continue;
+      }
+
+      $results[$id][$langcode_key] = $this->prepareLangcodeValues($translations);
+      foreach ($translations as $langcode) {
+        foreach ($results[$id] as $field_name => $field_values) {
+          if (!$this->isFieldTranslatable($field_name)) {
+            continue;
+          }
+
+          if (!isset($field_values[$langcode]) && isset($field_values[LanguageInterface::LANGCODE_DEFAULT])) {
+            $results[$id][$field_name][$langcode] = $field_values[LanguageInterface::LANGCODE_DEFAULT];
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * Prepares the langcode values for the translation processing.
+   *
+   * Given an array of langcodes, prepare the values expected by
+   * RdfEntitySparqlStorage::getFromStorage() to determine the entity
+   * translations.
+   *
+   * @param array $langcodes
+   *   The langcodes.
+   *
+   * @return array
+   *   The values.
+   */
+  protected function prepareLangcodeValues(array $langcodes): array {
+    $values = [];
+    foreach ($langcodes as $langcode) {
+      $values[$langcode] = [
+        [
+          'value' => $langcode,
+        ],
+      ];
+    }
+
+    return $values;
+  }
+
+  /**
+   * Checks if a given field is translatable: is a translatable literal.
+   *
+   * @param string $field_name
+   *   The field name.
+   *
+   * @return bool
+   *   Whether it is translatable or not.
+   */
+  protected function isFieldTranslatable(string $field_name): bool {
+    try {
+      $format = $this->fieldHandler->getFieldFormat($this->getEntityType()->id(), $field_name);
+    }
+    catch (\Exception $exception) {
+      return FALSE;
+    }
+
+    $format = reset($format);
+    if ($format !== RdfFieldHandlerInterface::TRANSLATABLE_LITERAL) {
+      return FALSE;
+    }
+
+    return TRUE;
   }
 
 }
