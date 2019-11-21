@@ -1,10 +1,21 @@
 # Change Log
 
-## [0.3.2](https://github.com/openeuropa/rdf_skos/tree/0.3.2) (2019-10-16)
+## [0.4.0](https://github.com/openeuropa/rdf_skos/tree/0.4.0) (2019-11-21)
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.3.2...0.4.0)
+
+**Merged pull requests:**
+
+- OPENEUROPA-2402: Making the Skos entities translatable. [\#32](https://github.com/openeuropa/rdf_skos/pull/32) ([upchuk](https://github.com/upchuk))
+- OPENEUROPA-2258: Undo use of PHP 7.2. [\#31](https://github.com/openeuropa/rdf_skos/pull/31) ([dxvargas](https://github.com/dxvargas))
+- OPENEUROPA-2464: Use PHP 7.1 in docker-compose. [\#30](https://github.com/openeuropa/rdf_skos/pull/30) ([dxvargas](https://github.com/dxvargas))
+- OPENEUROPA-2258: Use PHP 7.2 in drone and docker image. [\#27](https://github.com/openeuropa/rdf_skos/pull/27) ([dxvargas](https://github.com/dxvargas))
+
+## [0.3.2](https://github.com/openeuropa/rdf_skos/tree/0.3.2) (2019-10-17)
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.3.1...0.3.2)
 
 **Merged pull requests:**
 
+- OPENEUROPA-0000: Update CHANGELOG.md for release 0.3.2. [\#29](https://github.com/openeuropa/rdf_skos/pull/29) ([sergepavle](https://github.com/sergepavle))
 - OPENEUROPA-2285: Add schema for field formatter. [\#28](https://github.com/openeuropa/rdf_skos/pull/28) ([nagyad](https://github.com/nagyad))
 
 ## [0.3.1](https://github.com/openeuropa/rdf_skos/tree/0.3.1) (2019-08-26)
