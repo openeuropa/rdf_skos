@@ -108,6 +108,8 @@ class SkosEntityStorage extends RdfEntitySparqlStorage {
    */
   protected function processGraphResultTranslations(array &$results): void {
     $langcode_key = $this->getEntityType()->getKey('langcode');
+    // Loop through each set of entity values and determine the languages
+    // in which there are translations.
     foreach ($results as $id => $entity_values) {
       $translations = [];
 
@@ -116,6 +118,8 @@ class SkosEntityStorage extends RdfEntitySparqlStorage {
         continue;
       }
 
+      // Loop trough each individual translatable field and keep track of the
+      // languages in which it has values.
       foreach ($entity_values as $field_name => $field_values) {
         if (!$this->isFieldTranslatable($field_name)) {
           continue;
@@ -124,6 +128,7 @@ class SkosEntityStorage extends RdfEntitySparqlStorage {
         $translations = array_merge($translations, array_keys($field_values));
       }
 
+      // Skip the default language from the found translation languages.
       $translations = array_filter($translations, function ($langcode) {
         return $langcode !== LanguageInterface::LANGCODE_DEFAULT;
       });
@@ -133,6 +138,9 @@ class SkosEntityStorage extends RdfEntitySparqlStorage {
       }
 
       $results[$id][$langcode_key] = $this->prepareLangcodeValues($translations);
+
+      // Go through each translation language and populate each field with
+      // default values in each language where values are missing.
       foreach ($translations as $langcode) {
         foreach ($results[$id] as $field_name => $field_values) {
           if (!$this->isFieldTranslatable($field_name)) {
