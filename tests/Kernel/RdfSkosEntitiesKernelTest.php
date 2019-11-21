@@ -130,11 +130,13 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
     /** @var \Drupal\rdf_skos\Entity\ConceptSchemeInterface $scheme */
     $scheme = $entity_type_manager->getStorage('skos_concept_scheme')->load('http://example.com/fruit');
     $this->assertTrue($scheme->hasTranslation('it'));
+    $this->assertFalse($scheme->hasTranslation('fr'));
     $this->assertEquals('Frutta', $scheme->getTranslation('it')->label());
 
     /** @var \Drupal\rdf_skos\Entity\ConceptInterface $pear */
     $pear = $entity_type_manager->getStorage('skos_concept')->load('http://example.com/fruit/pear');
     $this->assertTrue($pear->hasTranslation('fr'));
+    $this->assertFalse($pear->hasTranslation('it'));
     $this->assertEquals('Poire', $pear->getTranslation('fr')->label());
 
     /** @var \Drupal\rdf_skos\Entity\ConceptInterface $citrus */

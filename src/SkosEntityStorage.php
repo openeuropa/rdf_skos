@@ -199,11 +199,7 @@ class SkosEntityStorage extends RdfEntitySparqlStorage {
     }
 
     $format = reset($format);
-    if ($format !== RdfFieldHandlerInterface::TRANSLATABLE_LITERAL) {
-      return FALSE;
-    }
-
-    return TRUE;
+    return $format === RdfFieldHandlerInterface::TRANSLATABLE_LITERAL;
   }
 
 }
