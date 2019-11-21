@@ -221,6 +221,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
     $fields['pref_label'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Preferred Label'))
       ->setDescription(t('The preferred label of the Concept.'))
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', [
         'label' => 'hidden',
         'type' => 'sting',
@@ -229,6 +230,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
     $fields['alt_label'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Alternate Label'))
       ->setDescription(t('The alternate label of the Concept.'))
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'sting',
@@ -237,6 +239,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
     $fields['hidden_label'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Hidden Label'))
       ->setDescription(t('The hidden label of the Concept.'))
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'sting',
@@ -245,6 +248,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
     $fields['definition'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Definition'))
       ->setDescription(t('The definition of the Concept.'))
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'sting',
@@ -253,6 +257,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
     $fields['example'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Example'))
       ->setDescription(t('The example of the Concept.'))
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'sting',
@@ -261,6 +266,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
     $fields['scope_note'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Scope Note'))
       ->setDescription(t('The scope note of the Concept.'))
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'sting',
@@ -269,6 +275,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
     $fields['editorial_note'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Editorial Note'))
       ->setDescription(t('The editorial note of the Concept.'))
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'sting',
@@ -277,6 +284,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
     $fields['change_note'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Change Note'))
       ->setDescription(t('The change note of the Concept.'))
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'sting',
@@ -285,6 +293,7 @@ class Concept extends ContentEntityBase implements ConceptInterface {
     $fields['history_note'] = BaseFieldDefinition::create('string')
       ->setLabel(t('History Note'))
       ->setDescription(t('The history note of the Concept.'))
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'sting',

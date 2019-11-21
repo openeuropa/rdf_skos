@@ -78,6 +78,7 @@ class ConceptScheme extends ContentEntityBase implements ConceptSchemeInterface 
 
     $fields['title'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Title'))
+      ->setTranslatable(TRUE)
       ->setDescription(t('The title of the Concept Scheme.'));
 
     $fields['has_top_concept'] = BaseFieldDefinition::create('entity_reference')
