@@ -52,6 +52,10 @@ class SkosEntityStorage extends RdfEntitySparqlStorage {
       }
     }
 
+    if (!is_array($return)) {
+      return $return;
+    }
+
     $this->processGraphResultTranslations($return);
     return $return;
   }
