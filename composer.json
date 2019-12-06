@@ -6,6 +6,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
+        "cweagans/composer-patches": "~1.0",
         "drupal/core": "^8.7",
         "drupal/rdf_entity": "1.0-alpha12",
         "easyrdf/easyrdf": "0.10.0-alpha.1 as 0.9.1",
@@ -14,7 +15,6 @@
     "require-dev": {
         "composer/installers": "^1.5",
         "consolidation/robo" : "~1.4",
-        "cweagans/composer-patches": "~1.0",
         "drupal-composer/drupal-scaffold": "^2.5.2",
         "drupal/config_devel": "~1.2",
         "drupal/drupal-extension": "~4.0",
@@ -57,7 +57,8 @@
         "patches": {
             "drupal/rdf_entity": {
                 "GH-63: Paginating the term list page - https://github.com/ec-europa/rdf_entity/pull/64": "https://patch-diff.githubusercontent.com/raw/ec-europa/rdf_entity/pull/64.patch",
-                "GH-61 - Fixing RDF taxonomy access bug - https://github.com/ec-europa/rdf_entity/pull/62": "https://patch-diff.githubusercontent.com/raw/ec-europa/rdf_entity/pull/62.patch"
+                "GH-61 - Fixing RDF taxonomy access bug - https://github.com/ec-europa/rdf_entity/pull/62": "https://patch-diff.githubusercontent.com/raw/ec-europa/rdf_entity/pull/62.patch",
+                "DO-3087381: TypeError: Return value of RdfGraphHandler - https://www.drupal.org/project/rdf_entity/issues/3087381": "https://www.drupal.org/files/issues/2019-12-06/rdf_entity-fix_undefined_index_rdf_entity-087381-2.patch"
             }
         },
         "installer-paths": {
