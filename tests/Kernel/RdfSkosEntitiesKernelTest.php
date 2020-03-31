@@ -19,6 +19,7 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
   public static $modules = [
     'language',
     'content_translation',
+    'rdf_skos_language_mapping',
   ];
 
   /**
