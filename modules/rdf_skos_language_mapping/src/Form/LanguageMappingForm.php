@@ -96,6 +96,25 @@ class LanguageMappingForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $languages = $this->languageManager->getLanguages();
+
+    // Count repeated values for uniqueness check.
+    $count = array_count_values($form_state->getValue('language_mapping'));
+    foreach ($languages as $langcode => $language) {
+      $value = $form_state->getValue(['language_mapping', $langcode]);
+      if (isset($count[$value]) && $count[$value] > 1) {
+        // Throw a form error if there are two languages with the same langcode.
+        $form_state->setErrorByName("language_mapping][$langcode", $this->t('The langcode for %language, %value, is not unique.', ['%language' => $language->getName(), '%value' => $value]));
+      }
+    }
+
+    parent::validateForm($form, $form_state);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->config('rdf_skos_language_mapping.settings')
       ->set('language_mapping', $form_state->getValue('language_mapping'))
