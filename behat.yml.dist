@@ -23,6 +23,7 @@ default:
       api_driver: "drupal"
       selectors:
         message_selector: ".messages"
+        success_message_selector: ".messages.messages--status"
         error_message_selector: ".messages.messages--error"
       drupal:
         drupal_root: "build"

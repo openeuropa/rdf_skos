@@ -38,6 +38,7 @@ class RdfSkosLanguageMappingSubscriber implements EventSubscriberInterface {
    */
   public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager) {
     $this->configFactory = $config_factory;
+    $this->entityTypeManager = $entity_type_manager;
   }
 
   /**

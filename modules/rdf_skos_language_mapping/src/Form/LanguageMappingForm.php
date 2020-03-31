@@ -74,7 +74,7 @@ class LanguageMappingForm extends ConfigFormBase {
     ];
 
     $languages = $this->languageManager->getLanguages();
-    $rdf_skos_langcodes = $config->get('rdf_skos_langcodes');
+    $mapped_langcodes = $config->get('language_mapping');
     foreach ($languages as $langcode => $language) {
       $t_args = [
         '%language' => $language->getName(),
@@ -85,7 +85,7 @@ class LanguageMappingForm extends ConfigFormBase {
         '#type' => 'textfield',
         '#title' => $this->t('RDF SKOS %language (%langcode)', $t_args),
         '#maxlength' => 64,
-        '#default_value' => isset($rdf_skos_langcodes[$langcode]) ? $rdf_skos_langcodes[$langcode] : substr($langcode, 0, 2),
+        '#default_value' => isset($mapped_langcodes[$langcode]) ? $mapped_langcodes[$langcode] : substr($langcode, 0, 2),
         '#required' => TRUE,
       ];
     }

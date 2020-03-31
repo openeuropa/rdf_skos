@@ -27,7 +27,7 @@ Feature: SKOS language mapping feature
     When I fill in "RDF SKOS English (en)" with "en"
     When I fill in "RDF SKOS Portuguese, Portugal (pt-pt)" with "pt-pt"
     And I press "Save configuration"
-    Then I should not see the success message "The configuration options have been saved."
+    Then I should see the success message "The configuration options have been saved."
     And the "RDF SKOS Portuguese, Portugal (pt-pt)" field should contain "pt-pt"
     And I fill in "RDF SKOS Portuguese, Portugal (pt-pt)" with "pt"
     And I press "Save configuration"
