@@ -112,6 +112,7 @@ class SkosEntityStorage extends RdfEntitySparqlStorage {
 
     $this->processGraphResultTranslations($return);
     $event = new SkosProcessGraphResultsEvent();
+    $event->setEntityTypeId($this->getEntityTypeId());
     $event->setResults($return);
     $this->dispatcher->dispatch(SkosProcessGraphResultsEvent::ALTER, $event);
     return $event->getResults();
@@ -253,8 +254,7 @@ class SkosEntityStorage extends RdfEntitySparqlStorage {
    */
   protected function isFieldTranslatable(string $field_name): bool {
     try {
-      $format = $this->fieldHandler->getFieldFormat($this->getEntityType()
-        ->id(), $field_name);
+      $format = $this->fieldHandler->getFieldFormat($this->getEntityType()->id(), $field_name);
     }
     catch (\Exception $exception) {
       return FALSE;
