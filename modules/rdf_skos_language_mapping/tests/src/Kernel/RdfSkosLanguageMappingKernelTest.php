@@ -8,7 +8,7 @@ use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\Tests\rdf_skos\Kernel\RdfSkosKernelTestBase;
 
 /**
- * Tests the RDF SKOS entities.
+ * Tests the mapping between Drupal langcodes and the ones in Skos entities.
  */
 class RdfSkosLanguageMappingKernelTest extends RdfSkosKernelTestBase {
 
