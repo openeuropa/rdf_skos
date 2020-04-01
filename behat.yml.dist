@@ -6,7 +6,6 @@ default:
       contexts:
         - Drupal\DrupalExtension\Context\MinkContext
         - Drupal\DrupalExtension\Context\DrupalContext
-        - Drupal\DrupalExtension\Context\MessageContext
         - Drupal\Tests\rdf_skos\Behat\FeatureContext
         - OpenEuropa\Behat\TransformationContext:
             pages:
@@ -21,10 +20,6 @@ default:
       base_url: "${drupal.base_url}"
     Drupal\DrupalExtension:
       api_driver: "drupal"
-      selectors:
-        message_selector: ".messages"
-        success_message_selector: ".messages.messages--status"
-        error_message_selector: ".messages.messages--error"
       drupal:
         drupal_root: "build"
   formatters:
