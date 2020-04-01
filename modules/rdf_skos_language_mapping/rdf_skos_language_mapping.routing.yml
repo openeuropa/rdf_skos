@@ -4,4 +4,4 @@ rdf_skos_language_mapping.language_mapping_form:
     _title: 'Language mapping configuration'
     _form: 'Drupal\rdf_skos_language_mapping\Form\LanguageMappingForm'
   requirements:
-    _permission: 'administer skos concept entities'
+    _permission: 'administer rdf skos language mapping'

@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\rdf_skos_language_mapping\Form;
 
+use Drupal\Core\Cache\CacheTagsInvalidatorInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -11,7 +12,10 @@ use Drupal\Core\Language\LanguageManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Configure RDF SKOS language mapping settings for this site.
+ * Configuration form for language mapping settings.
+ *
+ * Configure the mapping between Drupal languages and the ones found
+ * in RDF Skos entities.
  */
 class LanguageMappingForm extends ConfigFormBase {
 
@@ -23,16 +27,26 @@ class LanguageMappingForm extends ConfigFormBase {
   protected $languageManager;
 
   /**
+   * The cache tags invalidator.
+   *
+   * @var \Drupal\Core\Cache\CacheTagsInvalidatorInterface
+   */
+  protected $cacheTagsInvalidator;
+
+  /**
    * Constructs a new LanguageMappingForm object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The factory for configuration objects.
    * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    *   The language manager.
+   * @param \Drupal\Core\Cache\CacheTagsInvalidatorInterface $cache_tags_invalidator
+   *   The cache tags invalidator.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, LanguageManagerInterface $language_manager) {
+  public function __construct(ConfigFactoryInterface $config_factory, LanguageManagerInterface $language_manager, CacheTagsInvalidatorInterface $cache_tags_invalidator) {
     parent::__construct($config_factory);
     $this->languageManager = $language_manager;
+    $this->cacheTagsInvalidator = $cache_tags_invalidator;
   }
 
   /**
@@ -41,7 +55,8 @@ class LanguageMappingForm extends ConfigFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
-      $container->get('language_manager')
+      $container->get('language_manager'),
+      $container->get('cache_tags.invalidator')
     );
   }
 
@@ -49,7 +64,7 @@ class LanguageMappingForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'rdf_skos_language_mapping_language_mapping';
+    return 'rdf_skos_language_mapping_form';
   }
 
   /**
@@ -70,7 +85,7 @@ class LanguageMappingForm extends ConfigFormBase {
       '#tree' => TRUE,
       '#title' => $this->t('Language mapping'),
       '#open' => TRUE,
-      '#description' => $this->t('Language mapping between the RDF SKOS and enabled languages of Drupal.'),
+      '#description' => $this->t('Map the Drupal language codes to the ones you expect the RDF Skos entities to use.'),
     ];
 
     $languages = $this->languageManager->getLanguages();
@@ -83,7 +98,7 @@ class LanguageMappingForm extends ConfigFormBase {
 
       $form['language_mapping'][$langcode] = [
         '#type' => 'textfield',
-        '#title' => $this->t('RDF SKOS %language (%langcode)', $t_args),
+        '#title' => $this->t('%language (%langcode)', $t_args),
         '#maxlength' => 64,
         '#default_value' => isset($mapped_langcodes[$langcode]) ? $mapped_langcodes[$langcode] : substr($langcode, 0, 2),
         '#required' => TRUE,
@@ -119,6 +134,7 @@ class LanguageMappingForm extends ConfigFormBase {
     $this->config('rdf_skos_language_mapping.settings')
       ->set('language_mapping', $form_state->getValue('language_mapping'))
       ->save();
+    $this->cacheTagsInvalidator->invalidateTags(['skos_concept_values', 'skos_concept_scheme_values']);
     parent::submitForm($form, $form_state);
   }
 

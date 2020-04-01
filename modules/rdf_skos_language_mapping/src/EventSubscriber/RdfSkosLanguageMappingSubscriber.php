@@ -10,7 +10,12 @@ use Drupal\rdf_skos\Event\SkosProcessGraphResultsEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * RDF SKOS language mapping event subscriber.
+ * RDF Skos subscriber to alter the graph results.
+ *
+ * Overriding the language codes loaded from the RDF storage
+ * with the ones configured to be used instead.
+ *
+ * @see \Drupal\rdf_skos_language_mapping\Form\LanguageMappingForm
  */
 class RdfSkosLanguageMappingSubscriber implements EventSubscriberInterface {
 
@@ -29,7 +34,7 @@ class RdfSkosLanguageMappingSubscriber implements EventSubscriberInterface {
   protected $entityTypeManager;
 
   /**
-   * Constructs a new NodeAdminRouteSubscriber.
+   * Constructs a RdfSkosLanguageMappingSubscriber.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config factory.
@@ -42,46 +47,50 @@ class RdfSkosLanguageMappingSubscriber implements EventSubscriberInterface {
   }
 
   /**
-   * Process of Graph Results handler.
-   *
-   * @param \Drupal\rdf_skos\Event\SkosProcessGraphResultsEvent $event
-   *   Response event.
-   */
-  public function onProcessGraphResults(SkosProcessGraphResultsEvent $event) {
-    $result = $event->getResults();
-
-    if (empty($this->configFactory->get('rdf_skos_language_mapping.settings')->get('language_mapping'))) {
-      return;
-    }
-
-    $concept_schema = $this->entityTypeManager->getStorage('skos_concept_scheme');
-    $langcode_key = $concept_schema->getEntityType()->getKey('langcode');
-
-    $mapping = array_flip($this->configFactory->get('rdf_skos_language_mapping.settings')->get('language_mapping'));
-    foreach ($result as $id => $entity_values) {
-      foreach ($entity_values as $field_name => $field_values) {
-        foreach ($field_values as $langcode => $values) {
-          if (array_key_exists($langcode, $mapping) && $langcode !== $mapping[$langcode]) {
-            if ($field_name === $langcode_key) {
-              // Replace value and key of langcode.
-              $result[$id][$field_name][$langcode] = [['value' => $mapping[$langcode]]];
-            }
-            $result[$id][$field_name][$mapping[$langcode]] = $result[$id][$field_name][$langcode];
-            unset($result[$id][$field_name][$langcode]);
-          }
-        }
-      }
-    }
-    $event->setResults($result);
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
     return [
       SkosProcessGraphResultsEvent::ALTER => ['onProcessGraphResults'],
     ];
+  }
+
+  /**
+   * Event handler to alter the processed graph results.
+   *
+   * Overriding the language codes loaded from the RDF storage
+   * with the ones configured to be used instead.
+   *
+   * @param \Drupal\rdf_skos\Event\SkosProcessGraphResultsEvent $event
+   *   Process graph results event.
+   */
+  public function onProcessGraphResults(SkosProcessGraphResultsEvent $event) {
+    $results = $event->getResults();
+
+    // We don't do anything if a language mapping has not been configured.
+    if (empty($this->configFactory->get('rdf_skos_language_mapping.settings')->get('language_mapping'))) {
+      return;
+    }
+
+    $storage = $this->entityTypeManager->getStorage($event->getEntityTypeId());
+    $langcode_key = $storage->getEntityType()->getKey('langcode');
+
+    $mapping = array_flip($this->configFactory->get('rdf_skos_language_mapping.settings')->get('language_mapping'));
+    foreach ($results as $id => $entity_values) {
+      foreach ($entity_values as $field_name => $field_values) {
+        foreach ($field_values as $langcode => $values) {
+          if (array_key_exists($langcode, $mapping) && $langcode !== $mapping[$langcode]) {
+            if ($field_name === $langcode_key) {
+              // Replace value and key of langcode.
+              $results[$id][$field_name][$langcode] = [['value' => $mapping[$langcode]]];
+            }
+            $results[$id][$field_name][$mapping[$langcode]] = $results[$id][$field_name][$langcode];
+            unset($results[$id][$field_name][$langcode]);
+          }
+        }
+      }
+    }
+    $event->setResults($results);
   }
 
 }
