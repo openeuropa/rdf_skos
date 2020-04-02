@@ -56,7 +56,7 @@ pipeline:
 
   behat:
     group: test
-    image: fpfis/php71-build
+    image: fpfis/httpd-php-ci:${PHP_VERSION}
     commands:
       - ./vendor/bin/behat --strict
 
