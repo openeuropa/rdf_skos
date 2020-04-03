@@ -7,12 +7,14 @@
         <skos:hasTopConcept rdf:resource="http://example.com/fruit/citrus-fruit"/>
         <skos:prefLabel xml:lang="en">Fruit</skos:prefLabel>
         <skos:prefLabel xml:lang="it">Frutta</skos:prefLabel>
+        <skos:prefLabel xml:lang="pt">Fruta</skos:prefLabel>
         <dc:title xml:lang="en">Fruit</dc:title>
     </skos:ConceptScheme>
     <skos:Concept rdf:about="http://example.com/fruit/citrus-fruit">
         <skos:inScheme rdf:resource="http://example.com/fruit"/>
         <skos:prefLabel xml:lang="en">Citrus fruit</skos:prefLabel>
         <skos:prefLabel xml:lang="it">Agrumi</skos:prefLabel>
+        <skos:prefLabel xml:lang="pt">Cítrico</skos:prefLabel>
         <skos:altLabel xml:lang="en">Citrus fruit ALT</skos:altLabel>
         <skos:altLabel xml:lang="fr">Agrumes ALT</skos:altLabel>
         <skos:hiddenLabel xml:lang="en">Citrus fruit HIDDEN</skos:hiddenLabel>
@@ -40,6 +42,7 @@
         <skos:inScheme rdf:resource="http://example.com/fruit"/>
         <skos:prefLabel xml:lang="en">Apple</skos:prefLabel>
         <skos:prefLabel xml:lang="it">Mela</skos:prefLabel>
+        <skos:prefLabel xml:lang="pt">Maçã</skos:prefLabel>
     </skos:Concept>
     <skos:Concept rdf:about="http://example.com/fruit/banana">
         <skos:inScheme rdf:resource="http://example.com/fruit"/>

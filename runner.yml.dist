@@ -23,7 +23,7 @@ drupal:
     - "./vendor/bin/drush config-set system.theme admin seven -y"
     - "./vendor/bin/drush config-set node.settings use_admin_theme 1 -y"
     # Enable the modules.
-    - "./vendor/bin/drush en rdf_skos -y"
+    - "./vendor/bin/drush en rdf_skos rdf_skos_language_mapping -y"
   settings:
     settings:
       file_scan_ignore_directories:
@@ -49,6 +49,8 @@ commands:
     - { task: "run", command: "setup:behat" }
   setup:phpunit:
     - { task: "process", source: "phpunit.xml.dist", destination: "phpunit.xml" }
+    # Generate settings.testing.php, it will be used when running functional tests.
+    - { task: "process-php", type: "write", config: "drupal.settings", source: "${drupal.root}/sites/default/default.settings.php", destination: "${drupal.root}/sites/default/settings.testing.php", override: true }
   setup:behat:
     - { task: "process", source: "behat.yml.dist", destination: "behat.yml" }
   # Use the following commands only if you can run Task Runner commands on your host machine.
