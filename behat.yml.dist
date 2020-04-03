@@ -12,7 +12,7 @@ default:
               SKOS concept scheme administration: 'admin/structure/skos_concept_scheme'
               SKOS concept administration: 'admin/structure/skos_concept'
   extensions:
-    Drupal\MinkExtension:
+    Behat\MinkExtension:
       goutte: ~
       selenium2: ~
       javascript_session: selenium2

@@ -19,7 +19,6 @@ class RdfSkosLanguageMappingKernelTest extends RdfSkosKernelTestBase {
     'language',
     'content_translation',
     'rdf_skos_language_mapping',
-    'rdf_skos_language_mapping_test',
   ];
 
   /**
@@ -32,11 +31,18 @@ class RdfSkosLanguageMappingKernelTest extends RdfSkosKernelTestBase {
     $this->installConfig([
       'language',
       'content_translation',
-      'rdf_skos_language_mapping_test',
     ]);
     ConfigurableLanguage::createFromLangcode('fr')->save();
     ConfigurableLanguage::createFromLangcode('it')->save();
     ConfigurableLanguage::createFromLangcode('pt-pt')->save();
+
+    $this->config('rdf_skos_language_mapping.settings')
+      ->set('language_mapping', [
+        'en' => 'en',
+        'fr' => 'fr',
+        'pt-pt' => 'pt',
+      ])
+      ->save();
   }
 
   /**

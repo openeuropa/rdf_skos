@@ -1,8 +1,0 @@
-name: 'RDF SKOS language mapping test module'
-type: module
-description: 'Test configuration for testing RDF SKOS language mapping between SKOS and Drupal langcodes.'
-package: Testing
-version: VERSION
-core: 8.x
-dependencies:
-  - rdf_skos:rdf_skos_language_mapping

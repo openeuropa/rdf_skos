@@ -66,16 +66,17 @@ class RdfSkosLanguageMappingSubscriber implements EventSubscriberInterface {
    */
   public function onProcessGraphResults(SkosProcessGraphResultsEvent $event) {
     $results = $event->getResults();
+    $config = $this->configFactory->get('rdf_skos_language_mapping.settings')->get('language_mapping');
 
     // We don't do anything if a language mapping has not been configured.
-    if (empty($this->configFactory->get('rdf_skos_language_mapping.settings')->get('language_mapping'))) {
+    if (empty($config)) {
       return;
     }
 
     $storage = $this->entityTypeManager->getStorage($event->getEntityTypeId());
     $langcode_key = $storage->getEntityType()->getKey('langcode');
 
-    $mapping = array_flip($this->configFactory->get('rdf_skos_language_mapping.settings')->get('language_mapping'));
+    $mapping = array_flip($config);
     foreach ($results as $id => $entity_values) {
       foreach ($entity_values as $field_name => $field_values) {
         foreach ($field_values as $langcode => $values) {

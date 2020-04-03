@@ -1,8 +1,15 @@
 # RDF SKOS Language mapping
-=================================
+
 Provides a mapping between Drupal language codes and the ones present in Skos concepts and concept schemes.
 
-This module depends on the [RDF SKOS](https://github.com/openeuropa/rdf_skos/) component and `Language` core module.
+The need for this module arises due to potential mismatch between the language codes used in the Skos data and the ones Drupal expects. 
 
-In order to be able to manage mapping between Drupal language codes and the ones present in Skos concepts and concept schemes, assign the following permissions to appropriate roles:
-- `Administer RDF SKOS language mapping configuration form`
+For example, Drupal uses `pt-pt` for Portuguese (from Portugal) but the Skos data may be using simply `pt` having already assumed the country specificity. With this module you can map the two language codes so that the Skos entities can be loaded correctly in all languages.
+
+# Permissions
+
+The module ships with a new permission that allows access to configure the language mapping:
+
+```
+administer rdf skos language mapping
+```
