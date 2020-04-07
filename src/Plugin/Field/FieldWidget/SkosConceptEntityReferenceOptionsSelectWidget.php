@@ -12,10 +12,11 @@ use Drupal\Core\Field\Plugin\Field\FieldWidget\OptionsSelectWidget;
  * @FieldWidget(
  *   id = "skos_concept_entity_reference_options_select",
  *   label = @Translation("SKOS Concept select list"),
- *   description = @Translation("An select list field for SKOS Concepts."),
+ *   description = @Translation("A select list widget for RDF SKOS Concepts."),
  *   field_types = {
  *     "skos_concept_entity_reference"
- *   }
+ *   },
+ *   multiple_values = TRUE
  * )
  */
 class SkosConceptEntityReferenceOptionsSelectWidget extends OptionsSelectWidget {}

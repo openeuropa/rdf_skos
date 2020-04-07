@@ -69,6 +69,11 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
     $page->fillField('Title', 'Set Fruit in select box');
     $page->pressButton('Save');
     $this->assertSession()->elementTextContains('css', '.messages--status', 'Article Set Fruit in select box has been created.');
+    /** @var \Drupal\node\NodeInterface $node */
+    $node = $this->drupalGetNodeByTitle('Set Fruit in select box');
+    $this->drupalGet($node->toUrl('edit-form'));
+    // Make sure that field value is saved properly.
+    $this->assertSession()->fieldValueEquals('Fruit', 'http://example.com/fruit/apple');
   }
 
   /**
