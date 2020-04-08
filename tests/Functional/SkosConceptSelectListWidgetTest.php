@@ -4,10 +4,9 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\rdf_skos\Functional;
 
-use Drupal\field\Entity\FieldConfig;
-use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\rdf_entity\Traits\RdfDatabaseConnectionTrait;
+use Drupal\Tests\rdf_skos\Traits\SkosEntityReferenceTrait;
 use Drupal\Tests\rdf_skos\Traits\SkosImportTrait;
 
 /**
@@ -17,11 +16,12 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
 
   use RdfDatabaseConnectionTrait;
   use SkosImportTrait;
+  use SkosEntityReferenceTrait;
 
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'node',
     'rdf_entity',
     'rdf_skos',
@@ -41,7 +41,14 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
       'type' => 'article',
     ]);
 
-    $this->createSkosConceptReferenceField();
+    $this->createSkosConceptReferenceField(
+      'node',
+      'article',
+      ['http://example.com/fruit'],
+      'field_fruit_reference',
+      'Fruit',
+      'skos_concept_entity_reference_options_select'
+    );
   }
 
   /**
@@ -63,7 +70,7 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
       'view published skos concept entities',
       'bypass node access',
     ]));
-    $this->drupalGet('node/add');
+    $this->drupalGet('/node/add');
     $page = $this->getSession()->getPage();
     $page->selectFieldOption('Fruit', 'Apple');
     $page->fillField('Title', 'Set Fruit in select box');
@@ -71,62 +78,10 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
     $this->assertSession()->elementTextContains('css', '.messages--status', 'Article Set Fruit in select box has been created.');
     /** @var \Drupal\node\NodeInterface $node */
     $node = $this->drupalGetNodeByTitle('Set Fruit in select box');
-    $this->drupalGet($node->toUrl('edit-form'));
     // Make sure that field value is saved properly.
+    $this->assertEquals('http://example.com/fruit/apple', $node->get('field_fruit_reference')->target_id);
+    $this->drupalGet($node->toUrl('edit-form'));
     $this->assertSession()->fieldValueEquals('Fruit', 'http://example.com/fruit/apple');
-  }
-
-  /**
-   * Creates the Skos Concept reference field on the Article node type.
-   */
-  protected function createSkosConceptReferenceField(): void {
-    $handler_settings = [
-      'target_bundles' => NULL,
-      'auto_create' => FALSE,
-      'concept_schemes' => [
-        'http://example.com/fruit',
-      ],
-      'field' => [
-        'field_name' => 'field_fruit_reference',
-        'entity_type' => 'node',
-        'bundle' => 'article',
-        'concept_schemes' => [
-          'http://example.com/fruit',
-        ],
-      ],
-    ];
-
-    FieldStorageConfig::create([
-      'field_name' => 'field_fruit_reference',
-      'type' => 'skos_concept_entity_reference',
-      'entity_type' => 'node',
-      'cardinality' => 1,
-      'settings' => [
-        'target_type' => 'skos_concept',
-      ],
-    ])->save();
-
-    FieldConfig::create([
-      'field_name' => 'field_fruit_reference',
-      'entity_type' => 'node',
-      'bundle' => 'article',
-      'label' => 'Fruit',
-      'settings' => [
-        'handler' => 'default:skos_concept',
-        'handler_settings' => $handler_settings,
-      ],
-    ])->save();
-
-    /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
-    $form_display = \Drupal::entityTypeManager()
-      ->getStorage('entity_form_display')
-      ->load('node.article.default');
-
-    $form_display->setComponent('field_fruit_reference', [
-      'type' => 'skos_concept_entity_reference_options_select',
-      'region' => 'content',
-    ]);
-    $form_display->save();
   }
 
 }
