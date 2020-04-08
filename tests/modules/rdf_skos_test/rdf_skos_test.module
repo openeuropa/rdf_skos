@@ -20,8 +20,8 @@ function rdf_skos_test_query_skos_concept_field_selection_plugin_alter(Alterable
     return;
   }
 
-  if ($field_info['field_name'] === 'field_fruit' && count($field_info['concept_schemes']) === 1 && $field_info['concept_schemes'][0] === 'http://example.com/fruit') {
-    // Only apple related fruit.
-    $query->condition('related', 'http://example.com/fruit/apple');
+  $condition = \Drupal::state()->get('rdf_skos_test_query_skos_concept_field_selection_plugin_alter', []);
+  if ($field_info['field_name'] === 'field_fruit' && count($field_info['concept_schemes']) === 1 && $field_info['concept_schemes'][0] === 'http://example.com/fruit' && $condition) {
+    $query->condition($condition['field'], $condition['value']);
   }
 }

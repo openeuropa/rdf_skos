@@ -4,14 +4,14 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\rdf_skos\Kernel;
 
-use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
+use Drupal\Tests\rdf_skos\Traits\SkosEntityReferenceTrait;
 
 /**
  * Tests the SKOS entity reference field.
  */
 class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
 
-  use EntityReferenceTestTrait;
+  use SkosEntityReferenceTrait;
 
   /**
    * {@inheritdoc}
@@ -29,34 +29,24 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
    */
   public function testReferenceFields(): void {
     // Create a reference field to Fruit.
-    $this->createEntityReferenceField(
+    $this->createSkosConceptReferenceField(
       'entity_test',
       'entity_test',
+      ['http://example.com/fruit'],
       'field_fruit',
-      'Fruit',
-      'skos_concept',
-      'default',
-      [
-        'concept_schemes' => [
-          'http://example.com/fruit',
-        ],
-      ]
+      'Fruit'
     );
 
     // Create a reference field to Fruit and Vegetables.
-    $this->createEntityReferenceField(
+    $this->createSkosConceptReferenceField(
       'entity_test',
       'entity_test',
-      'field_fruits_veggies',
-      'Fruits and Vegetables',
-      'skos_concept',
-      'default',
       [
-        'concept_schemes' => [
-          'http://example.com/fruit',
-          'http://example.com/vegetables',
-        ],
-      ]
+        'http://example.com/fruit',
+        'http://example.com/vegetables',
+      ],
+      'field_fruits_veggies',
+      'Fruits and Vegetables'
     );
 
     /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
@@ -91,29 +81,21 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
    * is alterable.
    */
   public function testReferenceFieldQueryAlter() {
-    // Create a reference field to Fruit that is alterable.
-    $this->createEntityReferenceField(
+    // Create a reference field to Fruit.
+    $this->createSkosConceptReferenceField(
       'entity_test',
       'entity_test',
+      ['http://example.com/fruit'],
       'field_fruit',
-      'Fruit',
-      'skos_concept',
-      'default',
-      [
-        'concept_schemes' => [
-          'http://example.com/fruit',
-        ],
-        'field' => [
-          'field_name' => 'field_fruit',
-          'entity_type' => 'entity_test',
-          'bundle' => 'entity_test',
-          'concept_schemes' => [
-            'http://example.com/fruit',
-          ],
-        ],
-      ]
+      'Fruit'
     );
 
+    // Alter the query.
+    // @see rdf_skos_test_query_skos_concept_field_selection_plugin_alter()
+    \Drupal::state()->set('rdf_skos_test_query_skos_concept_field_selection_plugin_alter', [
+      'field' => 'related',
+      'value' => 'http://example.com/fruit/apple',
+    ]);
     /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
     $entity_type_manager = $this->container->get('entity_type.manager');
 
@@ -123,7 +105,6 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
 
     // The fruit field should only reference the "pear" fruit as it's the only
     // one that is related to "apple".
-    // @see rdf_skos_test_query_skos_concept_field_selection_plugin_alter()
     $entity->set('field_fruit', 'http://example.com/fruit/apple');
     $violations = $entity->field_fruit->validate();
     $this->assertCount(1, $violations);
