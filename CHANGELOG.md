@@ -1,10 +1,22 @@
 # Change Log
 
+## [0.6.0](https://github.com/openeuropa/rdf_skos/tree/0.6.0) (2020-04-08)
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.5.0...0.6.0)
+
+**Merged pull requests:**
+
+- OPENEUROPA-2965: Allowing graph results to be altered when loading RDF Skos entities [\#41](https://github.com/openeuropa/rdf_skos/pull/41) ([sergepavle](https://github.com/sergepavle))
+- OPENEUROPA-2943: Update composer.json file. [\#40](https://github.com/openeuropa/rdf_skos/pull/40) ([sergepavle](https://github.com/sergepavle))
+- OPENEUROPA-0000: Use drupal/core instead of drupal/core-recommended. [\#39](https://github.com/openeuropa/rdf_skos/pull/39) ([22Alexandra](https://github.com/22Alexandra))
+- OPENEUROPA-2943: Upgrade to PHP 7.3. [\#38](https://github.com/openeuropa/rdf_skos/pull/38) ([sergepavle](https://github.com/sergepavle))
+- OPENEUROPA-2604: Drupal 8 recommended project. [\#37](https://github.com/openeuropa/rdf_skos/pull/37) ([upchuk](https://github.com/upchuk))
+
 ## [0.5.0](https://github.com/openeuropa/rdf_skos/tree/0.5.0) (2019-11-25)
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.4.0...0.5.0)
 
 **Merged pull requests:**
 
+- Release-0.5.0: Update changelog. [\#35](https://github.com/openeuropa/rdf_skos/pull/35) ([nagyad](https://github.com/nagyad))
 - OPENEUROPA-2402: Fixing storage translation handling. [\#34](https://github.com/openeuropa/rdf_skos/pull/34) ([upchuk](https://github.com/upchuk))
 
 ## [0.4.0](https://github.com/openeuropa/rdf_skos/tree/0.4.0) (2019-11-21)
