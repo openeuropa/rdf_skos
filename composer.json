@@ -16,6 +16,7 @@
         "consolidation/robo" : "~1.4",
         "cweagans/composer-patches": "~1.0",
         "drupal-composer/drupal-scaffold": "^2.5.2",
+        "drupal/coder": "8.3.8",
         "drupal/config_devel": "~1.2",
         "drupal/drupal-extension": "~4.0",
         "drush/drush": "~9.0",
@@ -28,6 +29,9 @@
         "phpunit/phpunit": "~6.0",
         "symfony/dom-crawler": "~3.4"
     },
+    "_readme": [
+        "We explicitly require drupal/coder 8.3.8 or deployments will be broken."
+    ],
     "suggest": {
         "drupal/console": "^1"
     },
