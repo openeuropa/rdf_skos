@@ -4,6 +4,10 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\rdf_skos\Kernel;
 
+use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\rdf_skos\Plugin\Field\SkosConceptReferenceFieldItemList;
 use Drupal\Tests\rdf_skos\Traits\SkosEntityReferenceTrait;
 
 /**
@@ -72,6 +76,62 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
     $entity->set('field_fruits_veggies', 'http://example.com/vegetables/potato');
     $violations = $entity->field_fruits_veggies->validate();
     $this->assertCount(0, $violations);
+
+    // Configure the field to have a default value.
+    $field = FieldConfig::loadByName('entity_test', 'entity_test', 'field_fruit');
+    $field->setDefaultValue([
+      'target_id' => 'http://example.com/fruit/pear',
+    ]);
+    $field->save();
+
+    /** @var \Drupal\entity_test\Entity\EntityTest $entity */
+    $entity = $entity_type_manager->getStorage('entity_test')
+      ->create(['type' => 'entity_test']);
+    $entity->save();
+    $entity_type_manager->getStorage('entity_test')->resetCache();
+    $entity_type_manager->getStorage('entity_test')->load($entity->id());
+    $this->assertCount(1, $entity->get('field_fruit')->referencedEntities());
+    $this->assertEquals('http://example.com/fruit/pear', $entity->get('field_fruit')->entity->id());
+  }
+
+  /**
+   * Test multiple references.
+   */
+  public function testMultipleReferences(): void {
+    $this->createSkosConceptReferenceField(
+      'entity_test',
+      'entity_test',
+      ['http://example.com/fruit'],
+      'field_fruit',
+      'Fruit'
+    );
+
+    // Increase the field cardinality.
+    $field_storage = FieldStorageConfig::loadByName('entity_test', 'field_fruit');
+    $field_storage->setCardinality(-1);
+    $field_storage->save();
+
+    /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
+    $entity_type_manager = $this->container->get('entity_type.manager');
+
+    /** @var \Drupal\entity_test\Entity\EntityTest $entity */
+    $entity = $entity_type_manager->getStorage('entity_test')
+      ->create(['type' => 'entity_test']);
+
+    $entity->set('field_fruit', [
+      'http://example.com/fruit/apple',
+      'http://example.com/fruit/lemon',
+    ]);
+
+    $entity->save();
+    $entity_type_manager->getStorage('entity_test')->resetCache();
+    $entity_type_manager->getStorage('entity_test')->load($entity->id());
+    $this->assertInstanceOf(EntityReferenceFieldItemListInterface::class, $entity->get('field_fruit'));
+    $this->assertInstanceOf(SkosConceptReferenceFieldItemList::class, $entity->get('field_fruit'));
+    $referenced_entities = $entity->get('field_fruit')->referencedEntities();
+    $this->assertCount(2, $referenced_entities);
+    $this->assertEquals('http://example.com/fruit/apple', $referenced_entities[0]->id());
+    $this->assertEquals('http://example.com/fruit/lemon', $referenced_entities[1]->id());
   }
 
   /**
