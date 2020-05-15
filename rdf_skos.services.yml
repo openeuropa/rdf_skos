@@ -15,3 +15,6 @@ services:
     arguments: ['@entity_type.manager', '@rdf_skos.sparql.graph_handler']
     tags:
       - { name: event_subscriber }
+  rdf_skos.skos_graph_configurator:
+    class: Drupal\rdf_skos\SkosGraphConfigurator
+    arguments: ['@config.factory']
