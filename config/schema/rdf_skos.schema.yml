@@ -86,3 +86,11 @@ views.filter.skos_concept_reference_id:
 
 views.filter_value.skos_concept_reference_id:
   type: views.filter_value.in_operator
+
+field.value.skos_concept_entity_reference:
+  type: mapping
+  label: 'Default value'
+  mapping:
+    target_id:
+      type: string
+      label: 'Value'
