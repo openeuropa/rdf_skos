@@ -6,7 +6,7 @@ namespace Drupal\Tests\rdf_skos\Functional;
 
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\rdf_entity\Traits\RdfDatabaseConnectionTrait;
+use Drupal\Tests\sparql_entity_storage\Traits\SparqlConnectionTrait;
 use Drupal\Tests\rdf_skos\Traits\SkosEntityReferenceTrait;
 use Drupal\Tests\rdf_skos\Traits\SkosImportTrait;
 
@@ -15,7 +15,7 @@ use Drupal\Tests\rdf_skos\Traits\SkosImportTrait;
  */
 class SkosConceptSelectListWidgetTest extends BrowserTestBase {
 
-  use RdfDatabaseConnectionTrait;
+  use SparqlConnectionTrait;
   use SkosImportTrait;
   use SkosEntityReferenceTrait;
 
@@ -24,7 +24,7 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
    */
   protected static $modules = [
     'node',
-    'rdf_entity',
+    'sparql_entity_storage',
     'rdf_skos',
   ];
 

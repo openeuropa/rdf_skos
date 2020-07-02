@@ -1,7 +1,7 @@
 services:
   rdf_skos.entity.query.sparql:
     class: Drupal\rdf_skos\Entity\Query\Sparql\QueryFactory
-    arguments: ['@sparql_endpoint', '@entity_type.manager', '@rdf_skos.sparql.graph_handler', '@rdf_skos.sparql.field_handler']
+    arguments: ['@sparql.endpoint', '@entity_type.manager', '@rdf_skos.sparql.graph_handler', '@rdf_skos.sparql.field_handler']
     tags:
       - { name: backend_overridable }
   rdf_skos.sparql.graph_handler:

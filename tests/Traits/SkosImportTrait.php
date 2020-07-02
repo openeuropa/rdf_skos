@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\rdf_skos\Traits;
 
-use Drupal\rdf_entity\Database\Driver\sparql\ConnectionInterface;
-use Drupal\rdf_entity\Entity\Query\Sparql\SparqlArg;
+use Drupal\sparql_entity_storage\Database\Driver\sparql\ConnectionInterface;
+use Drupal\sparql_entity_storage\Entity\Query\Sparql\SparqlArg;
 use EasyRdf\Graph;
 
 /**
@@ -18,7 +18,7 @@ trait SkosImportTrait {
    *
    * @param string $base_url
    *   The base URL of where the test is running.
-   * @param \Drupal\rdf_entity\Database\Driver\sparql\ConnectionInterface $sparql
+   * @param \Drupal\sparql_entity_storage\Database\Driver\sparql\ConnectionInterface $sparql
    *   The Sparql connection.
    * @param string $test
    *   The test these are used for. Separate graphs for behat and phpunit.
@@ -41,7 +41,7 @@ trait SkosImportTrait {
    *
    * @param string $base_url
    *   The base URL of where the test is running.
-   * @param \Drupal\rdf_entity\Database\Driver\sparql\ConnectionInterface $sparql
+   * @param \Drupal\sparql_entity_storage\Database\Driver\sparql\ConnectionInterface $sparql
    *   The Sparql connection.
    * @param string $test
    *   The test these are used for. Separate graphs for behat and phpunit.

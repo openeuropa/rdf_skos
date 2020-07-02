@@ -6,16 +6,16 @@ namespace Drupal\rdf_skos;
 
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\rdf_entity\Exception\NonExistingFieldPropertyException;
-use Drupal\rdf_entity\RdfFieldHandler;
-use Drupal\rdf_entity\RdfFieldHandlerInterface;
+use Drupal\sparql_entity_storage\Exception\NonExistingFieldPropertyException;
+use Drupal\sparql_entity_storage\SparqlEntityStorageFieldHandler;
+use Drupal\sparql_entity_storage\SparqlEntityStorageFieldHandlerInterface;
 use Drupal\rdf_skos\Event\SkosPredicateMappingEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * RDF field handler for SKOS entities.
  */
-class RdfSkosFieldHandler extends RdfFieldHandler {
+class RdfSkosFieldHandler extends SparqlEntityStorageFieldHandler {
 
   /**
    * The concept subset plugin manager.
@@ -135,12 +135,12 @@ class RdfSkosFieldHandler extends RdfFieldHandler {
               'http://www.w3.org/2004/02/skos/core#prefLabel',
               'http://www.w3.org/2000/01/rdf-schema#label',
             ],
-            'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
+            'format' => SparqlEntityStorageFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
           'has_top_concept' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#hasTopConcept'],
-            'format' => RdfFieldHandlerInterface::RESOURCE,
+            'format' => SparqlEntityStorageFieldHandlerInterface::RESOURCE,
           ],
         ],
       ],
@@ -150,97 +150,97 @@ class RdfSkosFieldHandler extends RdfFieldHandler {
           'pref_label' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#prefLabel'],
-            'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
+            'format' => SparqlEntityStorageFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
           'alt_label' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#altLabel'],
-            'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
+            'format' => SparqlEntityStorageFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
           'hidden_label' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#hiddenLabel'],
-            'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
+            'format' => SparqlEntityStorageFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
           'in_scheme' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#inScheme'],
-            'format' => RdfFieldHandlerInterface::RESOURCE,
+            'format' => SparqlEntityStorageFieldHandlerInterface::RESOURCE,
           ],
           'definition' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#definition'],
-            'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
+            'format' => SparqlEntityStorageFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
           'example' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#example'],
-            'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
+            'format' => SparqlEntityStorageFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
           'scope_note' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#scopeNote'],
-            'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
+            'format' => SparqlEntityStorageFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
           'editorial_note' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#editorialNote'],
-            'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
+            'format' => SparqlEntityStorageFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
           'change_note' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#changeNote'],
-            'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
+            'format' => SparqlEntityStorageFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
           'history_note' => [
             'column' => 'value',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#historyNote'],
-            'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
+            'format' => SparqlEntityStorageFieldHandlerInterface::TRANSLATABLE_LITERAL,
           ],
           'top_concept_of' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#topConceptOf'],
-            'format' => RdfFieldHandlerInterface::RESOURCE,
+            'format' => SparqlEntityStorageFieldHandlerInterface::RESOURCE,
           ],
           'broader' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#broader'],
-            'format' => RdfFieldHandlerInterface::RESOURCE,
+            'format' => SparqlEntityStorageFieldHandlerInterface::RESOURCE,
           ],
           'narrower' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#narrower'],
-            'format' => RdfFieldHandlerInterface::RESOURCE,
+            'format' => SparqlEntityStorageFieldHandlerInterface::RESOURCE,
           ],
           'related' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#related'],
-            'format' => RdfFieldHandlerInterface::RESOURCE,
+            'format' => SparqlEntityStorageFieldHandlerInterface::RESOURCE,
           ],
           'exact_match' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#exactMatch'],
-            'format' => RdfFieldHandlerInterface::RESOURCE,
+            'format' => SparqlEntityStorageFieldHandlerInterface::RESOURCE,
           ],
           'close_match' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#closeMatch'],
-            'format' => RdfFieldHandlerInterface::RESOURCE,
+            'format' => SparqlEntityStorageFieldHandlerInterface::RESOURCE,
           ],
           'broad_match' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#broadMatch'],
-            'format' => RdfFieldHandlerInterface::RESOURCE,
+            'format' => SparqlEntityStorageFieldHandlerInterface::RESOURCE,
           ],
           'narrow_match' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#narrowMatch'],
-            'format' => RdfFieldHandlerInterface::RESOURCE,
+            'format' => SparqlEntityStorageFieldHandlerInterface::RESOURCE,
           ],
           'related_match' => [
             'column' => 'target_id',
             'predicate' => ['http://www.w3.org/2004/02/skos/core#relatedMatch'],
-            'format' => RdfFieldHandlerInterface::RESOURCE,
+            'format' => SparqlEntityStorageFieldHandlerInterface::RESOURCE,
           ],
         ],
       ],

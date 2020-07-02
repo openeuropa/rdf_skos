@@ -6,13 +6,13 @@ namespace Drupal\rdf_skos;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\rdf_entity\RdfGraphHandler;
+use Drupal\sparql_entity_storage\SparqlEntityStorageGraphHandler;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Contains helper methods for managing the RDF entity graphs for SKOS.
  */
-class RdfSkosGraphHandler extends RdfGraphHandler {
+class RdfSkosGraphHandler extends SparqlEntityStorageGraphHandler {
 
   /**
    * The config factory.

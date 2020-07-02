@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Drupal\rdf_skos\Entity\Query\Sparql;
 
 use Drupal\Core\Entity\Query\ConditionInterface;
-use Drupal\rdf_entity\Entity\Query\Sparql\Query as OriginalQuery;
+use Drupal\sparql_entity_storage\Entity\Query\Sparql\Query as OriginalQuery;
 
 /**
  * Specific Query class for the SKOS entities.

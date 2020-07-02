@@ -1,5 +1,5 @@
 rdf_skos_language_mapping.language_mapping_form:
-  path: '/admin/config/rdf_entity/language-mapping'
+  path: '/admin/config/sparql/language-mapping'
   defaults:
     _title: 'Language mapping configuration'
     _form: 'Drupal\rdf_skos_language_mapping\Form\LanguageMappingForm'
