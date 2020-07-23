@@ -42,8 +42,6 @@ class SkosConceptSelection extends DefaultSelection {
     $form = parent::buildConfigurationForm($form, $form_state);
 
     $configuration = $this->getConfiguration();
-    $concept_scheme_ids = $this->entityManager->getStorage('skos_concept_scheme')->getQuery()
-      ->execute();
 
     $form['concept_schemes'] = [
       '#type' => 'select',
@@ -54,15 +52,10 @@ class SkosConceptSelection extends DefaultSelection {
       '#multiple' => TRUE,
     ];
 
-    if (empty($concept_scheme_ids)) {
-      return $form;
-    }
+    $options = $this->prepareConceptSchemeOptions();
 
-    /** @var \Drupal\rdf_skos\Entity\ConceptSchemeInterface[] $concept_schemes */
-    $concept_schemes = $this->entityManager->getStorage('skos_concept_scheme')->loadMultiple($concept_scheme_ids);
-    $options = [];
-    foreach ($concept_schemes as $concept_scheme) {
-      $options[$concept_scheme->id()] = $concept_scheme->getTitle();
+    if (empty($options)) {
+      return $form;
     }
 
     $form['concept_schemes']['#options'] = $options;
@@ -118,6 +111,32 @@ class SkosConceptSelection extends DefaultSelection {
     $query->condition('in_scheme', $concept_schemes, 'IN');
 
     return $query;
+  }
+
+  /**
+   * Prepares the options for the concept scheme select element.
+   *
+   * @return array
+   *   The options.
+   */
+  protected function prepareConceptSchemeOptions(): array {
+    $ids = $this->entityTypeManager->getStorage('skos_concept_scheme')
+      ->getQuery()
+      ->execute();
+
+    if (!$ids) {
+      return [];
+    }
+
+    /** @var \Drupal\rdf_skos\Entity\ConceptSchemeInterface[] $concept_schemes */
+    $concept_schemes = $this->entityTypeManager->getStorage('skos_concept_scheme')->loadMultiple($ids);
+
+    $options = [];
+    foreach ($concept_schemes as $concept_scheme) {
+      $options[$concept_scheme->id()] = $concept_scheme->getTitle();
+    }
+
+    return $options;
   }
 
 }
