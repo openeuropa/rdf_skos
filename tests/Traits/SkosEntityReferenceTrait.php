@@ -27,8 +27,10 @@ trait SkosEntityReferenceTrait {
    *   The field label.
    * @param string|null $widget
    *   The widget plugin ID if one is needed. NULL otherwise.
+   * @param string|null $concept_subset
+   *   An optional concept subset plugin.
    */
-  protected function createSkosConceptReferenceField(string $entity_type, string $bundle, array $concept_schemes, string $field_name, string $field_label, string $widget = NULL): void {
+  protected function createSkosConceptReferenceField(string $entity_type, string $bundle, array $concept_schemes, string $field_name, string $field_label, string $widget = NULL, string $concept_subset = NULL): void {
     $handler_settings = [
       'target_bundles' => NULL,
       'auto_create' => FALSE,
@@ -40,6 +42,10 @@ trait SkosEntityReferenceTrait {
         'concept_schemes' => $concept_schemes,
       ],
     ];
+
+    if ($concept_subset) {
+      $handler_settings['concept_subset'] = $concept_subset;
+    }
 
     if (!FieldStorageConfig::loadByName($entity_type, $field_name)) {
       FieldStorageConfig::create([

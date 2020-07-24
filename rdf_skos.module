@@ -7,6 +7,7 @@
 
 declare(strict_types = 1);
 
+use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\field\FieldStorageConfigInterface;
 
 /**
@@ -27,4 +28,32 @@ function rdf_skos_field_views_data_alter(array &$data, FieldStorageConfigInterfa
       }
     }
   }
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ *
+ * Provide the base field definitions of all the predicate mapping concept
+ * subset plugins.
+ */
+function rdf_skos_entity_base_field_info(EntityTypeInterface $entity_type) {
+  if ($entity_type->id() !== 'skos_concept') {
+    return [];
+  }
+
+  $fields = [];
+
+  /** @var \Drupal\rdf_skos\ConceptSubsetPluginManagerInterface $manager */
+  $manager = \Drupal::service('plugin.manager.concept_subset');
+  $definitions = $manager->getPredicateMappingDefinitions();
+  foreach ($definitions as $id => $definition) {
+    /** @var \Drupal\rdf_skos\Plugin\PredicateMapperInterface $plugin */
+    $plugin = $manager->createInstance($id);
+    $base_fields = $plugin->getBaseFieldDefinitions();
+    if ($base_fields) {
+      $fields += $base_fields;
+    }
+  }
+
+  return $fields;
 }

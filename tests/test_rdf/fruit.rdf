@@ -20,6 +20,7 @@
         <skos:hiddenLabel xml:lang="en">Citrus fruit HIDDEN</skos:hiddenLabel>
         <skos:example xml:lang="en">lemons, oranges, limes, mandarines, grapefruit, satsumas</skos:example>
         <skos:definition xml:lang="en">Fruit that make you salivate sometimes</skos:definition>
+        <skos:dummy xml:lang="en">A dummy value that is not skos.</skos:dummy>
     </skos:Concept>
     <skos:Concept rdf:about="http://example.com/fruit/exotic-fruit">
         <skos:inScheme rdf:resource="http://example.com/fruit"/>

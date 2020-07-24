@@ -4,10 +4,18 @@ declare(strict_types = 1);
 
 namespace Drupal\rdf_skos\Plugin\EntityReferenceSelection;
 
+use Drupal\Core\Entity\EntityFieldManagerInterface;
+use Drupal\Core\Entity\EntityRepositoryInterface;
+use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Plugin\EntityReferenceSelection\DefaultSelection;
 use Drupal\Core\Entity\Query\QueryInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Field\FieldConfigInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\rdf_skos\ConceptSubsetPluginManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Selection plugin for SKOS Concepts.
@@ -23,12 +31,49 @@ use Drupal\Core\Form\FormStateInterface;
 class SkosConceptSelection extends DefaultSelection {
 
   /**
+   * The concept subset plugin manager.
+   *
+   * @var \Drupal\rdf_skos\ConceptSubsetPluginManagerInterface
+   */
+  protected $subsetManager;
+
+  /**
+   * {@inheritdoc}
+   *
+   * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler, AccountInterface $current_user, EntityFieldManagerInterface $entity_field_manager, EntityTypeBundleInfoInterface $entity_type_bundle_info, EntityRepositoryInterface $entity_repository, ConceptSubsetPluginManagerInterface $subset_manager) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $entity_type_manager, $module_handler, $current_user, $entity_field_manager, $entity_type_bundle_info, $entity_repository);
+    $this->subsetManager = $subset_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('entity_type.manager'),
+      $container->get('module_handler'),
+      $container->get('current_user'),
+      $container->get('entity_field.manager'),
+      $container->get('entity_type.bundle.info'),
+      $container->get('entity.repository'),
+      $container->get('plugin.manager.concept_subset')
+    );
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function defaultConfiguration(): array {
     return [
       // Empty array means allow all.
       'concept_schemes' => [],
+      // Concept subset to filter the available concepts by.
+      'concept_subset' => NULL,
         // In case the plugin is used in a reference field, we can store some
         // info about it.
       'field' => [],
@@ -50,7 +95,21 @@ class SkosConceptSelection extends DefaultSelection {
       '#options' => [],
       '#default_value' => array_values($configuration['concept_schemes']),
       '#multiple' => TRUE,
+      '#size' => 10,
+      // Ajax is applied in
+      // EntityReferenceItem::fieldSettingsAjaxProcessElement()
+      '#ajax' => TRUE,
     ];
+
+    $concept_schemes = $configuration['concept_schemes'] ?
+      $configuration['concept_schemes'] :
+      $form_state->getValue(['settings', 'handler_settings', 'concept_schemes']);
+    if ($concept_schemes) {
+      $subset_element = $this->buildConceptSubsetElement($form, $form_state, $concept_schemes);
+      if ($subset_element) {
+        $form['concept_subset'] = $subset_element;
+      }
+    }
 
     $options = $this->prepareConceptSchemeOptions();
 
@@ -105,10 +164,11 @@ class SkosConceptSelection extends DefaultSelection {
     }
 
     $concept_schemes = $configuration['concept_schemes'];
-    if (empty($concept_schemes)) {
-      return $query;
+    if (!empty($concept_schemes)) {
+      $query->condition('in_scheme', $concept_schemes, 'IN');
     }
-    $query->condition('in_scheme', $concept_schemes, 'IN');
+
+    $this->applyConceptSubset($query, $match_operator, $concept_schemes, $match);
 
     return $query;
   }
@@ -137,6 +197,70 @@ class SkosConceptSelection extends DefaultSelection {
     }
 
     return $options;
+  }
+
+  /**
+   * Builds the element for the concept subsets.
+   *
+   * @param array $form
+   *   The form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The form state.
+   * @param array $concept_schemes
+   *   The chosen concept schemes.
+   *
+   * @return array
+   *   The form element.
+   */
+  protected function buildConceptSubsetElement(array $form, FormStateInterface $form_state, array $concept_schemes) {
+    $all_definitions = $this->subsetManager->getDefinitions();
+    $options = [];
+    foreach ($all_definitions as $id => $definition) {
+      if (!isset($definition['concept_schemes'])) {
+        // Include the ones without any limitation.
+        $options[$id] = $definition['label'];
+        continue;
+      }
+
+      if (array_intersect($concept_schemes, $definition['concept_schemes'])) {
+        $options[$id] = $definition['label'];
+      }
+    }
+
+    if (!$options) {
+      return [];
+    }
+
+    return [
+      '#type' => 'select',
+      '#title' => $this->t('Concept subset'),
+      '#description' => $this->t('The concept subsets you would like this selection to filter by.'),
+      '#options' => $options,
+      '#default_value' => $this->getConfiguration()['concept_subset'],
+    ];
+  }
+
+  /**
+   * Applies the concept subset alterations to the query.
+   *
+   * @param \Drupal\Core\Entity\Query\QueryInterface $query
+   *   The query.
+   * @param string $match_operator
+   *   The matching operator.
+   * @param array $concept_schemes
+   *   The selected concept schemes.
+   * @param string|null $match
+   *   The value to match.
+   */
+  protected function applyConceptSubset(QueryInterface $query, $match_operator, array $concept_schemes = [], string $match = NULL) {
+    $configuration = $this->getConfiguration();
+    if (!$configuration['concept_subset']) {
+      return;
+    }
+
+    /** @var \Drupal\rdf_skos\ConceptSubsetInterface $plugin */
+    $plugin = $this->subsetManager->createInstance($configuration['concept_subset']);
+    $plugin->alterQuery($query, $match_operator, $concept_schemes, $match);
   }
 
 }
