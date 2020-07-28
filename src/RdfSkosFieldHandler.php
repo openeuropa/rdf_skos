@@ -4,15 +4,42 @@ declare(strict_types = 1);
 
 namespace Drupal\rdf_skos;
 
+use Drupal\Core\Entity\EntityFieldManagerInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\rdf_entity\Exception\NonExistingFieldPropertyException;
 use Drupal\rdf_entity\RdfFieldHandler;
 use Drupal\rdf_entity\RdfFieldHandlerInterface;
 use Drupal\rdf_skos\Event\SkosPredicateMappingEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * RDF field handler for SKOS entities.
  */
 class RdfSkosFieldHandler extends RdfFieldHandler {
+
+  /**
+   * The concept subset plugin manager.
+   *
+   * @var \Drupal\rdf_skos\ConceptSubsetPluginManagerInterface
+   */
+  protected $subsetManager;
+
+  /**
+   * Constructs a RdfSkosFieldHandler object.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
+   * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
+   *   The entity field manager.
+   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
+   *   The event dispatcher service.
+   * @param \Drupal\rdf_skos\ConceptSubsetPluginManagerInterface $subset_manager
+   *   The concept subset plugin manager.
+   */
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, EventDispatcherInterface $event_dispatcher, ConceptSubsetPluginManagerInterface $subset_manager) {
+    parent::__construct($entity_type_manager, $entity_field_manager, $event_dispatcher);
+    $this->subsetManager = $subset_manager;
+  }
 
   /**
    * {@inheritdoc}
@@ -218,6 +245,19 @@ class RdfSkosFieldHandler extends RdfFieldHandler {
         ],
       ],
     ];
+
+    // Allow the concept subset plugins to provide their own mappings.
+    $definitions = $this->subsetManager->getPredicateMappingDefinitions();
+    foreach ($definitions as $id => $definition) {
+      /** @var \Drupal\rdf_skos\Plugin\PredicateMapperInterface $plugin */
+      $plugin = $this->subsetManager->createInstance($id);
+      $plugin_mapping = $plugin->getPredicateMapping();
+      if (!$plugin_mapping) {
+        continue;
+      }
+
+      $mapping['skos_concept']['fields'] += $plugin_mapping;
+    }
 
     $event = new SkosPredicateMappingEvent($entity_type_id);
     $event->setMapping($mapping[$entity_type_id]);

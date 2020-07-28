@@ -175,4 +175,90 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
     $this->assertCount(0, $violations);
   }
 
+  /**
+   * Tests that concept subsets can be used to alter the queries.
+   */
+  public function testConceptSubsetQueryAlter(): void {
+    // Create a reference field to Fruit, using the fruit_alter subset.
+    $this->createSkosConceptReferenceField(
+      'entity_test',
+      'entity_test',
+      ['http://example.com/fruit'],
+      'field_fruit',
+      'Fruit',
+      NULL,
+      'fruit_alter'
+    );
+
+    /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
+    $entity_type_manager = $this->container->get('entity_type.manager');
+
+    /** @var \Drupal\entity_test\Entity\EntityTest $entity */
+    $entity = $entity_type_manager->getStorage('entity_test')
+      ->create(['type' => 'entity_test']);
+
+    // Since we are using the subset, only one single concept can be referenced.
+    $entity->set('field_fruit', 'http://example.com/fruit/citrus-fruit');
+    $violations = $entity->field_fruit->validate();
+    $this->assertCount(0, $violations);
+    $fruits = [
+      'http://example.com/fruit/apple',
+      'http://example.com/fruit/exotic-fruit',
+      'http://example.com/fruit/lemon',
+    ];
+
+    foreach ($fruits as $fruit) {
+      $entity->set('field_fruit', $fruit);
+      $violations = $entity->field_fruit->validate();
+      $this->assertCount(1, $violations);
+      $this->assertEquals(t('This entity (%type: %id) cannot be referenced.', ['%type' => 'skos_concept', '%id' => $fruit]), $violations[0]->getMessage());
+    }
+  }
+
+  /**
+   * Tests the applicable plugin definitions by concept schemes.
+   */
+  public function testPluginsApplicability(): void {
+    /** @var \Drupal\rdf_skos\ConceptSubsetPluginManagerInterface $manaer */
+    $manager = $this->container->get('plugin.manager.concept_subset');
+    $definitions = array_keys($manager->getApplicableDefinitions(['http://example.com/fruit']));
+    $expected = [
+      'any_alter',
+      'fruit_alter',
+      'multi_alter',
+      'predicate_mapping',
+    ];
+
+    sort($definitions);
+    $this->assertEquals($expected, $definitions);
+
+    $definitions = array_keys($manager->getApplicableDefinitions(['http://example.com/fruit', 'http://example.com/vegetables']));
+    $expected = [
+      'any_alter',
+      'multi_alter',
+      'predicate_mapping',
+    ];
+
+    sort($definitions);
+    $this->assertEquals($expected, $definitions);
+  }
+
+  /**
+   * Tests that concept subsets can map new predicates to custom fields.
+   */
+  public function testConceptSubsetPredicateMapping(): void {
+    /** @var \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager */
+    $entity_field_manager = $this->container->get('entity_field.manager');
+    $fields = $entity_field_manager->getBaseFieldDefinitions('skos_concept');
+    $this->assertContains('dummy_title', array_keys($fields));
+    /** @var \Drupal\Core\Field\BaseFieldDefinition $field */
+    $field = $fields['dummy_title'];
+    $this->assertEquals('A dummy title', $field->getLabel());
+
+    /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
+    $entity_type_manager = $this->container->get('entity_type.manager');
+    $concept = $entity_type_manager->getStorage('skos_concept')->load('http://example.com/fruit/citrus-fruit');
+    $this->assertEquals('A dummy value that is not skos.', $concept->get('dummy_title')->value);
+  }
+
 }

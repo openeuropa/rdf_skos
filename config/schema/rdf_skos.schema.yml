@@ -25,6 +25,9 @@ entity_reference_selection.default:skos_concept:
   mapping:
     concept_schemes:
       type: entity_reference_selection.skos_concept.concept_schemes
+    concept_subset:
+      type: string
+      label: 'The ID of the ConceptSubset plugin'
     field:
       type: mapping
       label: 'Field information'
