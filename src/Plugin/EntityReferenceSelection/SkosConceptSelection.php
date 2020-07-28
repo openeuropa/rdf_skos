@@ -215,7 +215,7 @@ class SkosConceptSelection extends DefaultSelection {
    *   The form element.
    */
   protected function buildConceptSubsetElement(array $form, FormStateInterface $form_state, array $concept_schemes): array {
-    $definitions = $this->subsetManager->getApplicableDefinitionsDefinitions($concept_schemes);
+    $definitions = $this->subsetManager->getApplicableDefinitions($concept_schemes);
 
     if (!$definitions) {
       return [];
@@ -229,7 +229,7 @@ class SkosConceptSelection extends DefaultSelection {
     return [
       '#type' => 'select',
       '#title' => $this->t('Concept subset'),
-      '#description' => $this->t('The concept subsets you would like this selection to filter by.'),
+      '#description' => $this->t('The concept subset you would like this selection to filter by.'),
       '#options' => $options,
       '#default_value' => $this->getConfiguration()['concept_subset'],
     ];

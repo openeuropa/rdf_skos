@@ -14,7 +14,7 @@ use Drupal\Core\Plugin\DefaultPluginManager;
 class ConceptSubsetPluginManager extends DefaultPluginManager implements ConceptSubsetPluginManagerInterface {
 
   /**
-   * Constructs ConceptSubsetPluginManager object.
+   * Constructs a ConceptSubsetPluginManager object.
    *
    * @param \Traversable $namespaces
    *   An object that implements \Traversable which contains the root paths
@@ -54,7 +54,7 @@ class ConceptSubsetPluginManager extends DefaultPluginManager implements Concept
   /**
    * {@inheritdoc}
    */
-  public function getApplicableDefinitionsDefinitions(array $concept_schemes): array {
+  public function getApplicableDefinitions(array $concept_schemes): array {
     $plugin_ids = [];
     foreach ($concept_schemes as $concept_scheme) {
       $definitions = $this->getDefinitionsForConceptScheme($concept_scheme);
@@ -76,7 +76,7 @@ class ConceptSubsetPluginManager extends DefaultPluginManager implements Concept
   }
 
   /**
-   * Gets the plugin definition that applies to a single concept scheme.
+   * Gets the plugin definitions that apply to a single concept scheme.
    *
    * @param string $concept_scheme
    *   The concept scheme ID.

@@ -7,7 +7,7 @@ namespace Drupal\rdf_skos\Annotation;
 use Drupal\Component\Annotation\Plugin;
 
 /**
- * Defines concept_subset annotation object.
+ * Defines the concept_subset annotation object.
  *
  * @Annotation
  */

@@ -221,7 +221,7 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
   public function testPluginsApplicability(): void {
     /** @var \Drupal\rdf_skos\ConceptSubsetPluginManagerInterface $manaer */
     $manager = $this->container->get('plugin.manager.concept_subset');
-    $definitions = $manager->getApplicableDefinitionsDefinitions(['http://example.com/fruit']);
+    $definitions = $manager->getApplicableDefinitions(['http://example.com/fruit']);
     $expected = [
       'fruit_alter',
       'predicate_mapping',
@@ -230,7 +230,7 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
     ];
     $this->assertEquals($expected, array_keys($definitions));
 
-    $definitions = $manager->getApplicableDefinitionsDefinitions(['http://example.com/fruit', 'http://example.com/vegetables']);
+    $definitions = $manager->getApplicableDefinitions(['http://example.com/fruit', 'http://example.com/vegetables']);
     $expected = [
       'predicate_mapping',
       'any_alter',

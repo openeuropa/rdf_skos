@@ -20,7 +20,7 @@ interface ConceptSubsetPluginManagerInterface extends PluginManagerInterface {
   public function getPredicateMappingDefinitions(): array;
 
   /**
-   * Returns all the plugin definitions apply to a concept scheme.
+   * Returns all the plugin definitions that apply to a set of concept schemes.
    *
    * @param array $concept_schemes
    *   The  selected concept scheme IDs.
@@ -28,6 +28,6 @@ interface ConceptSubsetPluginManagerInterface extends PluginManagerInterface {
    * @return array
    *   The definitions.
    */
-  public function getApplicableDefinitionsDefinitions(array $concept_schemes): array;
+  public function getApplicableDefinitions(array $concept_schemes): array;
 
 }
