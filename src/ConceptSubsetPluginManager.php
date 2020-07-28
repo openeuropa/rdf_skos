@@ -51,4 +51,55 @@ class ConceptSubsetPluginManager extends DefaultPluginManager implements Concept
     return $predicate_mappers;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getApplicableDefinitionsDefinitions(array $concept_schemes): array {
+    $plugin_ids = [];
+    foreach ($concept_schemes as $concept_scheme) {
+      $definitions = $this->getDefinitionsForConceptScheme($concept_scheme);
+      $ids = $definitions ? array_keys($definitions) : [];
+      $plugin_ids[$concept_scheme] = $ids;
+    }
+
+    if (!$plugin_ids) {
+      return [];
+    }
+
+    $plugin_ids = count($plugin_ids) === 1 ? reset($plugin_ids) : call_user_func_array('array_intersect', $plugin_ids);
+    $definitions = [];
+    foreach ($plugin_ids as $plugin_id) {
+      $definitions[$plugin_id] = $this->getDefinition($plugin_id);
+    }
+
+    return $definitions;
+  }
+
+  /**
+   * Gets the plugin definition that applies to a single concept scheme.
+   *
+   * @param string $concept_scheme
+   *   The concept scheme ID.
+   *
+   * @return array
+   *   The definitions.
+   */
+  protected function getDefinitionsForConceptScheme(string $concept_scheme): array {
+    $all_definitions = $this->getDefinitions();
+    $definitions = [];
+    foreach ($all_definitions as $id => $definition) {
+      if (!isset($definition['concept_schemes'])) {
+        // Include the ones without any limitation.
+        $definitions[$id] = $definition;
+        continue;
+      }
+
+      if (in_array($concept_scheme, $definition['concept_schemes'])) {
+        $definitions[$id] = $definition;
+      }
+    }
+
+    return $definitions;
+  }
+
 }

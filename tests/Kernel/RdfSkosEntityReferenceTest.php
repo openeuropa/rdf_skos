@@ -216,6 +216,30 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
   }
 
   /**
+   * Tests the applicable plugin definitions by concept schemes.
+   */
+  public function testPluginsApplicability(): void {
+    /** @var \Drupal\rdf_skos\ConceptSubsetPluginManagerInterface $manaer */
+    $manager = $this->container->get('plugin.manager.concept_subset');
+    $definitions = $manager->getApplicableDefinitionsDefinitions(['http://example.com/fruit']);
+    $expected = [
+      'fruit_alter',
+      'predicate_mapping',
+      'any_alter',
+      'multi_alter',
+    ];
+    $this->assertEquals($expected, array_keys($definitions));
+
+    $definitions = $manager->getApplicableDefinitionsDefinitions(['http://example.com/fruit', 'http://example.com/vegetables']);
+    $expected = [
+      'predicate_mapping',
+      'any_alter',
+      'multi_alter',
+    ];
+    $this->assertEquals($expected, array_keys($definitions));
+  }
+
+  /**
    * Tests that concept subsets can map new predicates to custom fields.
    */
   public function testConceptSubsetPredicateMapping(): void {

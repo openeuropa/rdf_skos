@@ -213,22 +213,15 @@ class SkosConceptSelection extends DefaultSelection {
    *   The form element.
    */
   protected function buildConceptSubsetElement(array $form, FormStateInterface $form_state, array $concept_schemes): array {
-    $all_definitions = $this->subsetManager->getDefinitions();
-    $options = [];
-    foreach ($all_definitions as $id => $definition) {
-      if (!isset($definition['concept_schemes'])) {
-        // Include the ones without any limitation.
-        $options[$id] = $definition['label'];
-        continue;
-      }
+    $definitions = $this->subsetManager->getApplicableDefinitionsDefinitions($concept_schemes);
 
-      if (array_intersect($concept_schemes, $definition['concept_schemes'])) {
-        $options[$id] = $definition['label'];
-      }
+    if (!$definitions) {
+      return [];
     }
 
-    if (!$options) {
-      return [];
+    $options = [];
+    foreach ($definitions as $id => $definition) {
+      $options[$id] = $definition['label'];
     }
 
     return [
