@@ -43,7 +43,7 @@ class ConceptSubsetPluginManager extends DefaultPluginManager implements Concept
     $definitions = $this->getDefinitions();
     $predicate_mappers = [];
     foreach ($definitions as $id => $definition) {
-      if (isset($definition['predicate_mapping']) && (bool) $definition['predicate_mapping']) {
+      if (isset($definition['predicate_mapping']) && $definition['predicate_mapping']) {
         $predicate_mappers[$id] = $definition;
       }
     }

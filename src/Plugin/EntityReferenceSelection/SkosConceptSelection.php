@@ -101,20 +101,18 @@ class SkosConceptSelection extends DefaultSelection {
       '#ajax' => TRUE,
     ];
 
-    $concept_schemes = $configuration['concept_schemes'] ?
-      $configuration['concept_schemes'] :
-      $form_state->getValue(['settings', 'handler_settings', 'concept_schemes']);
+    $options = $this->prepareConceptSchemeOptions();
+
+    if (empty($options)) {
+      return $form;
+    }
+
+    $concept_schemes = $configuration['concept_schemes'];
     if ($concept_schemes) {
       $subset_element = $this->buildConceptSubsetElement($form, $form_state, $concept_schemes);
       if ($subset_element) {
         $form['concept_subset'] = $subset_element;
       }
-    }
-
-    $options = $this->prepareConceptSchemeOptions();
-
-    if (empty($options)) {
-      return $form;
     }
 
     $form['concept_schemes']['#options'] = $options;

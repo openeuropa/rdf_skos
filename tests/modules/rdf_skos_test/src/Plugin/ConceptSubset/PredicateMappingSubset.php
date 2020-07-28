@@ -17,7 +17,7 @@ use Drupal\rdf_skos\Plugin\PredicateMapperInterface;
  *   id = "predicate_mapping",
  *   label = @Translation("Predicate mapping"),
  *   description = @Translation("Maps a new value to a new base field."),
- *   predicate_mapping = "TRUE"
+ *   predicate_mapping = TRUE
  * )
  */
 class PredicateMappingSubset extends ConceptSubsetPluginBase implements PredicateMapperInterface {
