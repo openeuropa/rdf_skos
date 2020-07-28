@@ -223,10 +223,10 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
     $manager = $this->container->get('plugin.manager.concept_subset');
     $definitions = $manager->getApplicableDefinitions(['http://example.com/fruit']);
     $expected = [
-      'fruit_alter',
       'predicate_mapping',
       'any_alter',
       'multi_alter',
+      'fruit_alter',
     ];
     $this->assertEquals($expected, array_keys($definitions));
 
