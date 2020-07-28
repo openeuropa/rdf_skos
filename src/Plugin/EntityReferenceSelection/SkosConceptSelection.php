@@ -212,7 +212,7 @@ class SkosConceptSelection extends DefaultSelection {
    * @return array
    *   The form element.
    */
-  protected function buildConceptSubsetElement(array $form, FormStateInterface $form_state, array $concept_schemes) {
+  protected function buildConceptSubsetElement(array $form, FormStateInterface $form_state, array $concept_schemes): array {
     $all_definitions = $this->subsetManager->getDefinitions();
     $options = [];
     foreach ($all_definitions as $id => $definition) {
@@ -252,7 +252,7 @@ class SkosConceptSelection extends DefaultSelection {
    * @param string|null $match
    *   The value to match.
    */
-  protected function applyConceptSubset(QueryInterface $query, $match_operator, array $concept_schemes = [], string $match = NULL) {
+  protected function applyConceptSubset(QueryInterface $query, $match_operator, array $concept_schemes = [], string $match = NULL): void {
     $configuration = $this->getConfiguration();
     if (!$configuration['concept_subset']) {
       return;

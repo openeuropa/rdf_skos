@@ -17,7 +17,7 @@ interface ConceptSubsetInterface {
    * @return string
    *   The translated title.
    */
-  public function label();
+  public function label(): string;
 
   /**
    * Alters the query of the selection plugin.
