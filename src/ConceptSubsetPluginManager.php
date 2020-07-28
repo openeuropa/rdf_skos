@@ -55,24 +55,14 @@ class ConceptSubsetPluginManager extends DefaultPluginManager implements Concept
    * {@inheritdoc}
    */
   public function getApplicableDefinitions(array $concept_schemes): array {
-    $plugin_ids = [];
+    $definitions_by_scheme = [];
     foreach ($concept_schemes as $concept_scheme) {
-      $definitions = $this->getDefinitionsForConceptScheme($concept_scheme);
-      $ids = $definitions ? array_keys($definitions) : [];
-      $plugin_ids[$concept_scheme] = $ids;
+      $definitions_by_scheme[$concept_scheme] = $this->getDefinitionsForConceptScheme($concept_scheme);
     }
-
-    if (!$plugin_ids) {
+    if (!$definitions_by_scheme) {
       return [];
     }
-
-    $plugin_ids = count($plugin_ids) === 1 ? reset($plugin_ids) : call_user_func_array('array_intersect', $plugin_ids);
-    $definitions = [];
-    foreach ($plugin_ids as $plugin_id) {
-      $definitions[$plugin_id] = $this->getDefinition($plugin_id);
-    }
-
-    return $definitions;
+    return count($definitions_by_scheme) === 1 ? reset($definitions_by_scheme) : call_user_func_array('array_intersect_key', $definitions_by_scheme);
   }
 
   /**
