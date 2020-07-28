@@ -86,6 +86,10 @@ class SkosConceptSelection extends DefaultSelection {
   public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form = parent::buildConfigurationForm($form, $form_state);
 
+    // We do not support sorting or auto-creation of values.
+    $form['auto_create']['#access'] = FALSE;
+    $form['sort']['#access'] = FALSE;
+
     $configuration = $this->getConfiguration();
 
     $form['concept_schemes'] = [
