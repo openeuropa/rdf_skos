@@ -6,15 +6,15 @@ namespace Drupal\Tests\rdf_skos\FunctionalJavascript;
 
 use Drupal\field\Entity\FieldConfig;
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
-use Drupal\Tests\rdf_entity\Traits\RdfDatabaseConnectionTrait;
 use Drupal\Tests\rdf_skos\Traits\SkosImportTrait;
+use Drupal\Tests\sparql_entity_storage\Traits\SparqlConnectionTrait;
 
 /**
  * Tests the SKOS Concept entity reference selection plugin form.
  */
 class SkosConceptSelectionFormTest extends WebDriverTestBase {
 
-  use RdfDatabaseConnectionTrait;
+  use SparqlConnectionTrait;
   use SkosImportTrait;
 
   /**
@@ -24,7 +24,6 @@ class SkosConceptSelectionFormTest extends WebDriverTestBase {
     'node',
     'field_ui',
     'field',
-    'rdf_entity',
     'rdf_skos',
     'rdf_skos_test',
   ];
