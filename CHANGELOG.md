@@ -1,11 +1,20 @@
 # Changelog
 
+## [0.9.0](https://github.com/openeuropa/rdf_skos/tree/0.9.0) (2020-08-04)
+
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.8.0...0.9.0)
+
+**Merged pull requests:**
+
+- OPENEUROPA-3409: Pluggable subsets of concepts [\#50](https://github.com/openeuropa/rdf_skos/pull/50) ([upchuk](https://github.com/upchuk))
+
 ## [0.8.0](https://github.com/openeuropa/rdf_skos/tree/0.8.0) (2020-06-15)
 
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.7.0...0.8.0)
 
 **Merged pull requests:**
 
+- RELEASE-0.8.0: Update CHANGELOG.md for release 0.8.0. [\#48](https://github.com/openeuropa/rdf_skos/pull/48) ([sergepavle](https://github.com/sergepavle))
 - OPENEUROPA-3216: Remove drupal-coder version. [\#47](https://github.com/openeuropa/rdf_skos/pull/47) ([nagyad](https://github.com/nagyad))
 - OPENEUROPA-3044: Add SkosGraphSetup service. [\#46](https://github.com/openeuropa/rdf_skos/pull/46) ([drishu](https://github.com/drishu))
 - OPENEUROPA-3158: Skos concept reference item list class. [\#45](https://github.com/openeuropa/rdf_skos/pull/45) ([upchuk](https://github.com/upchuk))
