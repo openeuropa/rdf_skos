@@ -101,7 +101,7 @@ class SkosConceptEntityReferenceOptionsSelectWidget extends OptionsSelectWidget 
         'id' => $this->t('ID'),
         'label' => $this->t('Label'),
       ],
-      '#description' => t('Select whether the options should be sorted by ID or by label.'),
+      '#description' => $this->t('Select whether the options should be sorted by ID or by label.'),
     ];
     return $element;
   }
@@ -112,7 +112,7 @@ class SkosConceptEntityReferenceOptionsSelectWidget extends OptionsSelectWidget 
   public function settingsSummary() {
     $summary = [];
     $sort = $this->getSetting('sort') === 'id' ? 'ID' : 'Label';
-    $summary[] = t('Sort by: @sort', ['@sort' => $sort]);
+    $summary[] = $this->t('Sort options by: @sort', ['@sort' => $sort]);
 
     return $summary;
   }
