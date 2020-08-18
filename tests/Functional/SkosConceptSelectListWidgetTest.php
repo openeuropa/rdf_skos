@@ -73,7 +73,7 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
     ]));
     $this->drupalGet('/node/add');
     $page = $this->getSession()->getPage();
-    // Assert the options are ordered by key by default.
+    // Assert the options are ordered by id by default.
     $expected_options = [
       '_none' => '- None -',
       'http://example.com/fruit/citrus-fruit' => 'Citrus fruit',

@@ -102,6 +102,6 @@ field.widget.settings.skos_concept_entity_reference_options_select:
   type: mapping
   label: 'SKOS Concept select list display format settings'
   mapping:
-    order:
+    sort:
       type: string
-      label: 'Order'
+      label: 'Sort'

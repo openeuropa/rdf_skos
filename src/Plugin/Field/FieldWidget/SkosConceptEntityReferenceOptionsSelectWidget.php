@@ -42,7 +42,22 @@ class SkosConceptEntityReferenceOptionsSelectWidget extends OptionsSelectWidget 
   protected $transliteration;
 
   /**
-   * {@inheritdoc}
+   * Constructs a SkosConceptEntityReferenceOptionsSelectWidget object.
+   *
+   * @param string $plugin_id
+   *   The plugin_id for the widget.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
+   *   The definition of the field to which the widget is associated.
+   * @param array $settings
+   *   The widget settings.
+   * @param array $third_party_settings
+   *   Any third party settings.
+   * @param \Drupal\Component\Transliteration\TransliterationInterface $transliteration
+   *   The transliteration service.
+   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
+   *   The language manager.
    */
   public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, array $third_party_settings, TransliterationInterface $transliteration, LanguageManagerInterface $language_manager) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $third_party_settings);
@@ -70,7 +85,7 @@ class SkosConceptEntityReferenceOptionsSelectWidget extends OptionsSelectWidget 
    */
   public static function defaultSettings() {
     return [
-      'order' => 'key',
+      'sort' => 'id',
     ] + parent::defaultSettings();
   }
 
@@ -78,15 +93,15 @@ class SkosConceptEntityReferenceOptionsSelectWidget extends OptionsSelectWidget 
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
-    $element['order'] = [
+    $element['sort'] = [
       '#type' => 'radios',
-      '#title' => t('Select order'),
-      '#default_value' => $this->getSetting('order'),
+      '#title' => $this->t('Sort by'),
+      '#default_value' => $this->getSetting('sort'),
       '#options' => [
-        'key' => $this->t('by Key'),
-        'label' => $this->t('by Label'),
+        'id' => $this->t('ID'),
+        'label' => $this->t('Label'),
       ],
-      '#description' => t('Select whether the options should be ordered by key or by label.'),
+      '#description' => t('Select whether the options should be sorted by ID or by label.'),
     ];
     return $element;
   }
@@ -96,8 +111,8 @@ class SkosConceptEntityReferenceOptionsSelectWidget extends OptionsSelectWidget 
    */
   public function settingsSummary() {
     $summary = [];
-    $order = $this->getSetting('order') == 'key' ? 'by Key' : 'by Label';
-    $summary[] = t('Order: @order', ['@order' => $order]);
+    $sort = $this->getSetting('sort') === 'id' ? 'ID' : 'Label';
+    $summary[] = t('Sort by: @sort', ['@sort' => $sort]);
 
     return $summary;
   }
@@ -107,18 +122,18 @@ class SkosConceptEntityReferenceOptionsSelectWidget extends OptionsSelectWidget 
    */
   protected function getOptions(FieldableEntityInterface $entity) {
     $options = parent::getOptions($entity);
-    $order = $this->getSetting('order');
-    if ($order == 'key') {
+    $sort = $this->getSetting('sort');
+    if ($sort === 'id') {
       return $options;
     }
 
     // If we have an empty label take it out before sorting.
     if ($empty_label = $this->getEmptyLabel()) {
-      array_shift($options);
+      unset($options['_none']);
     }
-    $language = $this->languageManager->getConfigOverrideLanguage() ?: $this->languageManager->getCurrentLanguage();
+    $language = $this->languageManager->getCurrentLanguage()->getId();
     uasort($options, function (string $a, string $b) use ($language): int {
-      return $this->transliteration->transliterate($a, $language->getId()) <=> $this->transliteration->transliterate($b, $language->getId());
+      return $this->transliteration->transliterate($a, $language) <=> $this->transliteration->transliterate($b, $language);
     });
     if ($empty_label) {
       $options = ['_none' => $empty_label] + $options;
