@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace Drupal\Tests\rdf_skos\Functional;
 
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
-use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\rdf_entity\Traits\RdfDatabaseConnectionTrait;
 use Drupal\Tests\rdf_skos\Traits\SkosEntityReferenceTrait;
@@ -51,8 +50,6 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
       'Fruit',
       'skos_concept_entity_reference_options_select'
     );
-    ConfigurableLanguage::createFromLangcode('it')->save();
-
   }
 
   /**
@@ -74,6 +71,7 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
       'view published skos concept entities',
       'bypass node access',
     ]));
+    $this->drupalGet('/node/add');
     $page = $this->getSession()->getPage();
     // Assert the options are ordered by key by default.
     $expected_options = [
@@ -84,6 +82,7 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
       'http://example.com/fruit/lemon' => 'Lemon',
       'http://example.com/fruit/pear' => 'Pear',
       'http://example.com/fruit/apple' => 'Apple',
+      'http://example.com/fruit/alien' => 'Ålien fruit',
     ];
     $actual_options = $this->getOptions($page->findField('field_fruit_reference'));
     $this->assertEquals($expected_options, $actual_options);
@@ -101,6 +100,7 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
     $page = $this->getSession()->getPage();
     $expected_options = [
       '_none' => '- None -',
+      'http://example.com/fruit/alien' => 'Ålien fruit',
       'http://example.com/fruit/apple' => 'Apple',
       'http://example.com/fruit/banana' => 'Banana',
       'http://example.com/fruit/citrus-fruit' => 'Citrus fruit',

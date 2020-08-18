@@ -49,4 +49,8 @@
         <skos:inScheme rdf:resource="http://example.com/fruit"/>
         <skos:prefLabel xml:lang="en">Banana</skos:prefLabel>
     </skos:Concept>
+    <skos:Concept rdf:about="http://example.com/fruit/alien">
+            <skos:inScheme rdf:resource="http://example.com/fruit"/>
+            <skos:prefLabel xml:lang="en">Ålien fruit</skos:prefLabel>
+        </skos:Concept>
 </rdf:RDF>
