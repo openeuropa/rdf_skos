@@ -67,7 +67,7 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
 
     $ids = $entity_type_manager->getStorage('skos_concept')->getQuery()
       ->execute();
-    $this->assertCount(6, $ids);
+    $this->assertCount(7, $ids);
   }
 
   /**
@@ -96,7 +96,7 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
       ->condition('inScheme', $concept_scheme->id())
       ->execute();
     $concepts = $entity_type_manager->getStorage('skos_concept')->loadMultiple($ids);
-    $this->assertCount(6, $concepts);
+    $this->assertCount(7, $concepts);
     /** @var \Drupal\rdf_skos\Entity\ConceptInterface $citrus */
     $citrus = $concepts['http://example.com/fruit/citrus-fruit'];
     $this->assertEquals('Citrus fruit ALT', $citrus->getAlternateLabel());
@@ -167,7 +167,7 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
     $this->assertCount(2, $ids);
     $ids = $entity_type_manager->getStorage('skos_concept')->getQuery()
       ->execute();
-    $this->assertCount(7, $ids);
+    $this->assertCount(8, $ids);
   }
 
   /**
