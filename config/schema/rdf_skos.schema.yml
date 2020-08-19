@@ -97,3 +97,11 @@ field.value.skos_concept_entity_reference:
     target_id:
       type: string
       label: 'Value'
+
+field.widget.settings.skos_concept_entity_reference_options_select:
+  type: mapping
+  label: 'SKOS Concept select list display format settings'
+  mapping:
+    sort:
+      type: string
+      label: 'Sort'
