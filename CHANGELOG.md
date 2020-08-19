@@ -1,11 +1,20 @@
 # Changelog
 
-## [0.9.0](https://github.com/openeuropa/rdf_skos/tree/0.9.0) (2020-08-04)
+## [0.10.0](https://github.com/openeuropa/rdf_skos/tree/0.10.0) (2020-08-19)
+
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.9.0...0.10.0)
+
+**Merged pull requests:**
+
+- EWPP-176: Add ordering options for select widget [\#52](https://github.com/openeuropa/rdf_skos/pull/52) ([imanoleguskiza](https://github.com/imanoleguskiza))
+
+## [0.9.0](https://github.com/openeuropa/rdf_skos/tree/0.9.0) (2020-08-06)
 
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.8.0...0.9.0)
 
 **Merged pull requests:**
 
+- Release-0.9.0: Update changelog. [\#51](https://github.com/openeuropa/rdf_skos/pull/51) ([nagyad](https://github.com/nagyad))
 - OPENEUROPA-3409: Pluggable subsets of concepts [\#50](https://github.com/openeuropa/rdf_skos/pull/50) ([upchuk](https://github.com/upchuk))
 
 ## [0.8.0](https://github.com/openeuropa/rdf_skos/tree/0.8.0) (2020-06-15)
