@@ -77,6 +77,11 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
     $violations = $entity->field_fruits_veggies->validate();
     $this->assertCount(0, $violations);
 
+    // Top concepts that don't define their scheme should also be referencable.
+    $entity->set('field_fruit', 'http://example.com/fruit/exotic-fruit');
+    $violations = $entity->field_fruit->validate();
+    $this->assertCount(0, $violations);
+
     // Configure the field to have a default value.
     $field = FieldConfig::loadByName('entity_test', 'entity_test', 'field_fruit');
     $field->setDefaultValue([

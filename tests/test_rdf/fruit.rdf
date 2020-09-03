@@ -23,7 +23,6 @@
         <skos:dummy xml:lang="en">A dummy value that is not skos.</skos:dummy>
     </skos:Concept>
     <skos:Concept rdf:about="http://example.com/fruit/exotic-fruit">
-        <skos:inScheme rdf:resource="http://example.com/fruit"/>
         <skos:prefLabel xml:lang="en">Exotic fruit</skos:prefLabel>
         <skos:topConceptOf rdf:resource="http://example.com/fruit"/>
         <skos:narrower rdf:resource="http://example.com/fruit/banana" />
