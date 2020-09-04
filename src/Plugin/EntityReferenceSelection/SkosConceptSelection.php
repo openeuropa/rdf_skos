@@ -167,7 +167,10 @@ class SkosConceptSelection extends DefaultSelection {
 
     $concept_schemes = $configuration['concept_schemes'];
     if (!empty($concept_schemes)) {
-      $query->condition('in_scheme', $concept_schemes, 'IN');
+      $group = $query->orConditionGroup()
+        ->condition('in_scheme', $concept_schemes, 'IN')
+        ->condition('top_concept_of', $concept_schemes, 'IN');
+      $query->condition($group);
     }
 
     $this->applyConceptSubset($query, $match_operator, $concept_schemes, $match);

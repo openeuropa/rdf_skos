@@ -93,10 +93,10 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
 
     // Test concepts.
     $ids = $entity_type_manager->getStorage('skos_concept')->getQuery()
-      ->condition('inScheme', $concept_scheme->id())
+      ->condition('in_scheme', $concept_scheme->id())
       ->execute();
     $concepts = $entity_type_manager->getStorage('skos_concept')->loadMultiple($ids);
-    $this->assertCount(7, $concepts);
+    $this->assertCount(6, $concepts);
     /** @var \Drupal\rdf_skos\Entity\ConceptInterface $citrus */
     $citrus = $concepts['http://example.com/fruit/citrus-fruit'];
     $this->assertEquals('Citrus fruit ALT', $citrus->getAlternateLabel());
@@ -116,7 +116,7 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
     /** @var \Drupal\rdf_skos\Entity\ConceptInterface $concept */
     $concept = reset($concepts);
     $this->assertEquals('Fruit', $concept->topConceptOf()[0]->getTitle());
-    $this->assertEquals('Fruit', $concept->getConceptSchemes()[0]->getTitle());
+    $this->assertEmpty($concept->getConceptSchemes());
     $this->assertEquals('Banana', $concept->getNarrower()[0]->getPreferredLabel());
   }
 
