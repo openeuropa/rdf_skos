@@ -235,6 +235,7 @@ class SkosConceptSelection extends DefaultSelection {
       '#description' => $this->t('The concept subset you would like this selection to filter by.'),
       '#options' => $options,
       '#default_value' => $this->getConfiguration()['concept_subset'],
+      '#empty_value' => '',
     ];
   }
 
