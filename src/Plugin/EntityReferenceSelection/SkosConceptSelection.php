@@ -137,6 +137,11 @@ class SkosConceptSelection extends DefaultSelection {
       $settings['handler_settings']['concept_schemes'] = $concept_schemes;
     }
 
+    // Store NULL when no concept subset is chosen.
+    if (isset($settings['handler_settings']['concept_subset']) && $settings['handler_settings']['concept_subset'] === '') {
+      $settings['handler_settings']['concept_subset'] = NULL;
+    }
+
     // Add field information that can be used in the selection handler. This
     // comes from the actual SkosConceptEntityReferenceItem and we need it so
     // that the selection plugin query builder can receive this information.
