@@ -124,9 +124,9 @@ Or, if you can run commands on your host machine:
 $ ./vendor/bin/run sparql:reset
 ```
 
-Updating from 0.8.0 to 0.9.0
+Updating from 0.10.0 to 0.11.0
 
-On 0.9.0, the rdf_entity module dependency has been removed and instead the sparql_entity_storage module has been
+On 0.11.0, the rdf_entity module dependency has been removed and instead the sparql_entity_storage module has been
 introduced (see the [rdf_entity module's Readme](https://github.com/ec-europa/rdf_entity#updating-from-10-alpha16-to-alpha17) for more information).
 As suggested by the rdf_entity module itself, the following steps can be taking in order to update rdf_skos in production:
 
@@ -141,7 +141,8 @@ The update process is split in three deployments.
 1. Enable the module.
 
 * Second deployment
-1. Require `drupal/rdf_entity` with the new `1.0-alpha17` version and `drupal/rdf_skos` with the new `0.8.0` version.
+1. Remove the empty `drupal/sparql_entity_storage` module requirement
+1. Require `drupal/rdf_entity` with the new `1.0-alpha21` version and `drupal/rdf_skos` with the new `0.11.0` version.
 1. Deploy to production.
 1. Uninstall the `drupal/rdf_entity` module.
 
