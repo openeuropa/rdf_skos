@@ -64,7 +64,7 @@ class SkosConceptSelectionFormTest extends WebDriverTestBase {
     $this->drupalGet('admin/structure/types/manage/article/fields/add-field');
     $this->getSession()->getPage()->selectFieldOption('Add a new field', 'skos_concept_entity_reference');
     $this->getSession()->getPage()->fillField('Label', 'Reference field');
-    $this->assertSession()->waitForText('Machine name: reference_field');
+    $this->assertSession()->waitForText('Machine name: field_reference_field');
     $this->getSession()->getPage()->pressButton('Save and continue');
     $this->getSession()->getPage()->pressButton('Save field settings');
 
