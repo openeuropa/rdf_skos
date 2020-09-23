@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\rdf_skos\FunctionalJavascript;
 
+use Drupal\field\Entity\FieldConfig;
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\Tests\rdf_entity\Traits\RdfDatabaseConnectionTrait;
 use Drupal\Tests\rdf_skos\Traits\SkosImportTrait;
@@ -84,6 +85,8 @@ class SkosConceptSelectionFormTest extends WebDriverTestBase {
     $this->assertSession()->selectExists('Concept subset');
     $this->assertSession()->optionExists('Concept subset', 'any_alter');
     $this->assertSession()->optionNotExists('Concept subset', 'fruit_alter');
+    // Verify that an option is present to allow to not select any subset.
+    $this->assertSession()->optionExists('Concept subset', '- None -');
 
     // Select the Fruit scheme and assert that we show both subsets.
     $this->getSession()->getPage()->selectFieldOption('Concept Schemes', 'http://example.com/fruit');
@@ -92,6 +95,7 @@ class SkosConceptSelectionFormTest extends WebDriverTestBase {
     $this->assertSession()->selectExists('Concept subset');
     $this->assertSession()->optionExists('Concept subset', 'any_alter');
     $this->assertSession()->optionExists('Concept subset', 'fruit_alter');
+    $this->assertSession()->optionExists('Concept subset', '- None -');
 
     $this->getSession()->getPage()->selectFieldOption('Concept subset', 'fruit_alter');
 
@@ -113,6 +117,15 @@ class SkosConceptSelectionFormTest extends WebDriverTestBase {
     $this->assertFalse($option->hasAttribute('selected'));
     $option = $this->assertSession()->optionExists('Concept subset', 'fruit_alter');
     $this->assertTrue($option->hasAttribute('selected'));
+
+    // Select the no subset option.
+    $this->assertSession()->selectExists('Concept subset')->selectOption('- None -');
+    $this->getSession()->getPage()->pressButton('Save settings');
+    $this->assertSession()->pageTextContains('Saved Reference field configuration.');
+
+    // Verify that a NULL value is stored when no concept is selected.
+    $field_config = FieldConfig::load('node.article.field_reference_field');
+    $this->assertNull($field_config->getSetting('handler_settings')['concept_subset']);
   }
 
 }
