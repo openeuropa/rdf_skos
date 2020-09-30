@@ -97,17 +97,74 @@ class SkosEntityStorage extends RdfEntitySparqlStorage {
 
   /**
    * {@inheritdoc}
+   *
+   * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+   * @SuppressWarnings(PHPMD.NPathComplexity)
    */
   protected function processGraphResults($results, array $graph_ids): ?array {
-    $return = parent::processGraphResults($results, $graph_ids);
-    if ($this->bundleKey === '' && $return) {
-      foreach ($return as &$values) {
-        unset($values['']);
-      }
+    $values_per_entity = $this->deserializeGraphResults($results);
+    if (empty($values_per_entity)) {
+      return NULL;
     }
 
-    if (!is_array($return)) {
-      return $return;
+    $default_language = $this->languageManager->getDefaultLanguage()->getId();
+    $inbound_map = $this->fieldHandler->getInboundMap($this->entityTypeId);
+    $return = [];
+    foreach ($values_per_entity as $entity_id => $values_per_graph) {
+      $graph_uris = $this->getGraphHandler()->getEntityTypeGraphUris($this->getEntityTypeId());
+      foreach ($graph_ids as $priority_graph_id) {
+        foreach ($values_per_graph as $graph_uri => $entity_values) {
+          // If the entity has been processed or the backend didn't returned
+          // anything for this graph, jump to the next graph retrieved from the
+          // SPARQL backend.
+          if (isset($return[$entity_id]) || array_search($graph_uri, array_column($graph_uris, $priority_graph_id)) === FALSE) {
+            continue;
+          }
+
+          $bundle = $this->getActiveBundle($entity_values);
+          if (!$bundle) {
+            continue;
+          }
+
+          // Check if the graph checked is in the request graphs. If there are
+          // multiple graphs set, probably the default is requested with the
+          // rest as fallback or it is a neutral call. If the default is
+          // requested, it is going to be first in line so in any case, use the
+          // first one.
+          if (!$graph_id = $this->getGraphHandler()->getBundleGraphId($this->getEntityTypeId(), $bundle, $graph_uri)) {
+            continue;
+          }
+
+          // Map entity ID.
+          $return[$entity_id][$this->idKey][LanguageInterface::LANGCODE_DEFAULT] = $entity_id;
+          $return[$entity_id]['graph'][LanguageInterface::LANGCODE_DEFAULT] = $graph_id;
+
+          $rdf_type = NULL;
+          foreach ($entity_values as $predicate => $field) {
+            $field_map = $this->getInboundFieldMap($inbound_map, $predicate, $bundle);
+            if (!$field_map) {
+              continue;
+            }
+
+            foreach ($field_map as $field_name => $info) {
+              $column = $info['column'];
+              foreach ($field as $lang => $items) {
+                $langcode_key = ($lang === $default_language) ? LanguageInterface::LANGCODE_DEFAULT : $lang;
+                foreach ($items as $delta => $item) {
+                  $item = $this->fieldHandler->getInboundValue($this->getEntityTypeId(), $field_name, $item, $langcode_key, $column, $bundle);
+
+                  if (!isset($return[$entity_id][$field_name][$langcode_key]) || !is_string($return[$entity_id][$field_name][$langcode_key])) {
+                    $return[$entity_id][$field_name][$langcode_key][$delta][$column] = $item;
+                  }
+                }
+                if (is_array($return[$entity_id][$field_name][$langcode_key])) {
+                  $this->applyFieldDefaults($info['type'], $return[$entity_id][$field_name][$langcode_key]);
+                }
+              }
+            }
+          }
+        }
+      }
     }
 
     $this->processGraphResultTranslations($return);
@@ -116,6 +173,35 @@ class SkosEntityStorage extends RdfEntitySparqlStorage {
     $event->setResults($return);
     $this->dispatcher->dispatch(SkosProcessGraphResultsEvent::ALTER, $event);
     return $event->getResults();
+  }
+
+  /**
+   * Returns the field map from the inbound map.
+   *
+   * Since more than one field can be mapped to a single predicate, this returns
+   * the inbound map info for each of the fields that map to a single predicate.
+   *
+   * @param array $inbound_map
+   *   The entire inbound map.
+   * @param string $predicate
+   *   The predicate.
+   * @param string $bundle
+   *   The entity bundle.
+   *
+   * @return array
+   *   An array of field inbound map info, keyed by field name.
+   */
+  protected function getInboundFieldMap(array $inbound_map, string $predicate, string $bundle): array {
+    if (!isset($inbound_map['fields'][$predicate][$bundle]) || empty($inbound_map['fields'][$predicate][$bundle])) {
+      return [];
+    }
+
+    $map = [];
+    foreach ($inbound_map['fields'][$predicate][$bundle] as $info) {
+      $map[$info['field_name']] = $info;
+    }
+
+    return $map;
   }
 
   /**
