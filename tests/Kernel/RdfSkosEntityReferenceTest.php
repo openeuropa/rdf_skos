@@ -266,4 +266,19 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
     $this->assertEquals('A dummy value that is not skos.', $concept->get('dummy_title')->value);
   }
 
+  /**
+   * Tests that we can map multiple fields to a single predicate.
+   */
+  public function testMultipleFieldMappings(): void {
+    /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
+    $entity_type_manager = $this->container->get('entity_type.manager');
+    /** @var \Drupal\rdf_skos\Entity\ConceptInterface $concept */
+    $concept = $entity_type_manager->getStorage('skos_concept')->load('http://example.com/fruit/citrus-fruit');
+    foreach (['dummy_field_one', 'dummy_field_two'] as $name) {
+      $this->assertTrue($concept->hasField($name));
+    }
+    $this->assertEquals('A dummy value that is not skos.', $concept->get('dummy_field_one')->value);
+    $this->assertEquals('A dummy value that is not skos.', $concept->get('dummy_field_two')->value);
+  }
+
 }

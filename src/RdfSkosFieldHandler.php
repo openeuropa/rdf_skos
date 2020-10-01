@@ -82,7 +82,7 @@ class RdfSkosFieldHandler extends RdfFieldHandler {
             'data_type' => $data_type,
           ];
 
-          $this->inboundMap[$entity_type_id]['fields'][$predicate][$entity_type_id] = [
+          $this->inboundMap[$entity_type_id]['fields'][$predicate][$entity_type_id][] = [
             'field_name' => $field_name,
             'column' => $field_mapping['column'],
             'serialize' => FALSE,
@@ -99,7 +99,7 @@ class RdfSkosFieldHandler extends RdfFieldHandler {
           'data_type' => $data_type,
         ];
 
-        $this->inboundMap[$entity_type_id]['fields'][$field_mapping['predicate']][$entity_type_id] = [
+        $this->inboundMap[$entity_type_id]['fields'][$field_mapping['predicate']][$entity_type_id][] = [
           'field_name' => $field_name,
           'column' => $field_mapping['column'],
           'serialize' => FALSE,
