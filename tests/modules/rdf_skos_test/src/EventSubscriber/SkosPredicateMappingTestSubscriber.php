@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Drupal\rdf_skos_test\EventSubscriber;
 
-use Drupal\rdf_entity\RdfFieldHandlerInterface;
 use Drupal\rdf_skos\Event\SkosPredicateMappingEvent;
+use Drupal\sparql_entity_storage\SparqlEntityStorageFieldHandler;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -40,13 +40,13 @@ class SkosPredicateMappingTestSubscriber implements EventSubscriberInterface {
       $mapping['fields']['dummy_field_one'] = [
         'column' => 'value',
         'predicate' => ['http://www.w3.org/2004/02/skos/core#dummy'],
-        'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
+        'format' => SparqlEntityStorageFieldHandler::TRANSLATABLE_LITERAL,
       ];
 
       $mapping['fields']['dummy_field_two'] = [
         'column' => 'value',
         'predicate' => ['http://www.w3.org/2004/02/skos/core#dummy'],
-        'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
+        'format' => SparqlEntityStorageFieldHandler::TRANSLATABLE_LITERAL,
       ];
     }
 
