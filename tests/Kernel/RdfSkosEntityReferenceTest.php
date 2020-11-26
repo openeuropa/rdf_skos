@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\rdf_skos\Kernel;
 
+use Drupal\Core\Entity\EntityDefinitionUpdateManager;
 use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
@@ -264,6 +265,25 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
     $entity_type_manager = $this->container->get('entity_type.manager');
     $concept = $entity_type_manager->getStorage('skos_concept')->load('http://example.com/fruit/citrus-fruit');
     $this->assertEquals('A dummy value that is not skos.', $concept->get('dummy_title')->value);
+  }
+
+  /**
+   * Tests that we can create the newly defined SKOS field definitions.
+   */
+  public function testSkosEntityDefinitionUpdateManager() {
+    $this->container->get('module_installer')->install(['rdf_skos_entity_definition_test']);
+    /** @var \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager */
+    $entity_field_manager = $this->container->get('entity_field.manager');
+    $fields = $entity_field_manager->getBaseFieldDefinitions('skos_concept');
+    $this->assertContains('new_dummy_title', array_keys($fields));
+
+    // Assert that we can use our definition update manager to update the newly
+    // created field definitions.
+    $change_list = \Drupal::entityDefinitionUpdateManager()->getChangeList();
+    $this->assertEquals(['new_dummy_title' => EntityDefinitionUpdateManager::DEFINITION_CREATED], $change_list['skos_concept']['field_storage_definitions']);
+    \Drupal::service('rdf_skos.skos_entity_definition_update_manager')->installFieldDefinitions('skos_concept');
+    $change_list = \Drupal::entityDefinitionUpdateManager()->getChangeList();
+    $this->assertTrue(!isset($change_list['skos_concept']));
   }
 
   /**

@@ -22,3 +22,6 @@ services:
   plugin.manager.concept_subset:
     class: Drupal\rdf_skos\ConceptSubsetPluginManager
     parent: default_plugin_manager
+  rdf_skos.skos_entity_definition_update_manager:
+    class: Drupal\rdf_skos\SkosEntityDefinitionUpdateManager
+    arguments: ['@entity.definition_update_manager', '@entity_field.manager']
