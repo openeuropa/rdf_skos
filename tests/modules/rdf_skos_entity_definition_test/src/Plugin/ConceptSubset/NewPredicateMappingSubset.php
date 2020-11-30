@@ -35,7 +35,13 @@ class NewPredicateMappingSubset extends ConceptSubsetPluginBase implements Predi
   public function getPredicateMapping(): array {
     $mapping = [];
 
-    $mapping['new_dummy_title'] = [
+    $mapping['first_new_dummy_title'] = [
+      'column' => 'value',
+      'predicate' => ['http://www.w3.org/2004/02/skos/core#dummy'],
+      'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
+    ];
+
+    $mapping['second_new_dummy_title'] = [
       'column' => 'value',
       'predicate' => ['http://www.w3.org/2004/02/skos/core#dummy'],
       'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
@@ -50,9 +56,13 @@ class NewPredicateMappingSubset extends ConceptSubsetPluginBase implements Predi
   public function getBaseFieldDefinitions(): array {
     $fields = [];
 
-    $fields['new_dummy_title'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('A new dummy title'))
-      ->setDescription(t('A dummy title added to the definition after installation of RDF Skos.'));
+    $fields['first_new_dummy_title'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('A first new dummy title'))
+      ->setDescription(t('A first dummy title added to the definition after installation of RDF Skos.'));
+
+    $fields['second_new_dummy_title'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('A second new dummy title'))
+      ->setDescription(t('A second dummy title added to the definition after installation of RDF Skos.'));
 
     return $fields;
   }

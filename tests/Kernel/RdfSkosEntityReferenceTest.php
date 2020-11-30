@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Drupal\Tests\rdf_skos\Kernel;
 
 use Drupal\Core\Entity\EntityDefinitionUpdateManager;
+use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
@@ -275,13 +276,34 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
     /** @var \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager */
     $entity_field_manager = $this->container->get('entity_field.manager');
     $fields = $entity_field_manager->getBaseFieldDefinitions('skos_concept');
-    $this->assertContains('new_dummy_title', array_keys($fields));
+    $this->assertContains('first_new_dummy_title', array_keys($fields));
+    $this->assertContains('second_new_dummy_title', array_keys($fields));
 
-    // Assert that we can use our definition update manager to update the newly
-    // created field definitions.
     $change_list = \Drupal::entityDefinitionUpdateManager()->getChangeList();
-    $this->assertEquals(['new_dummy_title' => EntityDefinitionUpdateManager::DEFINITION_CREATED], $change_list['skos_concept']['field_storage_definitions']);
-    \Drupal::service('rdf_skos.skos_entity_definition_update_manager')->installFieldDefinitions('skos_concept');
+    $this->assertEquals([
+      'first_new_dummy_title' => EntityDefinitionUpdateManager::DEFINITION_CREATED,
+      'second_new_dummy_title' => EntityDefinitionUpdateManager::DEFINITION_CREATED,
+    ], $change_list['skos_concept']['field_storage_definitions']);
+
+    /** @var \Drupal\rdf_skos\SkosEntityDefinitionUpdateManager $manager */
+    $manager = \Drupal::service('rdf_skos.skos_entity_definition_update_manager');
+
+    // Use the update manager to update a single field definitions.
+    $definitions = [];
+    $definitions['first_new_dummy_title'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('A first new dummy title'))
+      ->setDescription(t('A first dummy title added to the definition after installation of RDF Skos.'))
+      ->setProvider('rdf_skos');
+
+    $manager->installFieldDefinitions('skos_concept', $definitions);
+    $change_list = \Drupal::entityDefinitionUpdateManager()->getChangeList();
+    // Only the first definition got installed.
+    $this->assertEquals([
+      'second_new_dummy_title' => EntityDefinitionUpdateManager::DEFINITION_CREATED,
+    ], $change_list['skos_concept']['field_storage_definitions']);
+
+    // Use the update manager to install all available definitions.
+    $manager->installFieldDefinitions('skos_concept');
     $change_list = \Drupal::entityDefinitionUpdateManager()->getChangeList();
     $this->assertTrue(!isset($change_list['skos_concept']));
   }
