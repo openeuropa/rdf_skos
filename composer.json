@@ -6,7 +6,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "drupal/core": "^8.8",
+        "drupal/core": "^8.9",
         "drupal/sparql_entity_storage": "^1.0.0-alpha8",
         "easyrdf/easyrdf": "1.0.0 as 0.9.2",
         "php": ">=7.2"
