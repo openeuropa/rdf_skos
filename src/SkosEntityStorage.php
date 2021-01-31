@@ -258,6 +258,32 @@ class SkosEntityStorage extends SparqlEntityStorage {
   /**
    * {@inheritdoc}
    */
+  protected function getFromStaticCache(array $ids, array $graph_ids = []) {
+    $entities = [];
+    foreach ($ids as $id) {
+      if (isset($this->entities[$id])) {
+        if (!isset($entities[$id])) {
+          $entities[$id] = $this->entities[$id];
+        }
+      }
+    }
+    return $entities;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setStaticCache(array $entities) {
+    if ($this->entityType->isStaticallyCacheable()) {
+      foreach ($entities as $id => $entity) {
+        $this->entities[$id] = $entity;
+      }
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   protected function getFromPersistentCache(array &$ids = NULL, array $graph_ids = []) {
     if (!$this->entityType->isPersistentlyCacheable() || empty($ids)) {
       return [];
