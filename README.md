@@ -124,9 +124,9 @@ Or, if you can run commands on your host machine:
 $ ./vendor/bin/run sparql:reset
 ```
 
-Updating from 0.10.0 to 0.11.0
+Updating from 0.11.0 to 1.0.0-alpha1
 
-On 0.11.0, the rdf_entity module dependency has been removed and instead the sparql_entity_storage module has been
+On 1.0.0-alpha1, the rdf_entity module dependency has been removed and instead the sparql_entity_storage module has been
 introduced (see the [rdf_entity module's Readme](https://github.com/ec-europa/rdf_entity#updating-from-10-alpha16-to-alpha17) for more information).
 As suggested by the rdf_entity module itself, the following steps can be taken in order to update rdf_skos in production:
 
