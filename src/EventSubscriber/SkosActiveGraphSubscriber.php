@@ -5,9 +5,9 @@ declare(strict_types = 1);
 namespace Drupal\rdf_skos\EventSubscriber;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\rdf_entity\ActiveGraphEvent;
-use Drupal\rdf_entity\Event\RdfEntityEvents;
-use Drupal\rdf_entity\RdfGraphHandlerInterface;
+use Drupal\sparql_entity_storage\Event\ActiveGraphEvent;
+use Drupal\sparql_entity_storage\Event\SparqlEntityStorageEvents;
+use Drupal\sparql_entity_storage\SparqlEntityStorageGraphHandlerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -16,7 +16,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * We use this when the SKOS entities are param converted to ensure that for
  * the SKOS entity types, only the correct graphs are used.
  *
- * @see \Drupal\rdf_entity\ParamConverter\RdfEntityConverter
+ * @see \Drupal\sparql_entity_storage\ParamConverter\SparqlEntityStorageConverter
  */
 class SkosActiveGraphSubscriber implements EventSubscriberInterface {
 
@@ -30,7 +30,7 @@ class SkosActiveGraphSubscriber implements EventSubscriberInterface {
   /**
    * The RDF graph handler service.
    *
-   * @var \Drupal\rdf_entity\RdfGraphHandlerInterface
+   * @var \Drupal\sparql_entity_storage\SparqlEntityStorageGraphHandlerInterface
    */
   protected $rdfGraphHandler;
 
@@ -39,10 +39,10 @@ class SkosActiveGraphSubscriber implements EventSubscriberInterface {
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
-   * @param \Drupal\rdf_entity\RdfGraphHandlerInterface $rdf_graph_handler
+   * @param \Drupal\sparql_entity_storage\SparqlEntityStorageGraphHandlerInterface $rdf_graph_handler
    *   The RDF graph handler service.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, RdfGraphHandlerInterface $rdf_graph_handler) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, SparqlEntityStorageGraphHandlerInterface $rdf_graph_handler) {
     $this->entityTypeManager = $entity_type_manager;
     $this->rdfGraphHandler = $rdf_graph_handler;
   }
@@ -50,7 +50,7 @@ class SkosActiveGraphSubscriber implements EventSubscriberInterface {
   /**
    * Set the appropriate graph as an active graph for the SKOS entities.
    *
-   * @param \Drupal\rdf_entity\ActiveGraphEvent $event
+   * @param \Drupal\sparql_entity_storage\Event\ActiveGraphEvent $event
    *   The event object to process.
    *
    * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
@@ -73,7 +73,7 @@ class SkosActiveGraphSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents(): array {
     return [
-      RdfEntityEvents::GRAPH_ENTITY_CONVERT => ['graphForEntityConvert', 100],
+      SparqlEntityStorageEvents::GRAPH_ENTITY_CONVERT => ['graphForEntityConvert', 100],
     ];
   }
 

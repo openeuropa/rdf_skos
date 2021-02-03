@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\rdf_skos\Entity\Query\Sparql;
 
-use Drupal\rdf_entity\Entity\Query\Sparql\SparqlCondition as OriginalSparqlCondition;
+use Drupal\sparql_entity_storage\Entity\Query\Sparql\SparqlCondition as OriginalSparqlCondition;
 
 /**
  * SPARQL condition for SKOS entities.

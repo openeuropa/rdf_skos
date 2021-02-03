@@ -20,9 +20,19 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
   /**
    * {@inheritdoc}
    */
+  public static $modules = [
+    'entity_test',
+    'user',
+  ];
+
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
+    $this->installEntitySchema('entity_test');
+    $this->installEntitySchema('user');
     // Enable both graphs.
     $this->enableGraph('fruit');
     $this->enableGraph('vegetables');

@@ -1,17 +1,80 @@
 # RDF SKOS
 
+This module provides a dedicated entity type for SKOS modeling. The module requires access to a [triplestore database](https://en.wikipedia.org/wiki/Triplestore),
+such as [Virtuoso 7](https://github.com/openlink/virtuoso-opensource).
+
+## Upgrade from 0.11.0 to 1.0.0-alpha1
+
+On `1.0.0-alpha1`, the `rdf_entity` module dependency has been removed and instead the `sparql_entity_storage` module has been
+introduced (see the [rdf_entity module's Readme](https://github.com/ec-europa/rdf_entity#updating-from-10-alpha16-to-alpha17) for more information).
+
+As suggested by the `rdf_entity` module itself, the following steps can be taken in order to update `rdf_skos` in production:
+
+The update process needs to be split in three deployments, which will likely result into separate site releases.
+
+**First deployment**
+
+1. **Before you update `rdf_skos` to `1.0.0-alpha1`**, require an empty version of the `drupal/sparql_entity_storage` module:
+   ```
+   $ composer require drupal/sparql_entity_storage:dev-empty-module
+   ```
+2. Deploy to production.
+3. Enable the module (this can be part of the deployment procedure above, depending on your setup).
+
+At this point your site's `composer.json` should look like this:
+
+```
+{
+    ...
+    "openeuropa/rdf_skos": "~0.11.0",
+    "drupal/sparql_entity_storage": "dev-empty-module",
+    ...
+}
+```
+
+**Second deployment**
+
+1. Remove the empty `drupal/sparql_entity_storage` module requirement from your `composer.json`.
+2. Require `drupal/rdf_entity` with the new `1.0-alpha21` version and `openeuropa/rdf_skos` with the new `1.0.0-alpha1` version.
+3. Deploy to production.
+4. Uninstall the `drupal/rdf_entity` module (this can be part of the deployment procedure above, depending on your setup).
+
+At this point your site's `composer.json` should look like this:
+
+```
+{
+    ...
+    "openeuropa/rdf_skos": "~1.0.0-alpha1",
+    "drupal/rdf_entity": "~1.0-alpha21",
+    ...
+}
+```
+
+**Third deployment**
+
+1. Remove the `drupal/rdf_entity` dependency.
+2. Deploy to production.
+
+At this point your site's `composer.json` should look like this:
+
+```
+{
+    ...
+    "openeuropa/rdf_skos": "~1.0.0-alpha1",
+    ...
+}
+```
+
+After these steps your site should have the latest version `drupal/rdf_skos` module using `drupal/sparql_entity_storage`
+and the `drupal/rdf_entity` module should no longer be in your codebase.
+
 ## Development setup
-
-### Requirements
-
-* [Virtuoso 7 (Triplestore database)](https://github.com/openlink/virtuoso-opensource)
 
 ### Initial setup
 
 You can build the test site by running the following steps.
 
 * Install Virtuoso. The easiest way to do this is by using the OpenEuropa [Triple store](https://github.com/openeuropa/triple-store-dev) development Docker container which also pre-imports the main Europa vocabularies.
-
 * Install all the composer dependencies:
 
 ```

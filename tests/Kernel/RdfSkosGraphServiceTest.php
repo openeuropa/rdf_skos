@@ -4,12 +4,12 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\rdf_skos\Kernel;
 
-use Drupal\Tests\rdf_entity\Kernel\RdfKernelTestBase;
+use Drupal\Tests\sparql_entity_storage\Kernel\SparqlKernelTestBase;
 
 /**
  * Tests the RDF SKOS service.
  */
-class RdfSkosGraphServiceTest extends RdfKernelTestBase {
+class RdfSkosGraphServiceTest extends SparqlKernelTestBase {
 
   /**
    * {@inheritdoc}

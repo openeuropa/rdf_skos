@@ -4,13 +4,13 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\rdf_skos\Kernel;
 
-use Drupal\Tests\rdf_entity\Kernel\RdfKernelTestBase;
+use Drupal\Tests\sparql_entity_storage\Kernel\SparqlKernelTestBase;
 use Drupal\Tests\rdf_skos\Traits\SkosImportTrait;
 
 /**
  * Base class for the SKOS Kernel Tests.
  */
-class RdfSkosKernelTestBase extends RdfKernelTestBase {
+class RdfSkosKernelTestBase extends SparqlKernelTestBase {
 
   use SkosImportTrait;
 
@@ -35,7 +35,7 @@ class RdfSkosKernelTestBase extends RdfKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public function tearDown() {
+  public function tearDown(): void {
     $base_url = $_ENV['SIMPLETEST_BASE_URL'];
     $this->clear($base_url, $this->sparql, 'phpunit');
 

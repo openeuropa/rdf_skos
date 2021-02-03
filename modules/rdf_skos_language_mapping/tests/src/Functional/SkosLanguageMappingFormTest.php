@@ -34,7 +34,7 @@ class SkosLanguageMappingFormTest extends BrowserTestBase {
    */
   public function testLanguageMappingForm(): void {
     $this->drupalLogin($this->createUser(['administer rdf skos language mapping']));
-    $this->drupalGet('admin/config/rdf_entity/language-mapping');
+    $this->drupalGet('admin/config/sparql/language-mapping');
     $assert_session = $this->assertSession();
 
     // Make sure that validation works properly.

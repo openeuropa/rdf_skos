@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Drupal\rdf_skos_test\EventSubscriber;
 
-use Drupal\rdf_entity\ActiveGraphEvent;
-use Drupal\rdf_entity\Event\RdfEntityEvents;
+use Drupal\sparql_entity_storage\Event\ActiveGraphEvent;
+use Drupal\sparql_entity_storage\Event\SparqlEntityStorageEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -16,7 +16,7 @@ class TestSkosActiveGraphSubscriber implements EventSubscriberInterface {
   /**
    * Sets some dummy active graphs.
    *
-   * @param \Drupal\rdf_entity\ActiveGraphEvent $event
+   * @param \Drupal\sparql_entity_storage\Event\ActiveGraphEvent $event
    *   The event object to process.
    *
    * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
@@ -31,7 +31,7 @@ class TestSkosActiveGraphSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents(): array {
     return [
-      RdfEntityEvents::GRAPH_ENTITY_CONVERT => ['graphForEntityConvert'],
+      SparqlEntityStorageEvents::GRAPH_ENTITY_CONVERT => ['graphForEntityConvert'],
     ];
   }
 

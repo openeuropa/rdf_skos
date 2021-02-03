@@ -5,4 +5,4 @@ package: RDF Entity
 type: module
 
 dependencies:
-  - rdf_entity:rdf_entity
+  - sparql_entity_storage:sparql_entity_storage

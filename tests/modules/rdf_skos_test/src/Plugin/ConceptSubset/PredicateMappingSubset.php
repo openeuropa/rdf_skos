@@ -6,9 +6,9 @@ namespace Drupal\rdf_skos_test\Plugin\ConceptSubset;
 
 use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\rdf_entity\RdfFieldHandlerInterface;
 use Drupal\rdf_skos\ConceptSubsetPluginBase;
 use Drupal\rdf_skos\Plugin\PredicateMapperInterface;
+use Drupal\sparql_entity_storage\SparqlEntityStorageFieldHandler;
 
 /**
  * Test plugin that maps a new value to a new base field.
@@ -38,7 +38,7 @@ class PredicateMappingSubset extends ConceptSubsetPluginBase implements Predicat
     $mapping['dummy_title'] = [
       'column' => 'value',
       'predicate' => ['http://www.w3.org/2004/02/skos/core#dummy'],
-      'format' => RdfFieldHandlerInterface::TRANSLATABLE_LITERAL,
+      'format' => SparqlEntityStorageFieldHandler::TRANSLATABLE_LITERAL,
     ];
 
     return $mapping;

@@ -7,7 +7,7 @@ namespace Drupal\Tests\rdf_skos\Functional;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\Tests\rdf_entity\Traits\RdfDatabaseConnectionTrait;
+use Drupal\Tests\sparql_entity_storage\Traits\SparqlConnectionTrait;
 use Drupal\Tests\rdf_skos\Traits\SkosImportTrait;
 use Drupal\Tests\views\Functional\ViewTestBase;
 use Drupal\views\Tests\ViewTestData;
@@ -19,7 +19,7 @@ use Drupal\views\Tests\ViewTestData;
  */
 class SkosConceptReferenceIdFilterTest extends ViewTestBase {
 
-  use RdfDatabaseConnectionTrait;
+  use SparqlConnectionTrait;
   use SkosImportTrait;
 
   /**
@@ -28,7 +28,7 @@ class SkosConceptReferenceIdFilterTest extends ViewTestBase {
   public static $modules = [
     'views',
     'node',
-    'rdf_entity',
+    'sparql_entity_storage',
     'rdf_skos',
     'rdf_skos_test',
   ];
