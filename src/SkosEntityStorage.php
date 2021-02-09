@@ -260,11 +260,13 @@ class SkosEntityStorage extends SparqlEntityStorage {
    */
   protected function getFromStaticCache(array $ids, array $graph_ids = []) {
     $entities = [];
+    if (!$this->entityType->isStaticallyCacheable()) {
+      return $entities;
+    }
+
     foreach ($ids as $id) {
-      if (isset($this->entities[$id])) {
-        if (!isset($entities[$id])) {
-          $entities[$id] = $this->entities[$id];
-        }
+      if ($cached = $this->memoryCache->get($this->buildCacheId($id))) {
+        $entities[$id] = $cached->data;
       }
     }
     return $entities;
@@ -276,7 +278,7 @@ class SkosEntityStorage extends SparqlEntityStorage {
   protected function setStaticCache(array $entities) {
     if ($this->entityType->isStaticallyCacheable()) {
       foreach ($entities as $id => $entity) {
-        $this->entities[$id] = $entity;
+        $this->memoryCache->set($this->buildCacheId($entity->id()), $entity, MemoryCacheInterface::CACHE_PERMANENT, [$this->memoryCacheTag]);
       }
     }
   }
@@ -288,12 +290,14 @@ class SkosEntityStorage extends SparqlEntityStorage {
     if (!$this->entityType->isPersistentlyCacheable() || empty($ids)) {
       return [];
     }
+
     $entities = [];
     // Build the list of cache entries to retrieve.
     $cid_map = [];
     foreach ($ids as $id) {
       $cid_map[$id] = $this->buildCacheId($id);
     }
+
     $cids = array_values($cid_map);
     if ($cache = $this->cacheBackend->getMultiple($cids)) {
       // Get the entities that were found in the cache.
@@ -305,6 +309,7 @@ class SkosEntityStorage extends SparqlEntityStorage {
         }
       }
     }
+
     return $entities;
   }
 
