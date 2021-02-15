@@ -68,6 +68,13 @@ At this point your site's `composer.json` should look like this:
 After these steps your site should have the latest version `drupal/rdf_skos` module using `drupal/sparql_entity_storage`
 and the `drupal/rdf_entity` module should no longer be in your codebase.
 
+## Technical details and constraints
+The module allows loading SKOS concept schemes and concepts as entities in Drupal. The entities will be
+loaded from the graph IRIs specified in the related configuration.
+
+Since all the graphs are passed to the methods for loading entities, this enforces the limitation of having unique IRIs
+(IDs in Drupalese) for the SKOS entities present in all the graphs.
+
 ## Development setup
 
 ### Initial setup
