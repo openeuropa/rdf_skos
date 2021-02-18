@@ -1,5 +1,12 @@
 # RDF SKOS
 
+## Technical details and constraints
+The module allows loading SKOS concept schemes and concepts as entities in Drupal. The entities will be
+loaded from the graph IRIs specified in the related configuration.
+
+Since all the graphs are passed to the methods for loading entities, this enforces the limitation of having unique IRIs
+(IDs in Drupalese) for the SKOS entities present in all the graphs.
+
 ## Development setup
 
 ### Requirements

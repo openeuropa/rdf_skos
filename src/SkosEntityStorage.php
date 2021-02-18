@@ -23,6 +23,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Storage class for SKOS entities.
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class SkosEntityStorage extends RdfEntitySparqlStorage {
 
@@ -233,6 +235,82 @@ class SkosEntityStorage extends RdfEntitySparqlStorage {
     }
 
     return reset($bundles);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getFromStaticCache(array $ids, array $graph_ids = []) {
+    $entities = [];
+    if (!$this->entityType->isStaticallyCacheable()) {
+      return $entities;
+    }
+
+    foreach ($ids as $id) {
+      if ($cached = $this->memoryCache->get($this->buildCacheId($id))) {
+        $entities[$id] = $cached->data;
+      }
+    }
+    return $entities;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setStaticCache(array $entities) {
+    if ($this->entityType->isStaticallyCacheable()) {
+      foreach ($entities as $id => $entity) {
+        $this->memoryCache->set($this->buildCacheId($entity->id()), $entity, MemoryCacheInterface::CACHE_PERMANENT, [$this->memoryCacheTag]);
+      }
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getFromPersistentCache(array &$ids = NULL, array $graph_ids = []) {
+    if (!$this->entityType->isPersistentlyCacheable() || empty($ids)) {
+      return [];
+    }
+
+    $entities = [];
+    // Build the list of cache entries to retrieve.
+    $cid_map = [];
+    foreach ($ids as $id) {
+      $cid_map[$id] = $this->buildCacheId($id);
+    }
+
+    $cids = array_values($cid_map);
+    if ($cache = $this->cacheBackend->getMultiple($cids)) {
+      // Get the entities that were found in the cache.
+      foreach ($ids as $index => $id) {
+        $cid = $cid_map[$id];
+        if (isset($cache[$cid]) && !isset($entities[$id])) {
+          $entities[$id] = $cache[$cid]->data;
+          unset($ids[$index]);
+        }
+      }
+    }
+
+    return $entities;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setPersistentCache($entities) {
+    if (!$this->entityType->isPersistentlyCacheable()) {
+      return;
+    }
+
+    $cache_tags = [
+      $this->entityTypeId . '_values',
+      'entity_field_info',
+    ];
+    foreach ($entities as $id => $entity) {
+      $cid = $this->buildCacheId($id);
+      $this->cacheBackend->set($cid, $entity, CacheBackendInterface::CACHE_PERMANENT, $cache_tags);
+    }
   }
 
   /**
