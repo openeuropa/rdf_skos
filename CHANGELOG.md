@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.0-alpha2](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha2) (2021-02-24)
+
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha1...1.0.0-alpha2)
+
+**Merged pull requests:**
+
+- EWPP-109: Use 8.9.13 minimum on drupal-core-require-dev. [\#64](https://github.com/openeuropa/rdf_skos/pull/64) ([imanoleguskiza](https://github.com/imanoleguskiza))
+- EWPP-727: Fixing RDF Skos storage level caching. [\#63](https://github.com/openeuropa/rdf_skos/pull/63) ([upchuk](https://github.com/upchuk))
+
 ## [1.0.0-alpha1](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha1) (2021-02-03)
 
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.11.0...1.0.0-alpha1)
@@ -8,6 +17,7 @@ Refer to the [Readme](https://github.com/openeuropa/rdf_skos/blob/1.0.0-alpha1/R
 
 **Merged pull requests:**
 
+- Prepare release 1.0.0-alpha1. [\#62](https://github.com/openeuropa/rdf_skos/pull/62) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - EWPP-568: Provide empty config. [\#60](https://github.com/openeuropa/rdf_skos/pull/60) ([sergepavle](https://github.com/sergepavle))
 - EWPP-516: Update docker images. [\#58](https://github.com/openeuropa/rdf_skos/pull/58) ([22Alexandra](https://github.com/22Alexandra))
 - OPENEUROPA-3048: Use the sparql\_entity\_storage module. [\#49](https://github.com/openeuropa/rdf_skos/pull/49) ([imanoleguskiza](https://github.com/imanoleguskiza))
