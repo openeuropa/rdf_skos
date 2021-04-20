@@ -10,7 +10,7 @@
     <env name="MINK_DRIVER_ARGS_WEBDRIVER" value='["${selenium.browser}", null, "${selenium.host}:${selenium.port}/wd/hub"]'/>
   </php>
   <testsuites>
-    <testsuite>
+    <testsuite name="unit_tests">
       <directory>./tests/</directory>
       <directory>./modules/*/tests/</directory>
     </testsuite>

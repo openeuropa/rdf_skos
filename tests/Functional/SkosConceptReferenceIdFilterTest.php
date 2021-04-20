@@ -23,6 +23,13 @@ class SkosConceptReferenceIdFilterTest extends ViewTestBase {
   use SkosImportTrait;
 
   /**
+   * Default theme.
+   *
+   * @var string
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * {@inheritdoc}
    */
   public static $modules = [
@@ -44,7 +51,7 @@ class SkosConceptReferenceIdFilterTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE) {
+  protected function setUp($import_test_views = TRUE): void {
     parent::setUp(FALSE);
     $this->setUpSparql();
     $base_url = $_ENV['SIMPLETEST_BASE_URL'];
@@ -68,7 +75,7 @@ class SkosConceptReferenceIdFilterTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  public function tearDown() {
+  public function tearDown(): void {
     $base_url = $_ENV['SIMPLETEST_BASE_URL'];
     $this->clear($base_url, $this->sparql, 'phpunit');
 

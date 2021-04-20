@@ -89,7 +89,7 @@ abstract class SkosEntitySettingsForm extends FormBase {
       ->set('entity_types.' . $this->getEntityTypeId(), $graphs)
       ->save();
 
-    drupal_set_message($this->t('The form has been saved.'));
+    $this->messenger()->addMessage($this->t('The form has been saved.'));
   }
 
 }

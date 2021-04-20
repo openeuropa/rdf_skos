@@ -13,6 +13,13 @@ use Drupal\Tests\BrowserTestBase;
 class SkosLanguageMappingFormTest extends BrowserTestBase {
 
   /**
+   * Default theme.
+   *
+   * @var string
+   */
+  protected $defaultTheme = 'classy';
+
+  /**
    * {@inheritdoc}
    */
   protected static $modules = [
@@ -22,7 +29,7 @@ class SkosLanguageMappingFormTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     foreach (['fr', 'pt-pt'] as $langcode) {
       ConfigurableLanguage::createFromLangcode($langcode)->save();
@@ -44,7 +51,7 @@ class SkosLanguageMappingFormTest extends BrowserTestBase {
       "language_mapping[pt-pt]" => 'pt',
     ];
 
-    $this->drupalPostForm(NULL, $edit, 'Save configuration');
+    $this->submitForm($edit, 'Save configuration');
     $this->assertSession()->elementTextContains('css', '.messages--error', 'The langcode for English, fr, is not unique.');
     $this->assertSession()->elementTextContains('css', '.messages--error', 'The langcode for French, fr, is not unique.');
 
@@ -54,7 +61,7 @@ class SkosLanguageMappingFormTest extends BrowserTestBase {
       "language_mapping[fr]" => 'fr',
       "language_mapping[pt-pt]" => 'pt',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save configuration');
+    $this->submitForm($edit, 'Save configuration');
     $this->assertSession()->elementTextContains('css', '.messages--status', 'The configuration options have been saved.');
     $form_values = [
       'English (en)' => 'en',
