@@ -19,8 +19,9 @@
         "drupal/config_devel": "~1.2",
         "drupal/drupal-extension": "~4.0",
         "drush/drush": "~10.0",
-        "openeuropa/code-review": "dev-EWPP-372",
+        "nikic/php-parser": "^3.1.5",
         "openeuropa/behat-transformation-context" : "~0.1",
+        "openeuropa/code-review": "dev-EWPP-372",
         "openeuropa/drupal-core-require-dev": "^8.9.13 || ^9.1.6",
         "openeuropa/task-runner-drupal-project-symlink": "^1.0",
         "phpunit/phpunit": "^7 || ^8"
