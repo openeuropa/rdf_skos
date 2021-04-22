@@ -23,9 +23,7 @@ class SkosConceptReferenceIdFilterTest extends ViewTestBase {
   use SkosImportTrait;
 
   /**
-   * Default theme.
-   *
-   * @var string
+   * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 

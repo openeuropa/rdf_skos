@@ -20,9 +20,7 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
   use SkosEntityReferenceTrait;
 
   /**
-   * Default theme.
-   *
-   * @var string
+   * {@inheritdoc}
    */
   protected $defaultTheme = 'classy';
 

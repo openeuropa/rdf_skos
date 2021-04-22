@@ -28,7 +28,7 @@ class ConceptSchemeViewBuilder extends EntityViewBuilder {
   protected $entityTypeManager;
 
   /**
-   * Constructs a new CommentViewBuilder.
+   * Constructs a new ConceptSchemeViewBuilder.
    *
    * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type
    *   The entity type definition.

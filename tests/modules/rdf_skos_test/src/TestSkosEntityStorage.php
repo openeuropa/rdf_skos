@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\Tests\rdf_skos\modules\rdf_skos_test\src;
+namespace Drupal\rdf_skos_test;
 
 use Drupal\rdf_skos\SkosEntityStorage;
 

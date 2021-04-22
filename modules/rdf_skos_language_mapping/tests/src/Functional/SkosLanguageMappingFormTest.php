@@ -13,9 +13,7 @@ use Drupal\Tests\BrowserTestBase;
 class SkosLanguageMappingFormTest extends BrowserTestBase {
 
   /**
-   * Default theme.
-   *
-   * @var string
+   * {@inheritdoc}
    */
   protected $defaultTheme = 'classy';
 

@@ -18,9 +18,7 @@ class SkosConceptSelectionFormTest extends WebDriverTestBase {
   use SkosImportTrait;
 
   /**
-   * Default theme.
-   *
-   * @var string
+   * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
