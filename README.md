@@ -69,6 +69,7 @@ After these steps your site should have the latest version `drupal/rdf_skos` mod
 and the `drupal/rdf_entity` module should no longer be in your codebase.
 
 ## Technical details and constraints
+
 The module allows loading SKOS concept schemes and concepts as entities in Drupal. The entities will be
 loaded from the graph IRIs specified in the related configuration.
 
@@ -97,8 +98,20 @@ changing relevant values, like your database credentials.
 $ ./vendor/bin/run drupal:site-setup
 ```
 
-This will symlink the theme in the proper directory within the test site and
+This will symlink the module in the proper directory within the test site and
 perform token substitution in test configuration files such as `behat.yml.dist`.
+
+**Please note:** project files and directories are symlinked within the test site by using the
+[OpenEuropa Task Runner's Drupal project symlink](https://github.com/openeuropa/task-runner-drupal-project-symlink) command.
+
+If you add a new file or directory in the root of the project, you need to re-run `drupal:site-setup` in order to make
+sure they are be correctly symlinked.
+
+If you don't want to re-run a full site setup for that, you can simply run:
+
+```
+$ ./vendor/bin/run drupal:symlink-project
+```
 
 * Install test site by running:
 

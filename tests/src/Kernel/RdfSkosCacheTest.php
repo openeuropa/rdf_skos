@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Drupal\Tests\rdf_skos\Kernel;
 
 use Drupal\rdf_skos\Entity\ConceptInterface;
-use Drupal\Tests\rdf_skos\modules\rdf_skos_test\src\TestSkosEntityStorage;
+use Drupal\rdf_skos_test\TestSkosEntityStorage;
 
 /**
  * Tests the RDF Skos storage caching mechanisms.

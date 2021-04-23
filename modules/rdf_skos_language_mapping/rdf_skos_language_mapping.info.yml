@@ -1,6 +1,6 @@
 name: RDF SKOS language mapping
 description: Provides a mapping between Drupal language codes and the ones present in Skos concepts and concept schemes.
-core: 8.x
+core_version_requirement: ^8.9 || ^9
 package: RDF Entity
 type: module
 

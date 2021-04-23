@@ -8,3 +8,4 @@ runner.yml
 phpunit.xml
 vendor
 docker-compose.*.yml
+/.gitattributes

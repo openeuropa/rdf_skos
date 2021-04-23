@@ -22,6 +22,11 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'classy';
+
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = [
     'node',
     'sparql_entity_storage',
@@ -31,7 +36,7 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE) {
+  protected function setUp($import_test_views = TRUE): void {
     parent::setUp();
     $this->setUpSparql();
     $base_url = $_ENV['SIMPLETEST_BASE_URL'];
@@ -55,7 +60,7 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public function tearDown() {
+  public function tearDown(): void {
     $base_url = $_ENV['SIMPLETEST_BASE_URL'];
     $this->clear($base_url, $this->sparql, 'phpunit');
 
@@ -115,7 +120,7 @@ class SkosConceptSelectListWidgetTest extends BrowserTestBase {
     $page->selectFieldOption('Fruit', 'Apple');
     $page->fillField('Title', 'Set Fruit in select box');
     $page->pressButton('Save');
-    $this->assertSession()->elementTextContains('css', '.messages--status', 'Article Set Fruit in select box has been created.');
+    $this->assertSession()->elementTextContains('css', '.messages--status', 'article Set Fruit in select box has been created.');
     /** @var \Drupal\node\NodeInterface $node */
     $node = $this->drupalGetNodeByTitle('Set Fruit in select box');
     // Make sure that field value is saved properly.

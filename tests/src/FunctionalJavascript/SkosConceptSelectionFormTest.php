@@ -20,6 +20,11 @@ class SkosConceptSelectionFormTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = [
     'node',
     'field_ui',
@@ -31,7 +36,7 @@ class SkosConceptSelectionFormTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE) {
+  protected function setUp($import_test_views = TRUE): void {
     parent::setUp();
     $this->setUpSparql();
     $base_url = $_ENV['SIMPLETEST_BASE_URL'];
@@ -49,7 +54,7 @@ class SkosConceptSelectionFormTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  public function tearDown() {
+  public function tearDown(): void {
     $base_url = $_ENV['SIMPLETEST_BASE_URL'];
     $this->clear($base_url, $this->sparql, 'phpunit');
 
