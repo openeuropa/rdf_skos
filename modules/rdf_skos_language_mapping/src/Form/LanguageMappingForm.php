@@ -120,7 +120,10 @@ class LanguageMappingForm extends ConfigFormBase {
       $value = $form_state->getValue(['language_mapping', $langcode]);
       if (isset($count[$value]) && $count[$value] > 1) {
         // Throw a form error if there are two languages with the same langcode.
-        $form_state->setErrorByName("language_mapping][$langcode", $this->t('The langcode for %language, %value, is not unique.', ['%language' => $language->getName(), '%value' => $value]));
+        $form_state->setErrorByName("language_mapping][$langcode", $this->t('The langcode for %language, %value, is not unique.', [
+          '%language' => $language->getName(),
+          '%value' => $value,
+        ]));
       }
     }
 
@@ -134,7 +137,10 @@ class LanguageMappingForm extends ConfigFormBase {
     $this->config('rdf_skos_language_mapping.settings')
       ->set('language_mapping', $form_state->getValue('language_mapping'))
       ->save();
-    $this->cacheTagsInvalidator->invalidateTags(['skos_concept_values', 'skos_concept_scheme_values']);
+    $this->cacheTagsInvalidator->invalidateTags([
+      'skos_concept_values',
+      'skos_concept_scheme_values',
+    ]);
     parent::submitForm($form, $form_state);
   }
 

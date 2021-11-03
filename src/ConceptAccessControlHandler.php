@@ -22,7 +22,11 @@ class ConceptAccessControlHandler extends EntityAccessControlHandler {
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account): AccessResultInterface {
     // For the moment, we only allow read.
-    return $operation === 'view' ? AccessResult::allowedIfHasPermissions($account, ['view published skos concept entities', 'administer skos concept entities'], 'OR') : AccessResult::forbidden();
+    return $operation === 'view' ? AccessResult::allowedIfHasPermissions($account, [
+      'view published skos concept entities',
+      'administer skos concept entities',
+    ], 'OR'
+    ) : AccessResult::forbidden();
   }
 
   /**

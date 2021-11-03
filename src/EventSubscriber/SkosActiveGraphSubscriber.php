@@ -73,7 +73,10 @@ class SkosActiveGraphSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents(): array {
     return [
-      SparqlEntityStorageEvents::GRAPH_ENTITY_CONVERT => ['graphForEntityConvert', 100],
+      SparqlEntityStorageEvents::GRAPH_ENTITY_CONVERT => [
+        'graphForEntityConvert',
+        100,
+      ],
     ];
   }
 
