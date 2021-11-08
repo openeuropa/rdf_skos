@@ -77,7 +77,10 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
     $entity->set('field_fruit', 'http://example.com/vegetables/potato');
     $violations = $entity->field_fruit->validate();
     $this->assertCount(1, $violations);
-    $this->assertEquals(t('This entity (%type: %id) cannot be referenced.', ['%type' => 'skos_concept', '%id' => 'http://example.com/vegetables/potato']), $violations[0]->getMessage());
+    $this->assertEquals(t('This entity (%type: %id) cannot be referenced.', [
+      '%type' => 'skos_concept',
+      '%id' => 'http://example.com/vegetables/potato',
+    ]), $violations[0]->getMessage());
 
     // The fruits_veggies field should be able to reference both.
     $entity->set('field_fruits_veggies', 'http://example.com/fruit/apple');
@@ -183,7 +186,10 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
     $entity->set('field_fruit', 'http://example.com/fruit/apple');
     $violations = $entity->field_fruit->validate();
     $this->assertCount(1, $violations);
-    $this->assertEquals(t('This entity (%type: %id) cannot be referenced.', ['%type' => 'skos_concept', '%id' => 'http://example.com/fruit/apple']), $violations[0]->getMessage());
+    $this->assertEquals(t('This entity (%type: %id) cannot be referenced.', [
+      '%type' => 'skos_concept',
+      '%id' => 'http://example.com/fruit/apple',
+    ]), $violations[0]->getMessage());
 
     $entity->set('field_fruit', 'http://example.com/fruit/pear');
     $violations = $entity->field_fruit->validate();
@@ -226,7 +232,10 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
       $entity->set('field_fruit', $fruit);
       $violations = $entity->field_fruit->validate();
       $this->assertCount(1, $violations);
-      $this->assertEquals(t('This entity (%type: %id) cannot be referenced.', ['%type' => 'skos_concept', '%id' => $fruit]), $violations[0]->getMessage());
+      $this->assertEquals(t('This entity (%type: %id) cannot be referenced.', [
+        '%type' => 'skos_concept',
+        '%id' => $fruit,
+      ]), $violations[0]->getMessage());
     }
   }
 
@@ -247,7 +256,10 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
     sort($definitions);
     $this->assertEquals($expected, $definitions);
 
-    $definitions = array_keys($manager->getApplicableDefinitions(['http://example.com/fruit', 'http://example.com/vegetables']));
+    $definitions = array_keys($manager->getApplicableDefinitions([
+      'http://example.com/fruit',
+      'http://example.com/vegetables',
+    ]));
     $expected = [
       'any_alter',
       'multi_alter',

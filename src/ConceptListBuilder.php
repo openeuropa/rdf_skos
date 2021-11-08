@@ -30,7 +30,7 @@ class ConceptListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity): array {
-    /* @var $entity \Drupal\rdf_skos\Entity\ConceptInterface */
+    /** @var \Drupal\rdf_skos\Entity\ConceptInterface $entity */
     $row['id'] = $entity->id();
     $row['prefLabel'] = Link::createFromRoute(
       $entity->getPreferredLabel(),
