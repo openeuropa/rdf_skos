@@ -31,7 +31,7 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "title",
- *     "uuid" = "uuid",
+ *     "uuid" = "id",
  *     "langcode" = "langcode",
  *   },
  *   links = {
