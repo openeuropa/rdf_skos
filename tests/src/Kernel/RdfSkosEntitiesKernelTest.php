@@ -86,6 +86,9 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
     $concept_scheme = reset($concept_schemes);
     $this->assertEquals('Fruit', $concept_scheme->getTitle());
 
+    $this->assertEquals('http://example.com/fruit', $concept_scheme->id());
+    $this->assertEquals('http://example.com/fruit', $concept_scheme->uuid());
+
     // Assert top concepts.
     $top_concepts = $concept_scheme->getTopConcepts();
     $top_concept = reset($top_concepts);
@@ -95,25 +98,24 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
     $ids = $entity_type_manager->getStorage('skos_concept')->getQuery()
       ->condition('in_scheme', $concept_scheme->id())
       ->execute();
+    /** @var \Drupal\rdf_skos\Entity\ConceptInterface[] $concepts */
     $concepts = $entity_type_manager->getStorage('skos_concept')->loadMultiple($ids);
     $this->assertCount(6, $concepts);
-    /** @var \Drupal\rdf_skos\Entity\ConceptInterface $citrus */
+
     $citrus = $concepts['http://example.com/fruit/citrus-fruit'];
+    $this->assertEquals('http://example.com/fruit/citrus-fruit', $citrus->uuid());
     $this->assertEquals('Citrus fruit ALT', $citrus->getAlternateLabel());
     $this->assertEquals('Citrus fruit HIDDEN', $citrus->getHiddenLabel());
     $this->assertEquals('lemons, oranges, limes, mandarines, grapefruit, satsumas', $citrus->getExample());
     $this->assertEquals('Fruit that make you salivate sometimes', $citrus->getDefinition());
 
-    /** @var \Drupal\rdf_skos\Entity\ConceptInterface $lemon */
     $lemon = $concepts['http://example.com/fruit/lemon'];
     $this->assertEquals('Citrus fruit', $lemon->getBroader()[0]->getPreferredLabel());
 
-    /** @var \Drupal\rdf_skos\Entity\ConceptInterface $pear */
     $pear = $concepts['http://example.com/fruit/pear'];
     $this->assertEquals('Apple', $pear->getRelated()[0]->getPreferredLabel());
 
     $concepts = $entity_type_manager->getStorage('skos_concept')->loadByProperties(['pref_label' => 'Exotic fruit']);
-    /** @var \Drupal\rdf_skos\Entity\ConceptInterface $concept */
     $concept = reset($concepts);
     $this->assertEquals('Fruit', $concept->topConceptOf()[0]->getTitle());
     $this->assertEmpty($concept->getConceptSchemes());
