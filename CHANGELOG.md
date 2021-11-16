@@ -1,11 +1,25 @@
 # Changelog
 
+## [1.0.0-alpha4](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha4) (2021-11-16)
+
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha3...1.0.0-alpha4)
+
+**Closed issues:**
+
+- TypeError in RDF - Related modules [\#26](https://github.com/openeuropa/rdf_skos/issues/26)
+
+**Merged pull requests:**
+
+- EWPP-1718: Skos entities UUID. [\#74](https://github.com/openeuropa/rdf_skos/pull/74) ([brummbar](https://github.com/brummbar))
+- EWPP-1706: Coding standard fixes. [\#73](https://github.com/openeuropa/rdf_skos/pull/73) ([upchuk](https://github.com/upchuk))
+
 ## [1.0.0-alpha3](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha3) (2021-06-30)
 
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha2...1.0.0-alpha3)
 
 **Merged pull requests:**
 
+- Prepare release 1.0.0-alpha3. [\#71](https://github.com/openeuropa/rdf_skos/pull/71) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - EWPP-929: Drupal 9 compatibility fixes. [\#69](https://github.com/openeuropa/rdf_skos/pull/69) ([yenyasinn](https://github.com/yenyasinn))
 
 ## [1.0.0-alpha2](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha2) (2021-03-22)
@@ -20,16 +34,21 @@
 
 ## [1.0.0-alpha1](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha1) (2021-02-03)
 
-[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.11.0...1.0.0-alpha1)
-
-Refer to the [Readme](https://github.com/openeuropa/rdf_skos/blob/1.0.0-alpha1/README.md#upgrade-from-0110-to-100-alpha1) for update instructions.
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.12.0...1.0.0-alpha1)
 
 **Merged pull requests:**
 
 - Prepare release 1.0.0-alpha1. [\#62](https://github.com/openeuropa/rdf_skos/pull/62) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - EWPP-568: Provide empty config. [\#60](https://github.com/openeuropa/rdf_skos/pull/60) ([sergepavle](https://github.com/sergepavle))
-- EWPP-516: Update docker images. [\#58](https://github.com/openeuropa/rdf_skos/pull/58) ([22Alexandra](https://github.com/22Alexandra))
 - OPENEUROPA-3048: Use the sparql\_entity\_storage module. [\#49](https://github.com/openeuropa/rdf_skos/pull/49) ([imanoleguskiza](https://github.com/imanoleguskiza))
+
+## [0.12.0](https://github.com/openeuropa/rdf_skos/tree/0.12.0) (2021-01-12)
+
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.11.0...0.12.0)
+
+**Merged pull requests:**
+
+- EWPP-516: Update docker images. [\#58](https://github.com/openeuropa/rdf_skos/pull/58) ([22Alexandra](https://github.com/22Alexandra))
 
 ## [0.11.0](https://github.com/openeuropa/rdf_skos/tree/0.11.0) (2020-10-01)
 
@@ -163,7 +182,7 @@ Refer to the [Readme](https://github.com/openeuropa/rdf_skos/blob/1.0.0-alpha1/R
 
 ## [0.1.0](https://github.com/openeuropa/rdf_skos/tree/0.1.0) (2019-04-25)
 
-[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/cb9a758b16e1dff4c63a4b2d4580ac97a65e5b77...0.1.0)
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0f077fd4e2898a05afa9fa60387c5b708470d79d...0.1.0)
 
 **Merged pull requests:**
 
