@@ -18,7 +18,7 @@ class Query extends OriginalQuery {
   protected function conditionGroupFactory($conjunction = 'AND'): ConditionInterface {
     $class = static::getClass($this->namespaces, 'SparqlCondition');
 
-    return new $class($conjunction, $this, $this->namespaces, $this->graphHandler, $this->fieldHandler, $this->languageManager);
+    return new $class($conjunction, $this, $this->namespaces, $this->fieldHandler, $this->languageManager);
   }
 
 }
