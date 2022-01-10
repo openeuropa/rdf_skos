@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.0-alpha5](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha5) (2022-01-10)
+
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha4...1.0.0-alpha5)
+
+**Merged pull requests:**
+
+- EWPP-1883: Lock sparql entity storage version to 1.0.0-alpha10. [\#77](https://github.com/openeuropa/rdf_skos/pull/77) ([nagyad](https://github.com/nagyad))
+- EWPP-1883: Updating Query constructor arguments. [\#76](https://github.com/openeuropa/rdf_skos/pull/76) ([upchuk](https://github.com/upchuk))
+
 ## [1.0.0-alpha4](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha4) (2021-11-16)
 
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha3...1.0.0-alpha4)
@@ -10,6 +19,7 @@
 
 **Merged pull requests:**
 
+- Prepare release 1.0.0-alpha4. [\#75](https://github.com/openeuropa/rdf_skos/pull/75) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - EWPP-1718: Skos entities UUID. [\#74](https://github.com/openeuropa/rdf_skos/pull/74) ([brummbar](https://github.com/brummbar))
 - EWPP-1706: Coding standard fixes. [\#73](https://github.com/openeuropa/rdf_skos/pull/73) ([upchuk](https://github.com/upchuk))
 
