@@ -62,7 +62,7 @@ class ConceptSubsetPluginManager extends DefaultPluginManager implements Concept
     if (!$definitions_by_scheme) {
       return [];
     }
-    return count($definitions_by_scheme) === 1 ? reset($definitions_by_scheme) : call_user_func_array('array_intersect_key', $definitions_by_scheme);
+    return count($definitions_by_scheme) === 1 ? reset($definitions_by_scheme) : call_user_func_array('array_intersect_key', array_values($definitions_by_scheme));
   }
 
   /**
