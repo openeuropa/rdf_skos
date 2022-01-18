@@ -58,7 +58,7 @@ pipeline:
       - /cache:/cache
     commands:
       - composer self-update --2
-      - composer update --prefer-lowest --prefer-stable --ansi --no-suggest --no-progress
+      - composer update --prefer-lowest --prefer-stable --ansi --no-progress
     when:
       matrix:
         COMPOSER_BOUNDARY: lowest
@@ -66,6 +66,7 @@ pipeline:
   site-install:
     image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     commands:
+      - while ! mysqladmin ping -h mysql --silent; do sleep 1; done
       - ./vendor/bin/run drupal:site-install
 
   grumphp:
