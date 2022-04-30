@@ -74,7 +74,7 @@ abstract class SkosEntitySettingsForm extends FormBase {
       $exploded = explode("\r\n", $value);
       $graphs = [];
       foreach ($exploded as $line) {
-        list($name, $uri) = explode('|', $line);
+        [$name, $uri] = explode('|', $line);
         $graphs[] = [
           'name' => $name,
           'uri' => $uri,

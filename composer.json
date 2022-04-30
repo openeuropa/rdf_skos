@@ -14,7 +14,6 @@
     "require-dev": {
         "composer/installers": "^1.5",
         "consolidation/robo": "^3.0",
-        "cweagans/composer-patches": "~1.0",
         "drupal/config_devel": "~1.2",
         "drupal/core-composer-scaffold": "^9.2",
         "drupal/core-dev": "^9.2",
@@ -74,6 +73,7 @@
         "allow-plugins": {
             "composer/installers": true,
             "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
             "drupal/core-composer-scaffold": true,
             "phpro/grumphp": true
         }

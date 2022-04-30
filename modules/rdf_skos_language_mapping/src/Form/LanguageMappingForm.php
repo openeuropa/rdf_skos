@@ -100,7 +100,7 @@ class LanguageMappingForm extends ConfigFormBase {
         '#type' => 'textfield',
         '#title' => $this->t('%language (%langcode)', $t_args),
         '#maxlength' => 64,
-        '#default_value' => isset($mapped_langcodes[$langcode]) ? $mapped_langcodes[$langcode] : $langcode,
+        '#default_value' => $mapped_langcodes[$langcode] ?? $langcode,
         '#required' => TRUE,
       ];
     }
