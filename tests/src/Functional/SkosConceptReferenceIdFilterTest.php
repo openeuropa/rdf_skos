@@ -49,8 +49,8 @@ class SkosConceptReferenceIdFilterTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
-    parent::setUp(FALSE);
+  protected function setUp($import_test_views = TRUE, $modules = ['views_test_config']): void {
+    parent::setUp(FALSE, $modules);
     $this->setUpSparql();
     $base_url = $_ENV['SIMPLETEST_BASE_URL'];
     $this->import($base_url, $this->sparql, 'phpunit');
