@@ -264,8 +264,14 @@ class SkosEntityStorage extends SparqlEntityStorage {
       return $entities;
     }
 
+    // If there are more than one graphs in the request, return only the first
+    // one, if exists. If the first candidate doesn't exist in the static
+    // cache, we don't pick up the following because the first might be
+    // available later in the persistent cache or in the storage.
+    $graph_id = reset($graph_ids);
+
     foreach ($ids as $id) {
-      if ($cached = $this->memoryCache->get($this->buildCacheId($id))) {
+      if ($cached = $this->memoryCache->get($this->buildCacheId($id, $graph_id))) {
         $entities[$id] = $cached->data;
       }
     }
@@ -278,7 +284,7 @@ class SkosEntityStorage extends SparqlEntityStorage {
   protected function setStaticCache(array $entities) {
     if ($this->entityType->isStaticallyCacheable()) {
       foreach ($entities as $id => $entity) {
-        $this->memoryCache->set($this->buildCacheId($entity->id()), $entity, MemoryCacheInterface::CACHE_PERMANENT, [$this->memoryCacheTag]);
+        $this->memoryCache->set($this->buildCacheId($entity->id(), $entity->get('graph')->target_id), $entity, MemoryCacheInterface::CACHE_PERMANENT, [$this->memoryCacheTag]);
       }
     }
   }
@@ -291,11 +297,13 @@ class SkosEntityStorage extends SparqlEntityStorage {
       return [];
     }
 
+    $graph_id = reset($graph_ids);
+
     $entities = [];
     // Build the list of cache entries to retrieve.
     $cid_map = [];
     foreach ($ids as $id) {
-      $cid_map[$id] = $this->buildCacheId($id);
+      $cid_map[$id] = $this->buildCacheId($id, $graph_id);
     }
 
     $cids = array_values($cid_map);
@@ -303,7 +311,7 @@ class SkosEntityStorage extends SparqlEntityStorage {
       // Get the entities that were found in the cache.
       foreach ($ids as $index => $id) {
         $cid = $cid_map[$id];
-        if (isset($cache[$cid]) && !isset($entities[$id])) {
+        if (isset($cache[$cid])) {
           $entities[$id] = $cache[$cid]->data;
           unset($ids[$index]);
         }
@@ -326,7 +334,7 @@ class SkosEntityStorage extends SparqlEntityStorage {
       'entity_field_info',
     ];
     foreach ($entities as $id => $entity) {
-      $cid = $this->buildCacheId($id);
+      $cid = $this->buildCacheId($id, $entity->get('graph')->target_id);
       $this->cacheBackend->set($cid, $entity, CacheBackendInterface::CACHE_PERMANENT, $cache_tags);
     }
   }

@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Drupal\rdf_skos;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\sparql_entity_storage\SparqlEntityStorageGraphHandler;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -28,11 +29,13 @@ class RdfSkosGraphHandler extends SparqlEntityStorageGraphHandler {
    *   The entity type manager service.
    * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
    *   The event dispatcher.
+   * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
+   *   The entity type bundle info service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config factory.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, EventDispatcherInterface $eventDispatcher, ConfigFactoryInterface $configFactory) {
-    parent::__construct($entity_type_manager, $eventDispatcher);
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, EventDispatcherInterface $eventDispatcher, EntityTypeBundleInfoInterface $entity_type_bundle_info, ConfigFactoryInterface $configFactory) {
+    parent::__construct($entity_type_manager, $eventDispatcher, $entity_type_bundle_info);
     $this->configFactory = $configFactory;
   }
 

@@ -24,7 +24,7 @@
         "masterminds/html5": "^2.7.6",
         "mikey179/vfsstream": "^1.6.10",
         "nikic/php-parser": "^4.12.0",
-        "openeuropa/behat-transformation-context": "dev-EWPP-2891",
+        "openeuropa/behat-transformation-context": "dev-master",
         "openeuropa/code-review": "2.x-dev",
         "openeuropa/task-runner-drupal-project-symlink": "1.x-dev",
         "phpspec/prophecy-phpunit": "^2",
