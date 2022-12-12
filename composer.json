@@ -6,7 +6,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "drupal/core": "^9.3",
+        "drupal/core": "^9.4",
         "drupal/sparql_entity_storage": "1.0.0-alpha10",
         "easyrdf/easyrdf": "1.0.0 as 0.9.1",
         "php": ">=8.0"
@@ -15,8 +15,7 @@
         "composer/installers": "^1.5",
         "consolidation/robo": "^3.0",
         "drupal/config_devel": "~1.2",
-        "drupal/core-composer-scaffold": "^9.3",
-        "drupal/core-dev": "^9.3",
+        "drupal/core-composer-scaffold": "^9.4",
         "drupal/drupal-extension": "~4.0",
         "drush/drush": "~10.0",
         "fabpot/goutte": "~3.3",
