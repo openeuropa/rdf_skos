@@ -7,28 +7,39 @@
     "prefer-stable": true,
     "require": {
         "drupal/core": "^9.4",
-        "drupal/sparql_entity_storage": "1.0.0-alpha10",
-        "easyrdf/easyrdf": "1.0.0 as 0.9.1",
+        "drupal/sparql_entity_storage": "^2.0.0-alpha9",
+        "sweetrdf/easyrdf": "^1.7.1",
         "php": ">=8.0"
     },
     "require-dev": {
+        "behat/mink-selenium2-driver": "^1.5",
         "composer/installers": "^1.5",
-        "consolidation/robo": "^3.0",
+        "consolidation/robo": "^4.0",
         "drupal/config_devel": "~1.2",
         "drupal/core-composer-scaffold": "^9.4",
-        "drupal/drupal-extension": "~4.0",
-        "drush/drush": "~10.0",
-        "fabpot/goutte": "~3.3",
+        "drupal/core-utility": "^9.4",
+        "drupal/drupal-extension": "dev-master",
+        "drush/drush": "^11.1",
+        "guzzlehttp/guzzle": "^7.0",
+        "masterminds/html5": "^2.7.6",
+        "mikey179/vfsstream": "^1.6.10",
         "nikic/php-parser": "^4.12.0",
-        "openeuropa/behat-transformation-context": "~0.1",
-        "openeuropa/code-review": "^2.0",
-        "openeuropa/task-runner-drupal-project-symlink": "^1.0",
+        "openeuropa/behat-transformation-context": "dev-EWPP-2891",
+        "openeuropa/code-review": "2.x-dev",
+        "openeuropa/task-runner-drupal-project-symlink": "1.x-dev",
         "phpspec/prophecy-phpunit": "^2",
-        "phpunit/phpunit": "^9.4"
+        "phpunit/phpunit": "^9.4",
+        "symfony/console": "^4.4.30",
+        "symfony/css-selector": "^4.4.30",
+        "symfony/dom-crawler": "^4.4.44",
+        "symfony/finder": "^4.4.30",
+        "symfony/http-client": "^4.4.30",
+        "symfony/http-foundation": "^4.4.30",
+        "symfony/phpunit-bridge": "^6.0",
+        "symfony/routing": "^4.4.30",
+        "symfony/validator": "^4.4.30",
+        "symfony/yaml": "^4.4.29"
     },
-    "_readme": [
-        "Explicit minimum version requirement for fabpot/goutte due to lower version doesn't work with Drupal 9.3."
-    ],
     "suggest": {
         "drupal/console": "^1"
     },
@@ -65,7 +76,15 @@
             "locations": {
                 "web-root": "./build"
             }
-        }
+        },
+        "_readme": [
+            "Explicit minimum version requirement of symfony packages due to lower versions missing return type on various methods being incompatible with PHP 8.1 parent methods.",
+            "Explicit minimum version requirement of mikey179/vfsstream due to lower versions missing return type on vfsStreamDirectory::getIterator() method.",
+            "Use master branch of drupal/drupal-extension to replace fabpot/goutte with behat/mink-browserkit-driver and the rest of the behat required dependencies.",
+            "Explicit minimum version requirement of guzzlehttp/guzzle due to lower versions missing return type on CookieJar::getIterator() and CookieJar::count() methods.",
+            "Explicit minimum version requirement of masterminds/html5 due to lower versions passing NULL parameters instead of string when calling DOMImplementation::createDocument() method.",
+            "Explicit minimum version requirement of behat/mink-selenium2-driver due to lower versions passing null on int flags paramaters being incompatible with PHP 8.1."
+        ]
     },
     "config": {
         "sort-packages": true,

@@ -13,7 +13,7 @@ default:
               SKOS concept administration: 'admin/structure/skos_concept'
   extensions:
     Behat\MinkExtension:
-      goutte: ~
+      browserkit_http: ~
       selenium2: ~
       javascript_session: selenium2
       base_url: "${drupal.base_url}"
