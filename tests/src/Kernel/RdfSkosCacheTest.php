@@ -16,6 +16,8 @@ class RdfSkosCacheTest extends RdfSkosKernelTestBase {
    * Tests that persistent caching works correctly.
    */
   public function testPersistentCache(): void {
+    // Enable two graphs. The graph with our target test entity must be second.
+    $this->enableGraph('vegetables');
     $this->enableGraph('fruit');
 
     /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
@@ -58,6 +60,8 @@ class RdfSkosCacheTest extends RdfSkosKernelTestBase {
    * Tests that static caching works correctly.
    */
   public function testStaticCache(): void {
+    // Enable two graphs. The graph with our target test entity must be second.
+    $this->enableGraph('vegetables');
     $this->enableGraph('fruit');
 
     /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
