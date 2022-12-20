@@ -36,7 +36,7 @@ class RdfSkosCacheTest extends RdfSkosKernelTestBase {
 
     // Check that we don't have anything yet in the persistent cache for our
     // Skos concept.
-    $cid = "values:skos_concept:http://example.com/fruit/citrus-fruit:fruit";
+    $cid = "values:skos_concept:http://example.com/fruit/citrus-fruit";
     $this->assertFalse($this->container->get('cache.entity')->get($cid));
 
     // Load the Skos concept, triggering its caching in the persistent cache.

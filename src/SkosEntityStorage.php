@@ -258,85 +258,15 @@ class SkosEntityStorage extends SparqlEntityStorage {
   /**
    * {@inheritdoc}
    */
-  protected function getFromStaticCache(array $ids, array $graph_ids = []) {
-    $entities = [];
-    if (!$this->entityType->isStaticallyCacheable()) {
-      return $entities;
-    }
-
-    // If there are more than one graphs in the request, return only the first
-    // one, if exists. If the first candidate doesn't exist in the static
-    // cache, we don't pick up the following because the first might be
-    // available later in the persistent cache or in the storage.
-    $graph_id = reset($graph_ids);
-
-    foreach ($ids as $id) {
-      if ($cached = $this->memoryCache->get($this->buildCacheId($id, $graph_id))) {
-        $entities[$id] = $cached->data;
-      }
-    }
-    return $entities;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function setStaticCache(array $entities) {
-    if ($this->entityType->isStaticallyCacheable()) {
-      foreach ($entities as $id => $entity) {
-        $this->memoryCache->set($this->buildCacheId($entity->id(), $entity->get('graph')->target_id), $entity, MemoryCacheInterface::CACHE_PERMANENT, [$this->memoryCacheTag]);
-      }
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getFromPersistentCache(array &$ids = NULL, array $graph_ids = []) {
-    if (!$this->entityType->isPersistentlyCacheable() || empty($ids)) {
-      return [];
-    }
-
-    $graph_id = reset($graph_ids);
-
-    $entities = [];
-    // Build the list of cache entries to retrieve.
-    $cid_map = [];
-    foreach ($ids as $id) {
-      $cid_map[$id] = $this->buildCacheId($id, $graph_id);
-    }
-
-    $cids = array_values($cid_map);
-    if ($cache = $this->cacheBackend->getMultiple($cids)) {
-      // Get the entities that were found in the cache.
-      foreach ($ids as $index => $id) {
-        $cid = $cid_map[$id];
-        if (isset($cache[$cid])) {
-          $entities[$id] = $cache[$cid]->data;
-          unset($ids[$index]);
-        }
-      }
-    }
-
-    return $entities;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function setPersistentCache($entities) {
-    if (!$this->entityType->isPersistentlyCacheable()) {
-      return;
-    }
-
-    $cache_tags = [
-      $this->entityTypeId . '_values',
-      'entity_field_info',
-    ];
-    foreach ($entities as $id => $entity) {
-      $cid = $this->buildCacheId($id, $entity->get('graph')->target_id);
-      $this->cacheBackend->set($cid, $entity, CacheBackendInterface::CACHE_PERMANENT, $cache_tags);
-    }
+  protected function buildCacheId($id, ?string $graph_id = NULL): string {
+    // As per technical constraint of the module, entity IRIs must be unique
+    // amongst all graphs.
+    // This storage passes all the graphs to the methods to load entities. The
+    // parent Sparql entity storage uses the first graph ID to generate both
+    // static and persistent cache IDs, if the entity being loaded is present
+    // in any other graphs the caches will be rendered useless.
+    // @see \Drupal\Tests\rdf_skos\Kernel\RdfSkosCacheTest
+    return "values:{$this->entityTypeId}:$id";
   }
 
   /**
