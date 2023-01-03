@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.0-alpha8](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha8) (2023-01-03)
+
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha7...1.0.0-alpha8)
+
+**Merged pull requests:**
+
+- OEL-2115: Cache tests do not cover completely the bug scenarios. [\#87](https://github.com/openeuropa/rdf_skos/pull/87) ([brummbar](https://github.com/brummbar))
+
 ## [1.0.0-alpha7](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha7) (2022-06-22)
 
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha6...1.0.0-alpha7)
@@ -7,6 +15,7 @@
 **Merged pull requests:**
 
 - EWPP-2358: Drupal 9.4 support. [\#84](https://github.com/openeuropa/rdf_skos/pull/84) ([yenyasinn](https://github.com/yenyasinn))
+- Prepare release 1.0.0-alpha7. [\#83](https://github.com/openeuropa/rdf_skos/pull/83) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - EWPP-2202: Fix dependency from composer patches. [\#82](https://github.com/openeuropa/rdf_skos/pull/82) ([yenyasinn](https://github.com/yenyasinn))
 
 ## [1.0.0-alpha6](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha6) (2022-01-18)
@@ -50,7 +59,6 @@
 
 - Prepare release 1.0.0-alpha3. [\#71](https://github.com/openeuropa/rdf_skos/pull/71) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - EWPP-929: Drupal 9 compatibility fixes. [\#69](https://github.com/openeuropa/rdf_skos/pull/69) ([yenyasinn](https://github.com/yenyasinn))
-- EWPP-721: Update xdebug configuration. [\#61](https://github.com/openeuropa/rdf_skos/pull/61) ([22Alexandra](https://github.com/22Alexandra))
 
 ## [1.0.0-alpha2](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha2) (2021-03-22)
 
@@ -58,9 +66,7 @@
 
 **Merged pull requests:**
 
-- Prepare release 0.12.0. [\#68](https://github.com/openeuropa/rdf_skos/pull/68) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - Prepare release 1.0.0-alpha2. [\#67](https://github.com/openeuropa/rdf_skos/pull/67) ([imanoleguskiza](https://github.com/imanoleguskiza))
-- EWPP-727: Fixing RDF Skos storage level caching. [\#65](https://github.com/openeuropa/rdf_skos/pull/65) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - EWPP-109: Use 8.9.13 minimum on drupal-core-require-dev. [\#64](https://github.com/openeuropa/rdf_skos/pull/64) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - EWPP-727: Fixing RDF Skos storage level caching. [\#63](https://github.com/openeuropa/rdf_skos/pull/63) ([upchuk](https://github.com/upchuk))
 
