@@ -6,7 +6,7 @@ services:
       - { name: backend_overridable }
   rdf_skos.sparql.graph_handler:
     class: Drupal\rdf_skos\RdfSkosGraphHandler
-    arguments: ['@entity_type.manager', '@event_dispatcher', '@config.factory']
+    arguments: ['@entity_type.manager', '@event_dispatcher', '@entity_type.bundle.info', '@config.factory']
   rdf_skos.sparql.field_handler:
     class: Drupal\rdf_skos\RdfSkosFieldHandler
     parent: sparql.field_handler

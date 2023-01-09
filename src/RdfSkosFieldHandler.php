@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Drupal\rdf_skos;
 
 use Drupal\Core\Entity\EntityFieldManagerInterface;
+use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\sparql_entity_storage\Exception\NonExistingFieldPropertyException;
 use Drupal\sparql_entity_storage\SparqlEntityStorageFieldHandler;
@@ -33,11 +34,13 @@ class RdfSkosFieldHandler extends SparqlEntityStorageFieldHandler {
    *   The entity field manager.
    * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
    *   The event dispatcher service.
+   * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
+   *   The entity type bundle info service.
    * @param \Drupal\rdf_skos\ConceptSubsetPluginManagerInterface $subset_manager
    *   The concept subset plugin manager.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, EventDispatcherInterface $event_dispatcher, ConceptSubsetPluginManagerInterface $subset_manager) {
-    parent::__construct($entity_type_manager, $entity_field_manager, $event_dispatcher);
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, EventDispatcherInterface $event_dispatcher, EntityTypeBundleInfoInterface $entity_type_bundle_info, ConceptSubsetPluginManagerInterface $subset_manager) {
+    parent::__construct($entity_type_manager, $entity_field_manager, $event_dispatcher, $entity_type_bundle_info);
     $this->subsetManager = $subset_manager;
   }
 

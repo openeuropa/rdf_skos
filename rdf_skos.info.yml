@@ -1,6 +1,6 @@
 name: RDF SKOS
 description: Entity type for SKOS modeling
-core_version_requirement: ^8.9 || ^9
+core_version_requirement: ^9.4
 package: RDF Entity
 type: module
 
