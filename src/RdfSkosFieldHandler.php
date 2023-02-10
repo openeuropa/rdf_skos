@@ -264,7 +264,7 @@ class RdfSkosFieldHandler extends SparqlEntityStorageFieldHandler {
 
     $event = new SkosPredicateMappingEvent($entity_type_id);
     $event->setMapping($mapping[$entity_type_id]);
-    $this->eventDispatcher->dispatch(SkosPredicateMappingEvent::EVENT, $event);
+    $this->eventDispatcher->dispatch($event, SkosPredicateMappingEvent::EVENT);
 
     return $event->getMapping();
   }

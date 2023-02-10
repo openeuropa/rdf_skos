@@ -30,7 +30,7 @@ class SkosConceptReferenceIdFilterTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'views',
     'node',
     'sparql_entity_storage',

@@ -20,7 +20,7 @@ class RdfSkosEntityReferenceTest extends RdfSkosKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'entity_test',
     'user',
   ];

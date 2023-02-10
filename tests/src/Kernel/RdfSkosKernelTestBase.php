@@ -17,7 +17,7 @@ class RdfSkosKernelTestBase extends SparqlKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'rdf_skos',
     'rdf_skos_test',
   ];

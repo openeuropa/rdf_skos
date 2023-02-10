@@ -14,7 +14,7 @@ class RdfSkosGraphServiceTest extends SparqlKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'rdf_skos',
   ];
 
