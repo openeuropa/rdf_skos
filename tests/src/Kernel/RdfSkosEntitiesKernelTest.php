@@ -42,10 +42,12 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
     $entity_type_manager = $this->container->get('entity_type.manager');
 
     $ids = $entity_type_manager->getStorage('skos_concept_scheme')->getQuery()
+      ->accessCheck(FALSE)
       ->execute();
     $this->assertEmpty($ids);
 
     $ids = $entity_type_manager->getStorage('skos_concept')->getQuery()
+      ->accessCheck(FALSE)
       ->execute();
     $this->assertEmpty($ids);
   }
@@ -60,12 +62,14 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
     // Configure to read from the fruits graph.
     $this->enableGraph('fruit');
     $ids = $entity_type_manager->getStorage('skos_concept_scheme')->getQuery()
+      ->accessCheck(FALSE)
       ->execute();
     $this->assertCount(1, $ids);
     $id = reset($ids);
     $this->assertEquals('http://example.com/fruit', $id);
 
     $ids = $entity_type_manager->getStorage('skos_concept')->getQuery()
+      ->accessCheck(FALSE)
       ->execute();
     $this->assertCount(7, $ids);
   }
@@ -79,6 +83,7 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
     /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
     $entity_type_manager = $this->container->get('entity_type.manager');
     $ids = $entity_type_manager->getStorage('skos_concept_scheme')->getQuery()
+      ->accessCheck(FALSE)
       ->execute();
     $concept_schemes = $entity_type_manager->getStorage('skos_concept_scheme')->loadMultiple($ids);
     $this->assertCount(1, $concept_schemes);
@@ -97,6 +102,7 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
     // Test concepts.
     $ids = $entity_type_manager->getStorage('skos_concept')->getQuery()
       ->condition('in_scheme', $concept_scheme->id())
+      ->accessCheck(FALSE)
       ->execute();
     /** @var \Drupal\rdf_skos\Entity\ConceptInterface[] $concepts */
     $concepts = $entity_type_manager->getStorage('skos_concept')->loadMultiple($ids);
@@ -165,9 +171,11 @@ class RdfSkosEntitiesKernelTest extends RdfSkosKernelTestBase {
     $this->enableGraph('vegetables');
 
     $ids = $entity_type_manager->getStorage('skos_concept_scheme')->getQuery()
+      ->accessCheck(FALSE)
       ->execute();
     $this->assertCount(2, $ids);
     $ids = $entity_type_manager->getStorage('skos_concept')->getQuery()
+      ->accessCheck(FALSE)
       ->execute();
     $this->assertCount(8, $ids);
   }

@@ -192,6 +192,7 @@ class SkosConceptSelection extends DefaultSelection {
   protected function prepareConceptSchemeOptions(): array {
     $ids = $this->entityTypeManager->getStorage('skos_concept_scheme')
       ->getQuery()
+      ->accessCheck()
       ->execute();
 
     if (!$ids) {

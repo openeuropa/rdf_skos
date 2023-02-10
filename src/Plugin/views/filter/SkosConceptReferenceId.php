@@ -126,7 +126,9 @@ class SkosConceptReferenceId extends ManyToOne {
   public function buildExtraOptionsForm(&$form, FormStateInterface $form_state) {
     // We need to get all the IDs before trying to load. Peculiarity of the
     // RDF storage.
-    $ids = $this->entityTypeManager->getStorage('skos_concept_scheme')->getQuery()->execute();
+    $ids = $this->entityTypeManager->getStorage('skos_concept_scheme')->getQuery()
+      ->accessCheck()
+      ->execute();
     $schemes = $this->entityTypeManager->getStorage('skos_concept_scheme')->loadMultiple($ids);
     $options = [];
     foreach ($schemes as $scheme) {

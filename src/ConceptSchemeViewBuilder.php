@@ -114,6 +114,7 @@ class ConceptSchemeViewBuilder extends EntityViewBuilder {
     $ids = $this->entityTypeManager->getStorage('skos_concept')->getQuery()
       ->condition('top_concept_of', $concept_scheme->id())
       ->pager(30)
+      ->accessCheck()
       ->execute();
 
     if (!$ids) {
