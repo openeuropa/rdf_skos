@@ -8,8 +8,7 @@
     "require": {
         "php": ">=8.0",
         "drupal/core": "^9.5 || ^10",
-        "drupal/sparql_entity_storage": "^2.0.0-alpha9",
-        "sweetrdf/easyrdf": "^1.7.1"
+        "drupal/sparql_entity_storage": "^2.0.0-alpha12"
     },
     "require-dev": {
         "composer/installers": "^1.11",
