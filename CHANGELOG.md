@@ -1,11 +1,18 @@
 # Changelog
 
-## [1.0.0-alpha8](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha8) (2023-01-03)
+## [1.0.0-alpha9](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha9) (2023-02-27)
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha8...1.0.0-alpha9)
 
+**Merged pull requests:**
+
+- EWPP-2892: Update to PHP 8.1. [\#86](https://github.com/openeuropa/rdf_skos/pull/86) ([22Alexandra](https://github.com/22Alexandra))
+
+## [1.0.0-alpha8](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha8) (2023-01-03)
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha7...1.0.0-alpha8)
 
 **Merged pull requests:**
 
+- EWPP-0000: Prepare for 1.0.0-alpha8 release. [\#88](https://github.com/openeuropa/rdf_skos/pull/88) ([sergepavle](https://github.com/sergepavle))
 - OEL-2115: Cache tests do not cover completely the bug scenarios. [\#87](https://github.com/openeuropa/rdf_skos/pull/87) ([brummbar](https://github.com/brummbar))
 
 ## [1.0.0-alpha7](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha7) (2022-06-22)
