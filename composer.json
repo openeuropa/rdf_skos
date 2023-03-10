@@ -57,7 +57,6 @@
             }
         },
         "_readme": [
-            "Replacing abandoned easyrdf/easyrdf library with the sweetrdf/easyrdf fork compatible with PHP 8.1",
             "Explicit minimum version requirement of symfony/phpunit-bridge to replace drupal/core-dev testing classes and traits.",
             "Explicit requirement of mikey179/vfsstream to remove when drupal/core-dev is reinstated."
         ]
