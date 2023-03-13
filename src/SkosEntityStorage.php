@@ -191,7 +191,7 @@ class SkosEntityStorage extends SparqlEntityStorage {
     $event = new SkosProcessGraphResultsEvent();
     $event->setEntityTypeId($this->getEntityTypeId());
     $event->setResults($return);
-    $this->dispatcher->dispatch(SkosProcessGraphResultsEvent::ALTER, $event);
+    $this->dispatcher->dispatch($event, SkosProcessGraphResultsEvent::ALTER);
     return $event->getResults();
   }
 

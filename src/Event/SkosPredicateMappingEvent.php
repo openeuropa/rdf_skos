@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\rdf_skos\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Event dispatched to gather custom predicate mappings for SKOS entities.
