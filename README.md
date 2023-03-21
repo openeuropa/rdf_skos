@@ -15,6 +15,24 @@ The update process needs to be split in three deployments, which will likely res
 **First deployment**
 
 1. **Before you update `rdf_skos` to `1.0.0-alpha1`**, require an empty version of the `drupal/sparql_entity_storage` module:
+
+   add the official module repository https://git.drupalcode.org/project/sparql_entity_storage.git to the composer.json, it will look like this: 
+   
+   ```
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/sparql_entity_storage.git"
+        }
+    ],
+   ```
+   
+   after require the module with composer: 
+
    ```
    $ composer require drupal/sparql_entity_storage:dev-empty-module
    ```
