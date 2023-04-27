@@ -14,12 +14,32 @@ The update process needs to be split in three deployments, which will likely res
 
 **First deployment**
 
-1. **Before you update `rdf_skos` to `1.0.0-alpha1`**, require an empty version of the `drupal/sparql_entity_storage` module:
+1. **Before you update `rdf_skos` to `1.0.0-alpha1`**, require an empty version of the `drupal/sparql_entity_storage` module.
+
+The official module repository has a branch which contains such empty version. Drupal.org doesn't allow to reference
+this branch directly, so to overcome this you need to add a custom package repository entry that points to the module
+repository itself. Place this entry before the Drupal composer packages entry, like shown here:
+
+   ```
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/sparql_entity_storage.git"
+        }
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+   ```
+
+   Now you can require the module with composer:
+
    ```
    $ composer require drupal/sparql_entity_storage:dev-empty-module
    ```
-2. Deploy to production.
-3. Enable the module (this can be part of the deployment procedure above, depending on your setup).
+4. Deploy to production.
+5. Enable the module (this can be part of the deployment procedure above, depending on your setup).
 
 At this point your site's `composer.json` should look like this:
 
@@ -34,10 +54,25 @@ At this point your site's `composer.json` should look like this:
 
 **Second deployment**
 
-1. Remove the empty `drupal/sparql_entity_storage` module requirement from your `composer.json`.
+1. Remove the empty `drupal/sparql_entity_storage` module requirement from your `composer.json`, together with the
+custom package repository entry.
 2. Require `drupal/rdf_entity` with the new `1.0-alpha21` version and `openeuropa/rdf_skos` with the new `1.0.0-alpha1` version.
-3. Deploy to production.
-4. Uninstall the `drupal/rdf_entity` module (this can be part of the deployment procedure above, depending on your setup).
+3. Update the Sparql database connection in your settings with the new namespace, so that it looks like this:
+
+```
+$databases['sparql_default']['sparql'] = [
+  'prefix' => '',
+  'host' => 'sparql',
+  'port' => '8890',
+  'namespace' => 'Drupal\\sparql_entity_storage\\Driver\\Database\\sparql',
+  'driver' => 'sparql',
+];
+```
+
+Note that you might have to change this in your runner.yml.dist file and not directly in settings.php.
+
+4. Deploy to production.
+5. Uninstall the `drupal/rdf_entity` module (this can be part of the deployment procedure above, depending on your setup).
 
 At this point your site's `composer.json` should look like this:
 
