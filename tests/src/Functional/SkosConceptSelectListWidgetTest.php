@@ -6,9 +6,9 @@ namespace Drupal\Tests\rdf_skos\Functional;
 
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\sparql_entity_storage\Traits\SparqlConnectionTrait;
 use Drupal\Tests\rdf_skos\Traits\SkosEntityReferenceTrait;
 use Drupal\Tests\rdf_skos\Traits\SkosImportTrait;
+use Drupal\Tests\sparql_entity_storage\Traits\SparqlConnectionTrait;
 
 /**
  * Test the Skos concept select list widget.
