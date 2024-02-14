@@ -1,14 +1,14 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\Tests\rdf_skos\Functional;
 
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\Tests\sparql_entity_storage\Traits\SparqlConnectionTrait;
 use Drupal\Tests\rdf_skos\Traits\SkosImportTrait;
+use Drupal\Tests\sparql_entity_storage\Traits\SparqlConnectionTrait;
 use Drupal\Tests\views\Functional\ViewTestBase;
 use Drupal\views\Tests\ViewTestData;
 

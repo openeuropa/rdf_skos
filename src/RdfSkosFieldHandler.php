@@ -1,16 +1,16 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\rdf_skos;
 
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\rdf_skos\Event\SkosPredicateMappingEvent;
 use Drupal\sparql_entity_storage\Exception\NonExistingFieldPropertyException;
 use Drupal\sparql_entity_storage\SparqlEntityStorageFieldHandler;
 use Drupal\sparql_entity_storage\SparqlEntityStorageFieldHandlerInterface;
-use Drupal\rdf_skos\Event\SkosPredicateMappingEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**

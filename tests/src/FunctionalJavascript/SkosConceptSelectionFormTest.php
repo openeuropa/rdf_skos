@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\Tests\rdf_skos\FunctionalJavascript;
 
@@ -66,11 +66,22 @@ class SkosConceptSelectionFormTest extends WebDriverTestBase {
    */
   public function testSelectionConfigForm(): void {
     $this->drupalGet('admin/structure/types/manage/article/fields/add-field');
-    $this->getSession()->getPage()->selectFieldOption('Add a new field', 'skos_concept_entity_reference');
-    $this->getSession()->getPage()->fillField('Label', 'Reference field');
-    $this->assertSession()->waitForText('Machine name: field_reference_field');
-    $this->getSession()->getPage()->pressButton('Save and continue');
-    $this->getSession()->getPage()->pressButton('Save field settings');
+
+    // @todo Remove when support for 10.1.x is dropped.
+    if (version_compare(\Drupal::VERSION, '10.2', '>')) {
+      $this->getSession()->getPage()->findField('SKOS Concept Reference')->click();
+      $this->assertSession()->assertWaitOnAjaxRequest();
+      $this->getSession()->getPage()->fillField('Label', 'Reference field');
+      $this->assertSession()->waitForText('Machine name: field_reference_field');
+      $this->getSession()->getPage()->pressButton('Continue');
+    }
+    else {
+      $this->getSession()->getPage()->selectFieldOption('Add a new field', 'skos_concept_entity_reference');
+      $this->getSession()->getPage()->fillField('Label', 'Reference field');
+      $this->assertSession()->waitForText('Machine name: field_reference_field');
+      $this->getSession()->getPage()->pressButton('Save and continue');
+      $this->getSession()->getPage()->pressButton('Save field settings');
+    }
 
     // Assert we have the concept schemes selection element.
     $this->assertSession()->selectExists('Concept Schemes');

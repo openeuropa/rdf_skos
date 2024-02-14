@@ -5,7 +5,7 @@
  * Install, update and uninstall functions for rdf_skos module.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /**
  * Remove UUID field storage definition for rdf_skos entities.

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\rdf_skos;
 
@@ -13,9 +13,9 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\rdf_skos\Event\SkosProcessGraphResultsEvent;
 use Drupal\sparql_entity_storage\Driver\Database\sparql\ConnectionInterface;
 use Drupal\sparql_entity_storage\SparqlEntityStorage;
-use Drupal\rdf_skos\Event\SkosProcessGraphResultsEvent;
 use Drupal\sparql_entity_storage\SparqlEntityStorageEntityIdPluginManager;
 use Drupal\sparql_entity_storage\SparqlEntityStorageFieldHandlerInterface;
 use Drupal\sparql_entity_storage\SparqlEntityStorageGraphHandlerInterface;
