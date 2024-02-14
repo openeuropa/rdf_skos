@@ -1,13 +1,30 @@
-# Change Log
+# Changelog
+
+## [1.0.0](https://github.com/openeuropa/rdf_skos/tree/1.0.0) (2024-02-14)
+
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha10...1.0.0)
+
+**Closed issues:**
+
+- Update drupal/sparql\_entity\_storage [\#93](https://github.com/openeuropa/rdf_skos/issues/93)
+- How to install this module in an existing Drupal 10 site? [\#92](https://github.com/openeuropa/rdf_skos/issues/92)
+- Update from 0.12.0 to 1.0.0-alpha17 fails [\#70](https://github.com/openeuropa/rdf_skos/issues/70)
+
+**Merged pull requests:**
+
+- EWPP-4078: Add Drupal 10.2.x and PHP 8.2 to matrix. [\#94](https://github.com/openeuropa/rdf_skos/pull/94) ([brummbar](https://github.com/brummbar))
 
 ## [1.0.0-alpha10](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha10) (2023-03-13)
+
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha9...1.0.0-alpha10)
 
 **Merged pull requests:**
 
+- Prepare changelog for release 1.0.0-alpha10. [\#91](https://github.com/openeuropa/rdf_skos/pull/91) ([brummbar](https://github.com/brummbar))
 - EWPP-2994: Drupal 10 compatibility. [\#89](https://github.com/openeuropa/rdf_skos/pull/89) ([brummbar](https://github.com/brummbar))
 
 ## [1.0.0-alpha9](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha9) (2023-02-27)
+
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha8...1.0.0-alpha9)
 
 **Merged pull requests:**
@@ -16,6 +33,7 @@
 - EWPP-2892: Update to PHP 8.1. [\#86](https://github.com/openeuropa/rdf_skos/pull/86) ([22Alexandra](https://github.com/22Alexandra))
 
 ## [1.0.0-alpha8](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha8) (2023-01-03)
+
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha7...1.0.0-alpha8)
 
 **Merged pull requests:**
