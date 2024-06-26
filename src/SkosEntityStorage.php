@@ -81,7 +81,7 @@ class SkosEntityStorage extends SparqlEntityStorage {
     SparqlEntityStorageGraphHandlerInterface $sparql_graph_handler,
     SparqlEntityStorageFieldHandlerInterface $sparql_field_handler,
     SparqlEntityStorageEntityIdPluginManager $entity_id_plugin_manager,
-    EventDispatcherInterface $dispatcher
+    EventDispatcherInterface $dispatcher,
   ) {
     parent::__construct($entity_type, $entity_field_manager, $cache, $memory_cache, $entity_type_bundle_info, $sparql, $entity_type_manager, $language_manager, $module_handler, $sparql_graph_handler, $sparql_field_handler, $entity_id_plugin_manager);
     $this->dispatcher = $dispatcher;
