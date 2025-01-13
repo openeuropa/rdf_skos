@@ -24,7 +24,7 @@ class FruitSchemeAlterSubset extends ConceptSubsetPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function alterQuery(QueryInterface $query, $match_operator, array $concept_schemes = [], string $match = NULL): void {
+  public function alterQuery(QueryInterface $query, $match_operator, array $concept_schemes = [], ?string $match = NULL): void {
     // Allow only one fruit in this subset.
     $query->condition('id', 'http://example.com/fruit/citrus-fruit');
   }

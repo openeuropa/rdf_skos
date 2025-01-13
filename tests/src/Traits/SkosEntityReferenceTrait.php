@@ -30,7 +30,7 @@ trait SkosEntityReferenceTrait {
    * @param string|null $concept_subset
    *   An optional concept subset plugin.
    */
-  protected function createSkosConceptReferenceField(string $entity_type, string $bundle, array $concept_schemes, string $field_name, string $field_label, string $widget = NULL, string $concept_subset = NULL): void {
+  protected function createSkosConceptReferenceField(string $entity_type, string $bundle, array $concept_schemes, string $field_name, string $field_label, ?string $widget = NULL, ?string $concept_subset = NULL): void {
     $handler_settings = [
       'target_bundles' => NULL,
       'auto_create' => FALSE,

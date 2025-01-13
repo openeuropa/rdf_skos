@@ -62,7 +62,7 @@ class TestSkosEntityStorage extends SkosEntityStorage {
   /**
    * {@inheritdoc}
    */
-  protected function doLoadMultiple(array $ids = NULL, array $graph_ids = []) {
+  protected function doLoadMultiple(?array $ids = NULL, array $graph_ids = []) {
     $this->loads[] = $ids;
     return parent::doLoadMultiple($ids, $graph_ids);
   }
@@ -70,7 +70,7 @@ class TestSkosEntityStorage extends SkosEntityStorage {
   /**
    * {@inheritdoc}
    */
-  protected function getFromStorage(array $ids = NULL, array $graph_ids = []): array {
+  protected function getFromStorage(?array $ids = NULL, array $graph_ids = []): array {
     $this->storageLoads[] = $ids;
     return parent::getFromStorage($ids, $graph_ids);
   }

@@ -31,6 +31,6 @@ interface ConceptSubsetInterface {
    * @param string|null $match
    *   The value to match.
    */
-  public function alterQuery(QueryInterface $query, $match_operator, array $concept_schemes = [], string $match = NULL): void;
+  public function alterQuery(QueryInterface $query, $match_operator, array $concept_schemes = [], ?string $match = NULL): void;
 
 }

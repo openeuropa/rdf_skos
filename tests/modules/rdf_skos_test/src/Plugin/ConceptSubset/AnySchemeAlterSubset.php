@@ -21,7 +21,7 @@ class AnySchemeAlterSubset extends ConceptSubsetPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function alterQuery(QueryInterface $query, $match_operator, array $concept_schemes = [], string $match = NULL): void {
+  public function alterQuery(QueryInterface $query, $match_operator, array $concept_schemes = [], ?string $match = NULL): void {
     // We don't actually alter the query but use this plugin to test that it
     // is always available.
   }

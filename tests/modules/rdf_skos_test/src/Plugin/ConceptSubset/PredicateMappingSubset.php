@@ -25,7 +25,7 @@ class PredicateMappingSubset extends ConceptSubsetPluginBase implements Predicat
   /**
    * {@inheritdoc}
    */
-  public function alterQuery(QueryInterface $query, $match_operator, array $concept_schemes = [], string $match = NULL): void {
+  public function alterQuery(QueryInterface $query, $match_operator, array $concept_schemes = [], ?string $match = NULL): void {
     // We don't need to alter the query for this test.
   }
 
