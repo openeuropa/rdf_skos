@@ -257,7 +257,7 @@ class SkosConceptSelection extends DefaultSelection {
    * @param string|null $match
    *   The value to match.
    */
-  protected function applyConceptSubset(QueryInterface $query, $match_operator, array $concept_schemes = [], string $match = NULL): void {
+  protected function applyConceptSubset(QueryInterface $query, $match_operator, array $concept_schemes = [], ?string $match = NULL): void {
     $configuration = $this->getConfiguration();
     if (!$configuration['concept_subset']) {
       return;

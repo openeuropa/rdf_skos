@@ -72,7 +72,7 @@ class RdfSkosGraphHandler extends SparqlEntityStorageGraphHandler {
   /**
    * {@inheritdoc}
    */
-  public function getEntityTypeGraphUris(string $entity_type_id, array $limit_to_graph_ids = NULL): array {
+  public function getEntityTypeGraphUris(string $entity_type_id, ?array $limit_to_graph_ids = NULL): array {
     if (isset($this->cache['structure'][$entity_type_id])) {
       return $this->cache['structure'][$entity_type_id];
     }

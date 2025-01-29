@@ -58,6 +58,8 @@ class ConceptSchemeHtmlRouteProvider extends AdminHtmlRouteProvider {
 
       return $route;
     }
+
+    return NULL;
   }
 
 }
