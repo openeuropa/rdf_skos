@@ -1,7 +1,14 @@
-# Changelog
+# Change Log
+
+## [1.1.0](https://github.com/openeuropa/rdf_skos/tree/1.1.0) (2025-01-29)
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0...1.1.0)
+
+**Merged pull requests:**
+
+- EWPP-4991: Ensure PHP8.3 compatibility. [\#98](https://github.com/openeuropa/rdf_skos/pull/98) ([nagyad](https://github.com/nagyad))
+- OEL-3029: Update to Drupal 10.3 [\#97](https://github.com/openeuropa/rdf_skos/pull/97) ([brummbar](https://github.com/brummbar))
 
 ## [1.0.0](https://github.com/openeuropa/rdf_skos/tree/1.0.0) (2024-02-14)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha10...1.0.0)
 
 **Closed issues:**
@@ -12,10 +19,10 @@
 
 **Merged pull requests:**
 
+- Release-1.0.0: Update changelog. [\#95](https://github.com/openeuropa/rdf_skos/pull/95) ([nagyad](https://github.com/nagyad))
 - EWPP-4078: Add Drupal 10.2.x and PHP 8.2 to matrix. [\#94](https://github.com/openeuropa/rdf_skos/pull/94) ([brummbar](https://github.com/brummbar))
 
 ## [1.0.0-alpha10](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha10) (2023-03-13)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha9...1.0.0-alpha10)
 
 **Merged pull requests:**
@@ -24,7 +31,6 @@
 - EWPP-2994: Drupal 10 compatibility. [\#89](https://github.com/openeuropa/rdf_skos/pull/89) ([brummbar](https://github.com/brummbar))
 
 ## [1.0.0-alpha9](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha9) (2023-02-27)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha8...1.0.0-alpha9)
 
 **Merged pull requests:**
@@ -33,7 +39,6 @@
 - EWPP-2892: Update to PHP 8.1. [\#86](https://github.com/openeuropa/rdf_skos/pull/86) ([22Alexandra](https://github.com/22Alexandra))
 
 ## [1.0.0-alpha8](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha8) (2023-01-03)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha7...1.0.0-alpha8)
 
 **Merged pull requests:**
@@ -42,7 +47,6 @@
 - OEL-2115: Cache tests do not cover completely the bug scenarios. [\#87](https://github.com/openeuropa/rdf_skos/pull/87) ([brummbar](https://github.com/brummbar))
 
 ## [1.0.0-alpha7](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha7) (2022-06-22)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha6...1.0.0-alpha7)
 
 **Merged pull requests:**
@@ -52,7 +56,6 @@
 - EWPP-2202: Fix dependency from composer patches. [\#82](https://github.com/openeuropa/rdf_skos/pull/82) ([yenyasinn](https://github.com/yenyasinn))
 
 ## [1.0.0-alpha6](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha6) (2022-01-18)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha5...1.0.0-alpha6)
 
 **Merged pull requests:**
@@ -61,7 +64,6 @@
 - EWPP-1891: Update to PHP8. [\#79](https://github.com/openeuropa/rdf_skos/pull/79) ([22Alexandra](https://github.com/22Alexandra))
 
 ## [1.0.0-alpha5](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha5) (2022-01-10)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha4...1.0.0-alpha5)
 
 **Merged pull requests:**
@@ -71,7 +73,6 @@
 - EWPP-1883: Updating Query constructor arguments. [\#76](https://github.com/openeuropa/rdf_skos/pull/76) ([upchuk](https://github.com/upchuk))
 
 ## [1.0.0-alpha4](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha4) (2021-11-16)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha3...1.0.0-alpha4)
 
 **Closed issues:**
@@ -85,7 +86,6 @@
 - EWPP-1706: Coding standard fixes. [\#73](https://github.com/openeuropa/rdf_skos/pull/73) ([upchuk](https://github.com/upchuk))
 
 ## [1.0.0-alpha3](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha3) (2021-06-30)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha2...1.0.0-alpha3)
 
 **Merged pull requests:**
@@ -94,7 +94,6 @@
 - EWPP-929: Drupal 9 compatibility fixes. [\#69](https://github.com/openeuropa/rdf_skos/pull/69) ([yenyasinn](https://github.com/yenyasinn))
 
 ## [1.0.0-alpha2](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha2) (2021-03-22)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0-alpha1...1.0.0-alpha2)
 
 **Merged pull requests:**
@@ -104,7 +103,6 @@
 - EWPP-727: Fixing RDF Skos storage level caching. [\#63](https://github.com/openeuropa/rdf_skos/pull/63) ([upchuk](https://github.com/upchuk))
 
 ## [1.0.0-alpha1](https://github.com/openeuropa/rdf_skos/tree/1.0.0-alpha1) (2021-02-03)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.12.0...1.0.0-alpha1)
 
 **Merged pull requests:**
@@ -114,7 +112,6 @@
 - OPENEUROPA-3048: Use the sparql\_entity\_storage module. [\#49](https://github.com/openeuropa/rdf_skos/pull/49) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [0.12.0](https://github.com/openeuropa/rdf_skos/tree/0.12.0) (2021-01-12)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.11.0...0.12.0)
 
 **Merged pull requests:**
@@ -122,7 +119,6 @@
 - EWPP-516: Update docker images. [\#58](https://github.com/openeuropa/rdf_skos/pull/58) ([22Alexandra](https://github.com/22Alexandra))
 
 ## [0.11.0](https://github.com/openeuropa/rdf_skos/tree/0.11.0) (2020-10-01)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.10.0...0.11.0)
 
 **Merged pull requests:**
@@ -133,7 +129,6 @@
 - EWPP-212: Take into account concepts without inScheme property. [\#54](https://github.com/openeuropa/rdf_skos/pull/54) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [0.10.0](https://github.com/openeuropa/rdf_skos/tree/0.10.0) (2020-08-19)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.9.0...0.10.0)
 
 **Merged pull requests:**
@@ -142,7 +137,6 @@
 - EWPP-176: Add ordering options for select widget [\#52](https://github.com/openeuropa/rdf_skos/pull/52) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [0.9.0](https://github.com/openeuropa/rdf_skos/tree/0.9.0) (2020-08-06)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.8.0...0.9.0)
 
 **Merged pull requests:**
@@ -151,7 +145,6 @@
 - OPENEUROPA-3409: Pluggable subsets of concepts [\#50](https://github.com/openeuropa/rdf_skos/pull/50) ([upchuk](https://github.com/upchuk))
 
 ## [0.8.0](https://github.com/openeuropa/rdf_skos/tree/0.8.0) (2020-06-15)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.7.0...0.8.0)
 
 **Merged pull requests:**
@@ -162,7 +155,6 @@
 - OPENEUROPA-3158: Skos concept reference item list class. [\#45](https://github.com/openeuropa/rdf_skos/pull/45) ([upchuk](https://github.com/upchuk))
 
 ## [0.7.0](https://github.com/openeuropa/rdf_skos/tree/0.7.0) (2020-05-12)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.6.0...0.7.0)
 
 **Merged pull requests:**
@@ -171,7 +163,6 @@
 - OPENEUROPA-3040: \[rdf\_skos\] Create a SKOS reference fields select widget. [\#42](https://github.com/openeuropa/rdf_skos/pull/42) ([sergepavle](https://github.com/sergepavle))
 
 ## [0.6.0](https://github.com/openeuropa/rdf_skos/tree/0.6.0) (2020-04-08)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.5.0...0.6.0)
 
 **Merged pull requests:**
@@ -184,7 +175,6 @@
 - OPENEUROPA-2604: Drupal 8 recommended project. [\#37](https://github.com/openeuropa/rdf_skos/pull/37) ([upchuk](https://github.com/upchuk))
 
 ## [0.5.0](https://github.com/openeuropa/rdf_skos/tree/0.5.0) (2019-11-25)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.4.0...0.5.0)
 
 **Merged pull requests:**
@@ -193,7 +183,6 @@
 - OPENEUROPA-2402: Fixing storage translation handling. [\#34](https://github.com/openeuropa/rdf_skos/pull/34) ([upchuk](https://github.com/upchuk))
 
 ## [0.4.0](https://github.com/openeuropa/rdf_skos/tree/0.4.0) (2019-11-21)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.3.2...0.4.0)
 
 **Merged pull requests:**
@@ -205,7 +194,6 @@
 - OPENEUROPA-2258: Use PHP 7.2 in drone and docker image. [\#27](https://github.com/openeuropa/rdf_skos/pull/27) ([dxvargas](https://github.com/dxvargas))
 
 ## [0.3.2](https://github.com/openeuropa/rdf_skos/tree/0.3.2) (2019-10-17)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.3.1...0.3.2)
 
 **Merged pull requests:**
@@ -214,7 +202,6 @@
 - OPENEUROPA-2285: Add schema for field formatter. [\#28](https://github.com/openeuropa/rdf_skos/pull/28) ([nagyad](https://github.com/nagyad))
 
 ## [0.3.1](https://github.com/openeuropa/rdf_skos/tree/0.3.1) (2019-08-26)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.3.0...0.3.1)
 
 **Merged pull requests:**
@@ -223,7 +210,6 @@
 - OPENEUROPA-0000: Remove unneeded field\_group dependency. [\#24](https://github.com/openeuropa/rdf_skos/pull/24) ([brummbar](https://github.com/brummbar))
 
 ## [0.3.0](https://github.com/openeuropa/rdf_skos/tree/0.3.0) (2019-06-25)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.2.1...0.3.0)
 
 **Merged pull requests:**
@@ -234,7 +220,6 @@
 - OPENEUROPA-1782: Ensure that the RDF SKOS entity reference target ID can be used in Views in a many-to-one filter [\#17](https://github.com/openeuropa/rdf_skos/pull/17) ([upchuk](https://github.com/upchuk))
 
 ## [0.2.1](https://github.com/openeuropa/rdf_skos/tree/0.2.1) (2019-05-14)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.2.0...0.2.1)
 
 **Merged pull requests:**
@@ -243,7 +228,6 @@
 - OPENEUROPA-1890: Fixing RDF Skos config schema. [\#18](https://github.com/openeuropa/rdf_skos/pull/18) ([upchuk](https://github.com/upchuk))
 
 ## [0.2.0](https://github.com/openeuropa/rdf_skos/tree/0.2.0) (2019-05-07)
-
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0.1.0...0.2.0)
 
 **Merged pull requests:**
@@ -252,9 +236,6 @@
 - OPENEUROPA-1813: Upgrade to 8.7 [\#15](https://github.com/openeuropa/rdf_skos/pull/15) ([upchuk](https://github.com/upchuk))
 
 ## [0.1.0](https://github.com/openeuropa/rdf_skos/tree/0.1.0) (2019-04-25)
-
-[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/0f077fd4e2898a05afa9fa60387c5b708470d79d...0.1.0)
-
 **Merged pull requests:**
 
 - Update CHANGELOG.md for release 0.1.0. [\#14](https://github.com/openeuropa/rdf_skos/pull/14) ([ademarco](https://github.com/ademarco))
@@ -273,4 +254,4 @@
 
 
 
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
