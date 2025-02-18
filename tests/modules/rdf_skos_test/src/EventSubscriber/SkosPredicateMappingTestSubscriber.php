@@ -19,7 +19,7 @@ class SkosPredicateMappingTestSubscriber implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     $events[SkosPredicateMappingEvent::EVENT][] = ['onPredicateMapping', 20];
     return $events;
   }
