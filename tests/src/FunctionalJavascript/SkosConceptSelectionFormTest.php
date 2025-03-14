@@ -67,21 +67,11 @@ class SkosConceptSelectionFormTest extends WebDriverTestBase {
   public function testSelectionConfigForm(): void {
     $this->drupalGet('admin/structure/types/manage/article/fields/add-field');
 
-    // @todo Remove when support for 10.2.x is dropped.
-    if (version_compare(\Drupal::VERSION, '10.3', '>')) {
-      $this->getSession()->getPage()->findField('SKOS Concept Reference')->click();
-      $this->getSession()->getPage()->pressButton('Continue');
-      $this->getSession()->getPage()->fillField('Label', 'Reference field');
-      $this->assertSession()->waitForText('Machine name: field_reference_field');
-      $this->getSession()->getPage()->pressButton('Continue');
-    }
-    else {
-      $this->getSession()->getPage()->findField('SKOS Concept Reference')->click();
-      $this->assertSession()->assertWaitOnAjaxRequest();
-      $this->getSession()->getPage()->fillField('Label', 'Reference field');
-      $this->assertSession()->waitForText('Machine name: field_reference_field');
-      $this->getSession()->getPage()->pressButton('Continue');
-    }
+    $this->getSession()->getPage()->findField('SKOS Concept Reference')->click();
+    $this->getSession()->getPage()->pressButton('Continue');
+    $this->getSession()->getPage()->fillField('Label', 'Reference field');
+    $this->assertSession()->waitForText('Machine name: field_reference_field');
+    $this->getSession()->getPage()->pressButton('Continue');
 
     // Assert we have the concept schemes selection element.
     $this->assertSession()->selectExists('Concept Schemes');
