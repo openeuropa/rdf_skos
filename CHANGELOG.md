@@ -1,10 +1,18 @@
 # Change Log
 
+## [1.2.0](https://github.com/openeuropa/rdf_skos/tree/1.2.0) (2025-03-14)
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.1.0...1.2.0)
+
+**Merged pull requests:**
+
+- EWPP-4616: D11 update. [\#100](https://github.com/openeuropa/rdf_skos/pull/100) ([piotrsmykaj](https://github.com/piotrsmykaj))
+
 ## [1.1.0](https://github.com/openeuropa/rdf_skos/tree/1.1.0) (2025-01-29)
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.0.0...1.1.0)
 
 **Merged pull requests:**
 
+- Release-1.1.0: Update changelog. [\#99](https://github.com/openeuropa/rdf_skos/pull/99) ([nagyad](https://github.com/nagyad))
 - EWPP-4991: Ensure PHP8.3 compatibility. [\#98](https://github.com/openeuropa/rdf_skos/pull/98) ([nagyad](https://github.com/nagyad))
 - OEL-3029: Update to Drupal 10.3 [\#97](https://github.com/openeuropa/rdf_skos/pull/97) ([brummbar](https://github.com/brummbar))
 
