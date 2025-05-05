@@ -1,10 +1,18 @@
 # Change Log
 
-## [1.2.0](https://github.com/openeuropa/rdf_skos/tree/1.2.0) (2025-03-14)
+## [1.2.1](https://github.com/openeuropa/rdf_skos/tree/1.2.1) (2025-05-02)
+[Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.2.0...1.2.1)
+
+**Merged pull requests:**
+
+- EWPP-5461: Update sparql image in docker-compose.yml and for drone.yml. [\#103](https://github.com/openeuropa/rdf_skos/pull/103) ([sergepavle](https://github.com/sergepavle))
+
+## [1.2.0](https://github.com/openeuropa/rdf_skos/tree/1.2.0) (2025-03-17)
 [Full Changelog](https://github.com/openeuropa/rdf_skos/compare/1.1.0...1.2.0)
 
 **Merged pull requests:**
 
+- Release-1.2.0: Update changelog. [\#101](https://github.com/openeuropa/rdf_skos/pull/101) ([nagyad](https://github.com/nagyad))
 - EWPP-4616: D11 update. [\#100](https://github.com/openeuropa/rdf_skos/pull/100) ([piotrsmykaj](https://github.com/piotrsmykaj))
 
 ## [1.1.0](https://github.com/openeuropa/rdf_skos/tree/1.1.0) (2025-01-29)
