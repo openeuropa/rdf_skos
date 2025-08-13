@@ -1,3 +1,7 @@
+# :warning: This repository is archived
+
+Development has moved to [drupal.org](https://www.drupal.org/project/rdf_skos).
+
 # RDF SKOS
 
 This module provides a dedicated entity type for SKOS modeling. The module requires access to a [triplestore database](https://en.wikipedia.org/wiki/Triplestore),
